@@ -18,22 +18,25 @@
   --white:    #F0EDE8;
   --muted:    #555555;
   --muted2:   #888888;
+  --coral:    #E8735A;
+  --coral2:   rgba(232,115,90,0.15);
 }
 
 body {
   background: #050505;
   font-family: 'Nunito', sans-serif;
-  min-height: 100vh;
-  margin: 0;
+  display: flex;
+  justify-content: center;
   padding: 0;
+  min-height: 100vh;
 }
 
 .page {
   width: 100%;
-  min-height: 100vh;
+  max-width: 1400px;
   background: var(--bg);
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 /* ── Grain texture overlay ── */
@@ -55,7 +58,7 @@ body {
 .hero {
   position: relative;
   z-index: 1;
-  padding: 60px 60px 0;
+  padding: 60px 6vw 0;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 40px;
@@ -167,7 +170,7 @@ body {
 .sep {
   position: relative;
   z-index: 1;
-  margin: 40px 60px 0;
+  margin: 40px 6vw 0;
   height: 1px;
   background: linear-gradient(90deg, var(--gold) 0%, rgba(200,168,107,0.2) 60%, transparent 100%);
 }
@@ -191,7 +194,7 @@ body {
 .accroche {
   position: relative;
   z-index: 1;
-  margin: 32px 60px;
+  margin: 32px 6vw;
   padding: 24px 28px;
   border: 1px solid var(--border);
   border-left: 2px solid var(--gold);
@@ -214,8 +217,8 @@ body {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr 220px;
-  margin: 0 60px;
+  grid-template-columns: 1fr 260px;
+  margin: 0 6vw;
   gap: 48px;
   padding-bottom: 60px;
 }
@@ -361,20 +364,20 @@ body {
   margin-bottom: 7px;
 }
 
-.tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tags, .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 6px; }
 
 .tag {
   font-size: 10px;
   font-weight: 400;
-  color: rgba(240,237,232,0.5);
-  border: 1px solid var(--border);
+  color: var(--gold);
+  border: 1px solid rgba(200,168,107,0.35);
   padding: 3px 8px;
   letter-spacing: 0.3px;
-  background: var(--surface);
-  transition: border-color 0.2s;
+  background: rgba(200,168,107,0.06);
+  transition: border-color 0.2s, background 0.2s;
 }
 
-.tag:hover { border-color: var(--gold); color: var(--gold); }
+.tag:hover { border-color: var(--gold); background: rgba(200,168,107,0.14); }
 
 /* Formation */
 .form-item {
@@ -478,7 +481,7 @@ body {
   z-index: 1;
   border-top: 1px solid var(--border);
   margin: 0 0;
-  padding: 16px 60px;
+  padding: 16px 6vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -505,47 +508,9 @@ body {
   opacity: 0.4;
 }
 
-
-/* ── Full page responsive spacing ── */
-.hero,
-.sep,
-.accroche,
-.body,
-.footer {
-  margin-left: 8vw !important;
-  margin-right: 8vw !important;
-}
-
-.sep {
-  width: auto;
-}
-
-@media (max-width: 900px) {
-  .hero {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding-top: 40px;
-  }
-
-  .body {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    border-left: none;
-    padding-left: 0;
-  }
-
-  .name-first,
-  .name-last {
-    font-size: 52px;
-  }
-}
-
-
 @media print {
   body { background: none; padding: 0; }
-  .page { box-shadow: none; width: 100%; }
+  .page { box-shadow: none; width: 100%; max-width: 100%; }
 }
 
 /* ── Filigrane portrait haut droite ── */
@@ -767,6 +732,14 @@ body {
 .tag { opacity: 0; transform: translateY(6px); transition: opacity 0.35s ease, transform 0.35s ease; }
 .tag.visible { opacity: 1; transform: translateY(0); }
 
+/* Fallback : si JS ne déclenche pas l'observer, on force la visibilité après délai */
+@keyframes tagFallback {
+  to { opacity: 1; transform: translateY(0); }
+}
+.tag {
+  animation: tagFallback 0s 2s forwards;
+}
+
 /* Sidebar fade */
 .sidebar { opacity: 0; transform: translateY(20px); transition: opacity 0.9s ease 0.15s, transform 0.9s ease 0.15s; }
 .sidebar.visible { opacity: 1; transform: translateY(0); }
@@ -878,17 +851,104 @@ body {
 
 .skill-bar.animated { width: var(--target-width); }
 
-.skill-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
 
 .tag {
-  font-size: 8px !important;
-  font-weight: 400 !important;
-  letter-spacing: 1px !important;
-  color: var(--muted2) !important;
-  padding: 2px 7px !important;
-  border: 1px solid var(--border) !important;
-  background: transparent !important;
+  font-size: 9px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.8px !important;
+  color: var(--gold) !important;
+  padding: 3px 8px !important;
+  border: 1px solid rgba(200,168,107,0.4) !important;
+  background: rgba(200,168,107,0.07) !important;
 }
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+
+/* Laptop large (≤1200px) */
+@media (max-width: 1200px) {
+  .name-first, .name-last { font-size: 60px; }
+  .body { grid-template-columns: 1fr 220px; gap: 36px; }
+}
+
+/* Tablet / petit laptop (≤900px) */
+@media (max-width: 900px) {
+  .name-first, .name-last { font-size: 48px; }
+  .hero { padding: 40px 5vw 0; gap: 24px; }
+  .body { grid-template-columns: 1fr 190px; gap: 28px; margin: 0 5vw; }
+  .sep { margin: 32px 5vw 0; }
+  .accroche { margin: 24px 5vw; }
+  .footer { padding: 14px 5vw; }
+  .exp-title { font-size: 17px !important; }
+}
+
+/* Mobile (≤600px) — colonne unique */
+@media (max-width: 600px) {
+  .name-first, .name-last { font-size: 34px; }
+  .tagline { font-size: 12px; }
+
+  .hero {
+    padding: 28px 5vw 0;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .contact-block {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .contact-item { flex-direction: row; }
+
+  .sep { margin: 24px 5vw 0; }
+  .accroche { margin: 18px 5vw; padding: 16px 18px; }
+  .accroche p { font-size: 12px !important; }
+
+  /* Colonne unique : sidebar passe sous le main */
+  .body {
+    grid-template-columns: 1fr;
+    margin: 0 5vw;
+    gap: 0;
+    padding-bottom: 40px;
+  }
+
+  /* Sidebar : retire la bordure gauche, ajoute un séparateur top */
+  .sidebar {
+    padding-left: 0;
+    padding-top: 24px;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+  }
+
+  /* Compétences en grille 2 col sur mobile pour gagner de la place */
+  .sidebar .section:first-child .skill-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 16px;
+  }
+  .skill-group-name { grid-column: 1 / -1; }
+  .skill-bar-wrap { grid-column: 1 / -1; }
+
+  .footer { padding: 12px 5vw; flex-direction: column; gap: 8px; }
+  .exp-title { font-size: 16px !important; }
+  .sec-title { font-size: 10px; }
+  .skill-group-name { font-size: 8px !important; }
+  .tag { font-size: 8px !important; padding: 2px 6px !important; }
+}
+
+/* Très petit mobile (≤400px) */
+@media (max-width: 400px) {
+  .name-first, .name-last { font-size: 28px; }
+  .hero { padding: 22px 4vw 0; }
+  .body { margin: 0 4vw; }
+  .sep { margin: 20px 4vw 0; }
+  .accroche { margin: 14px 4vw; }
+}
+
+/* ── Accent corail ── */
 
 </style>
 </head>
@@ -898,7 +958,8 @@ body {
   <!-- HERO -->
   <div class="hero">
     <div class="hero-left">
-      <div class="overline">Responsable · Directeur Marketing</div>
+      <div class="overline">Marketing &amp; Commercial</div>
+      <div style="font-size:11px; font-weight:500; letter-spacing:3.5px; text-transform:uppercase; color:rgba(210,178,120,0.6); margin-bottom:14px; margin-top:-6px;">Responsable · Directeur</div>
       <div class="name-block">
         <span class="name-first">Hugo</span>
         <span class="name-last">Moronval</span>
@@ -996,8 +1057,13 @@ body {
               <span class="result-label">Refonte identité & offre</span>
             </div>
             <div class="result-item">
-              <span class="result-number">↑</span>
-              <span class="result-label">Nouveaux clients intégrés</span>
+              <span class="result-number" style="display:flex;align-items:center;gap:4px;">
+                <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+                  <path d="M7 16V2M7 2L1 8M7 2L13 8" stroke="rgba(210,178,120,0.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                +15%
+              </span>
+              <span class="result-label">Nouveaux clients</span>
             </div>
           </div>
         </div>
@@ -1015,6 +1081,7 @@ body {
           <ul>
             <li>Développement des partenariats entreprises dans les secteurs IA et digital</li>
             <li>Animation de cours de marketing auprès des étudiants ingénieurs</li>
+            <li>Déploiement et administration du système <strong>Microsoft 365</strong> pour l'établissement — migration, onboarding utilisateurs, paramétrage collaboratif</li>
           </ul>
         </div>
 
@@ -1034,6 +1101,28 @@ body {
           </ul>
           <div style="margin-top:10px; padding: 6px 10px; border-left: 2px solid var(--muted); background: rgba(255,255,255,0.02);">
             <span style="font-size:9.5px; color:var(--muted2); font-family:'Nunito',sans-serif; font-style:italic;">Missions en décalage avec les responsabilités annoncées — décision de quitter pour retrouver un environnement à la hauteur de mon niveau d'engagement.</span>
+          </div>
+        </div>
+
+        <!-- ACTIVITÉ PARALLÈLE -->
+        <div style="margin-top:32px; padding-top:22px; border-top:1px solid rgba(210,178,120,0.2); position:relative;">
+          <div style="position:absolute; top:-8px; left:0; font-size:8px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--gold); background:var(--bg); padding:0 12px 0 0; opacity:0.7;">Activité parallèle</div>
+
+          <div class="exp" style="border-bottom:none; padding-bottom:0;">
+            <div class="exp-head">
+              <div class="exp-title"><span class="exp-title-highlight" style="font-size:17px !important; opacity:0.78;">Associé — Co-gérant</span></div>
+              <div class="exp-period">2020 – Août 2025</div>
+            </div>
+            <div class="exp-meta">
+              <span class="exp-co">Le Bar Les 3 Rois</span>
+              <span class="exp-slash">/</span>
+              <span class="exp-sector">Commerce · Hazebrouck</span>
+            </div>
+            <ul>
+              <li>Gestion opérationnelle et administrative : approvisionnements, trésorerie, relation fournisseurs</li>
+              <li>Développement de l'identité et animation de la communication locale (événements, réseaux sociaux)</li>
+              <li>Management d'équipe et organisation des plannings en pic d'activité</li>
+            </ul>
           </div>
         </div>
 
@@ -1108,6 +1197,16 @@ body {
           <div class="form-school">Lycée Paul Hazard</div>
           <div class="form-year">2009 – 2011</div>
         </div>
+
+        <div class="form-item" style="margin-top:18px; border-left: 1px solid rgba(210,178,120,0.5);">
+          <div class="form-title" style="color:rgba(240,237,232,0.9);">Intelligence Artificielle</div>
+          <div class="form-school" style="color:var(--gold); opacity:1;">Usage avancé & intégration marketing</div>
+          <div class="form-year" style="color:rgba(240,237,232,0.45); margin-top:6px; line-height:1.7;">
+            ChatGPT · Claude · Midjourney · Perplexity<br>
+            Prompting stratégique · IA générative<br>
+            appliquée au branding &amp; contenu
+          </div>
+        </div>
       </div>
 
       <div class="section">
@@ -1162,7 +1261,7 @@ body {
       <div class="footer-dot"></div>
       <div class="footer-dot"></div>
     </div>
-    <span class="footer-text">Responsable / Directeur Marketing</span>
+    <span class="footer-text">Marketing & Commercial · Responsable / Directeur</span>
   </div>
 
 </div>
@@ -1204,7 +1303,7 @@ const tagObs = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.2 });
-document.querySelectorAll('.tags').forEach(el => tagObs.observe(el));
+document.querySelectorAll('.tags, .skill-tags, .int-tags').forEach(el => tagObs.observe(el));
 
 // Animated counter on result numbers
 const counterObs = new IntersectionObserver((entries) => {
