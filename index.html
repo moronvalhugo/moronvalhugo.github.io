@@ -70,6 +70,24 @@ body::after {
   -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
 }
 
+/* ══ NOM VERTICAL ══ */
+.vertical-name {
+  position: fixed;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center center;
+  z-index: 10;
+  pointer-events: none;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 9px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(200,169,107,0.5);
+  white-space: nowrap;
+}
+
 /* ══ FRAME DORÉE ══ */
 .frame {
   position: fixed;
@@ -513,6 +531,7 @@ body::after {
 
 <div class="frame"><span></span><span></span></div>
 <div class="photo-watermark"></div>
+<div class="vertical-name">Hugo Moronval · Marketing &amp; Branding</div>
 
 <div class="wrap">
 
