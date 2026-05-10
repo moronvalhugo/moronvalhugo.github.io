@@ -156,9 +156,9 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 }
 
 /* ══ NOM VERTICAL ══ */
-.vertical-name {
+.vertical-name-1,
+.vertical-name-2 {
   position: fixed;
-  right: -160px;
   top: 50%;
   transform: translateY(-50%) rotate(90deg);
   transform-origin: center center;
@@ -166,13 +166,15 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   pointer-events: none;
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 800;
-  font-size: clamp(48px, 7vw, 88px);
-  letter-spacing: 12px;
+  font-size: clamp(52px, 7vw, 90px);
+  letter-spacing: 14px;
   text-transform: uppercase;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(26,26,26,0.2);
+  -webkit-text-stroke: 1.5px rgba(220, 80, 130, 0.45);
   white-space: nowrap;
 }
+.vertical-name-1 { right: -32px; }
+.vertical-name-2 { right: -118px; }
 
 /* ══ HERO ══ */
 .hero {
@@ -705,7 +707,8 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="photo-watermark"></div>
-<div class="vertical-name">Hugo Moronval</div>
+<div class="vertical-name-1">Hugo</div>
+<div class="vertical-name-2">Moronval</div>
 
 <!-- ══ NAV ══ -->
 <nav class="nav">
