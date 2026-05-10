@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hugo Moronval — Portfolio & CV</title>
+<meta name="description" content="Hugo Moronval · Marketing & Commercial · Branding & Marketing Opérationnel">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg:      #F5F2EC;
+  --black:   #0D0D0D;
+  --white:   #FFFFFF;
+  --ink:     #1A1A1A;
+  --ink2:    #555;
+  --accent:  #C8A96B;
+  --accent2: #A88945;
+  --border:  #E0DDD6;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ══ CURSEUR CUSTOM ══ */
+.cursor {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  mix-blend-mode: multiply;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.18s ease, width 0.4s ease, height 0.4s ease, opacity 0.3s ease;
+  opacity: 0.6;
+}
+
+body:has(a:hover) .cursor,
+body:has(.card:hover) .cursor { width: 20px; height: 20px; }
+body:has(a:hover) .cursor-ring,
+body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
+
+/* ══ NAV ══ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 48px;
+  background: rgba(245,242,236,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink2);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--accent);
+  transition: width 0.35s ease;
+}
+
+.nav-link:hover { color: var(--ink); }
+.nav-link:hover::after { width: 100%; }
+
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ink2);
+}
+
+.nav-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3DA05A;
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* ══ HERO ══ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 48px 80px;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(160px, 28vw, 380px);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0,0,0,0.06);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -8px;
+}
+
+.hero-meta {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink2);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero-meta::before {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.hero-headline {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(56px, 10vw, 148px);
+  line-height: 0.88;
+  letter-spacing: -4px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 48px;
+}
+
+.hero-headline .outline {
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ink);
+}
+
+.hero-headline .gold {
+  color: var(--accent);
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.hero-bio {
+  max-width: 520px;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--ink2);
+}
+
+.hero-bio strong { color: var(--ink); font-weight: 600; }
+
+.hero-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink2);
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(180deg, var(--accent), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(0.5); opacity: 0.4; }
+}
+
+/* ══ TICKER ══ */
+.ticker {
+  background: var(--black);
+  overflow: hidden;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.ticker-inner {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker 18s linear infinite;
+  gap: 0;
+}
+
+.ticker-item {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+.ticker-item span {
+  color: var(--accent);
+  font-size: 16px;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ══ CARDS SECTION ══ */
+.cards-section {
+  padding: 120px 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cards-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 80px;
+}
+
+.cards-header-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cards-header-label::before {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.cards-header-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 0.9;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: var(--ink);
+  max-width: 500px;
+  text-align: right;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.card {
+  position: relative;
+  background: var(--white);
+  padding: 64px 56px;
+  text-decoration: none;
+  color: var(--ink);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: background 0.5s ease;
+  display: block;
+  group: true;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--black);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: 0;
+}
+
+.card:hover::before { transform: scaleY(1); }
+
+.card-inner { position: relative; z-index: 1; }
+
+.card-num {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: var(--accent);
+  margin-bottom: 32px;
+  transition: color 0.4s ease;
+}
+
+.card:hover .card-num { color: rgba(200,169,107,0.6); }
+
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(48px, 6vw, 88px);
+  line-height: 0.88;
+  letter-spacing: -3px;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-bottom: 24px;
+  transition: color 0.4s ease 0.1s;
+}
+
+.card:hover .card-title { color: var(--white); }
+
+.card-sub {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ink2);
+  margin-bottom: 40px;
+  transition: color 0.4s ease 0.1s;
+}
+
+.card:hover .card-sub { color: rgba(255,255,255,0.5); }
+
+.card-desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--ink2);
+  margin-bottom: 48px;
+  max-width: 360px;
+  transition: color 0.4s ease 0.1s;
+}
+
+.card:hover .card-desc { color: rgba(255,255,255,0.6); }
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 48px;
+}
+
+.card-tag {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink2);
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  transition: all 0.4s ease 0.1s;
+}
+
+.card:hover .card-tag {
+  border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.5);
+}
+
+.card-cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  transition: border-color 0.4s ease;
+}
+
+.card:hover .card-cta { border-color: rgba(255,255,255,0.1); }
+
+.card-cta-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: color 0.4s ease 0.1s;
+}
+
+.card:hover .card-cta-text { color: var(--accent); }
+
+.card-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  background: transparent;
+  flex-shrink: 0;
+}
+
+.card:hover .card-arrow {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: rotate(45deg);
+}
+
+.card-arrow svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--ink);
+  transition: stroke 0.4s ease;
+}
+
+.card:hover .card-arrow svg { stroke: var(--black); }
+
+/* ══ ABOUT STRIP ══ */
+.about {
+  padding: 100px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.about-label::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+
+.about-text {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 3.5vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: var(--ink);
+}
+
+.about-text em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.stat {
+  padding: 32px;
+  border: 1px solid var(--border);
+  background: var(--white);
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.stat:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -2px;
+  margin-bottom: 8px;
+}
+
+.stat-num span { color: var(--accent); }
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink2);
+}
+
+/* ══ FOOTER ══ */
+.footer {
+  padding: 80px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  background: var(--black);
+  color: var(--white);
+}
+
+.footer-left {}
+
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 32px;
+  line-height: 1;
+}
+
+.footer-logo span { color: var(--accent); }
+
+.footer-contacts {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.footer-contact:hover { transform: translateY(-3px); }
+
+.footer-contact-label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(200,169,107,0.6);
+  margin-bottom: 6px;
+}
+
+.footer-contact-value {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.75);
+  transition: color 0.3s ease;
+}
+
+.footer-contact:hover .footer-contact-value { color: var(--accent); }
+
+.footer-right {
+  text-align: right;
+}
+
+.footer-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-end;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 16px;
+}
+
+.footer-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #3DA05A;
+  animation: blink 2s ease-in-out infinite;
+}
+
+.footer-year {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 900px) {
+  .nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  .hero { padding: 0 24px 60px; }
+  .hero-headline { letter-spacing: -2px; }
+  .hero-bottom { flex-direction: column; gap: 32px; align-items: flex-start; }
+  .cards-section { padding: 80px 24px; }
+  .cards-header { flex-direction: column; gap: 24px; }
+  .cards-header-title { text-align: left; }
+  .cards { grid-template-columns: 1fr; }
+  .about { grid-template-columns: 1fr; padding: 80px 24px; }
+  .footer { flex-direction: column; gap: 48px; align-items: flex-start; padding: 60px 24px; }
+  .footer-right { text-align: left; }
+  body { cursor: auto; }
+  .cursor, .cursor-ring { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="nav-logo">Hugo <span>M.</span></div>
+  <div class="nav-links">
+    <a href="cv.html" class="nav-link">CV Digital</a>
+    <a href="portfolio.html" class="nav-link">Portfolio</a>
+    <a href="mailto:moronval.hugo@gmail.com" class="nav-link">Contact</a>
+  </div>
+  <div class="nav-status">
+    <span class="nav-dot"></span>
+    Disponible · Région lilloise
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bg-text">HM</div>
+
+  <div class="hero-meta">Marketing &amp; Commercial · 2026</div>
+
+  <h1 class="hero-headline">
+    <span class="outline">Stratégie.</span><br>
+    <span class="gold">Branding.</span><br>
+    Résultats.
+  </h1>
+
+  <div class="hero-bottom">
+    <p class="hero-bio">
+      10 ans d'impact concret au service des marques.<br>
+      <strong>De la vision stratégique à l'exécution terrain</strong> —<br>
+      là où l'idée rencontre le résultat.
+    </p>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TICKER ══ -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Branding <span>·</span></span>
+    <span class="ticker-item">Marketing Opérationnel <span>·</span></span>
+    <span class="ticker-item">Stratégie de marque <span>·</span></span>
+    <span class="ticker-item">Grande Distribution <span>·</span></span>
+    <span class="ticker-item">Management <span>·</span></span>
+    <span class="ticker-item">Identité visuelle <span>·</span></span>
+    <span class="ticker-item">Campagnes omnicanales <span>·</span></span>
+    <span class="ticker-item">Branding <span>·</span></span>
+    <span class="ticker-item">Marketing Opérationnel <span>·</span></span>
+    <span class="ticker-item">Stratégie de marque <span>·</span></span>
+    <span class="ticker-item">Grande Distribution <span>·</span></span>
+    <span class="ticker-item">Management <span>·</span></span>
+    <span class="ticker-item">Identité visuelle <span>·</span></span>
+    <span class="ticker-item">Campagnes omnicanales <span>·</span></span>
+  </div>
+</div>
+
+<!-- ══ CARDS ══ -->
+<section class="cards-section">
+  <div class="cards-header">
+    <div class="cards-header-label">Mon univers</div>
+    <h2 class="cards-header-title">Choisissez<br>votre entrée</h2>
+  </div>
+
+  <div class="cards">
+    <a href="cv.html" class="card">
+      <div class="card-inner">
+        <div class="card-num">— 01</div>
+        <h3 class="card-title">CV<br>Digital</h3>
+        <p class="card-sub">Parcours, compétences &amp; expériences</p>
+        <p class="card-desc">
+          Une lecture rapide et structurée de mon parcours professionnel, de mes formations et de mes domaines d'expertise.
+        </p>
+        <div class="card-tags">
+          <span class="card-tag">Parcours</span>
+          <span class="card-tag">Compétences</span>
+          <span class="card-tag">Print-ready</span>
+        </div>
+        <div class="card-cta">
+          <span class="card-cta-text">Consulter le CV</span>
+          <div class="card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </a>
+
+    <a href="portfolio.html" class="card">
+      <div class="card-inner">
+        <div class="card-num">— 02</div>
+        <h3 class="card-title">Port-<br>folio</h3>
+        <p class="card-sub">Projets, réalisations &amp; études de cas</p>
+        <p class="card-desc">
+          Sélection de projets concrets : campagnes, identités de marque, lancements et accompagnements stratégiques.
+        </p>
+        <div class="card-tags">
+          <span class="card-tag">Projets</span>
+          <span class="card-tag">Études de cas</span>
+          <span class="card-tag">Résultats</span>
+        </div>
+        <div class="card-cta">
+          <span class="card-cta-text">Voir le portfolio</span>
+          <div class="card-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ══ ABOUT ══ -->
+<section class="about">
+  <div>
+    <div class="about-label">En bref</div>
+    <p class="about-text">
+      L'idée sans l'exécution, c'est<br>
+      juste du bruit.<br>
+      <em>J'assure les deux.</em>
+    </p>
+  </div>
+  <div class="about-stats">
+    <div class="stat">
+      <div class="stat-num">10<span>+</span></div>
+      <div class="stat-label">Ans d'expérience</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">×<span>2</span></div>
+      <div class="stat-label">CA doublé en 3 ans</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">7</div>
+      <div class="stat-label">Personnes managées</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">360<span>°</span></div>
+      <div class="stat-label">Vision branding</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-left">
+    <div class="footer-logo">Hugo<br><span>Moronval</span></div>
+    <div class="footer-contacts">
+      <a href="mailto:moronval.hugo@gmail.com" class="footer-contact">
+        <span class="footer-contact-label">Email</span>
+        <span class="footer-contact-value">moronval.hugo@gmail.com</span>
+      </a>
+      <a href="https://www.linkedin.com/in/hugomoronval" class="footer-contact" target="_blank" rel="noopener">
+        <span class="footer-contact-label">LinkedIn</span>
+        <span class="footer-contact-value">Hugo Moronval</span>
+      </a>
+      <a href="tel:+33782246610" class="footer-contact">
+        <span class="footer-contact-label">Téléphone</span>
+        <span class="footer-contact-value">07.82.24.66.10</span>
+      </a>
+    </div>
+  </div>
+  <div class="footer-right">
+    <div class="footer-status">
+      <span class="footer-status-dot"></span>
+      Disponible · Région Lilloise
+    </div>
+    <div class="footer-year">© Hugo Moronval — MMXXVI</div>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+</script>
+
+</body>
+</html>
