@@ -419,6 +419,76 @@ body {
 .footer-link:hover { color: var(--accent); }
 .footer-year { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,242,236,.2); }
 
+/* ══ COSMOGROUP VISUAL ══ */
+.cosmo-visual {
+  display: grid; grid-template-columns: 1fr 360px; gap: 2px;
+  margin-bottom: 48px;
+}
+.cosmo-photo-slot {
+  position: relative; min-height: 320px; overflow: hidden;
+  background: #1A1410;
+}
+.cosmo-photo-bg {
+  position: absolute; inset: 0;
+  /* Quand la photo est dispo : background: url('assets/cosmo-rayon.jpg') center/cover; */
+  background: linear-gradient(135deg, #1A1410 0%, #2D2018 40%, #1A1410 100%);
+  opacity: .9;
+}
+.cosmo-photo-bg::after {
+  content: 'HYGIÈNE BEAUTÉ · COSMÉTIQUES';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800; font-size: clamp(18px, 3vw, 32px);
+  letter-spacing: 4px; text-transform: uppercase;
+  color: rgba(200,169,107,.12); white-space: nowrap;
+  pointer-events: none;
+}
+.cosmo-photo-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 32px;
+  background: linear-gradient(to top, rgba(10,8,5,.9) 0%, transparent 100%);
+}
+.cosmo-photo-tag {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+}
+.cosmo-photo-headline {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800; font-size: 28px; text-transform: uppercase;
+  color: #F5F2EC; line-height: 1.1;
+}
+.cosmo-context {
+  background: var(--surface); padding: 40px; border: 1px solid var(--border);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.cosmo-context-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 16px;
+}
+.cosmo-context-desc {
+  font-size: 14px; font-weight: 300; line-height: 1.7;
+  color: var(--ink2); margin-bottom: 32px; flex: 1;
+}
+.cosmo-context-stats {
+  display: flex; gap: 24px; margin-bottom: 24px;
+}
+.cosmo-ctx-num {
+  display: block;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800; font-size: 22px; color: var(--ink); line-height: 1;
+}
+.cosmo-ctx-lbl {
+  display: block; font-size: 10px; font-weight: 500; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--ink3); margin-top: 4px;
+}
+.cosmo-site-link {
+  font-size: 11px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--accent); text-decoration: none;
+  transition: letter-spacing .3s;
+}
+.cosmo-site-link:hover { letter-spacing: 3px; }
+
 /* ══ CATALOGUE PREVIEW ══ */
 .catalogue-block {
   margin-top: 56px; padding-top: 48px;
@@ -435,13 +505,14 @@ body {
 .catalogue-spread img { width: 100%; display: block; object-fit: cover; }
 .catalogue-spread.single { grid-template-columns: 1fr; max-width: 480px; }
 .catalogue-link {
-  display: inline-flex; align-items: center; gap: 10px;
+  display: inline-flex; align-items: center; gap: 12px;
   font-size: 12px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--accent);
-  text-decoration: none; transition: gap .3s;
+  text-transform: uppercase; color: var(--black);
+  background: var(--accent); text-decoration: none;
+  padding: 14px 24px; transition: background .3s, gap .3s;
 }
-.catalogue-link:hover { gap: 16px; }
-.catalogue-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+.catalogue-link:hover { background: var(--black); color: var(--accent); gap: 18px; }
+.catalogue-link svg { width: 14px; height: 14px; flex-shrink: 0; }
 
 /* ══ RESPONSIVE ══ */
 @media (max-width: 1100px) {
@@ -664,6 +735,29 @@ body {
       <div class="logo-placeholder" style="border-color:#C8A96B;color:#C8A96B;">Logo Cosmogroup</div>
     </div>
   </div>
+
+  <!-- Visual Cosmogroup -->
+  <div class="cosmo-visual reveal">
+    <div class="cosmo-photo-slot">
+      <!-- Photo rayon grande distribution → remplacer background-image par url('assets/cosmo-rayon.jpg') -->
+      <div class="cosmo-photo-bg"></div>
+      <div class="cosmo-photo-overlay">
+        <div class="cosmo-photo-tag">Grande Distribution Europe</div>
+        <div class="cosmo-photo-headline">Référencement<br>Auchan &amp; Carrefour</div>
+      </div>
+    </div>
+    <div class="cosmo-context">
+      <div class="cosmo-context-label">Cosmogroup Brands</div>
+      <p class="cosmo-context-desc">L'une des sociétés de distribution exclusive à la croissance la plus rapide d'Europe dans le secteur des cosmétiques. Fondée en 1989, présente dans 40+ pays via les filiales Diacosmo (France, Belgique, Pays-Bas).</p>
+      <div class="cosmo-context-stats">
+        <div><span class="cosmo-ctx-num">1989</span><span class="cosmo-ctx-lbl">Fondée</span></div>
+        <div><span class="cosmo-ctx-num">40+</span><span class="cosmo-ctx-lbl">Pays</span></div>
+        <div><span class="cosmo-ctx-num">8 000m²</span><span class="cosmo-ctx-lbl">Logistique</span></div>
+      </div>
+      <a href="https://www.cosmogroupbrands.com/fr/about" target="_blank" rel="noopener" class="cosmo-site-link">cosmogroupbrands.com →</a>
+    </div>
+  </div>
+
   <div class="case-stats-row reveal">
     <div class="case-stat-box">
       <div class="case-stat-num">+300K€</div>
