@@ -172,6 +172,12 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   color: transparent;
   -webkit-text-stroke: 1.5px rgba(200, 169, 107, 0.6);
   white-space: nowrap;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+.vertical-name-1.hidden,
+.vertical-name-2.hidden {
+  opacity: 0;
 }
 .vertical-name-1 { right: 10vw; }
 .vertical-name-2 { right: 2vw; }
@@ -906,6 +912,19 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
     requestAnimationFrame(animateRing);
   }
   animateRing();
+
+  // Fade out vertical name on scroll
+  const vn1 = document.querySelector('.vertical-name-1');
+  const vn2 = document.querySelector('.vertical-name-2');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+      vn1.classList.add('hidden');
+      vn2.classList.add('hidden');
+    } else {
+      vn1.classList.remove('hidden');
+      vn2.classList.remove('hidden');
+    }
+  }, { passive: true });
 </script>
 
 </body>
