@@ -55,6 +55,21 @@ body::after {
   mix-blend-mode: overlay;
 }
 
+/* ══ PHOTO FILIGRANE ══ */
+.photo-watermark {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 45vw;
+  height: 100vh;
+  background: url('og-image.jpg') center top / cover no-repeat;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 1;
+  mask-image: linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+}
+
 /* ══ FRAME DORÉE ══ */
 .frame {
   position: fixed;
@@ -497,6 +512,7 @@ body::after {
 <body>
 
 <div class="frame"><span></span><span></span></div>
+<div class="photo-watermark"></div>
 
 <div class="wrap">
 

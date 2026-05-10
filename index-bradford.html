@@ -138,6 +138,21 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   50% { opacity: 0.3; }
 }
 
+/* ══ PHOTO FILIGRANE ══ */
+.photo-watermark {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 45vw;
+  height: 100vh;
+  background: url('og-image.jpg') center top / cover no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+}
+
 /* ══ HERO ══ */
 .hero {
   min-height: 100vh;
@@ -668,6 +683,7 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+<div class="photo-watermark"></div>
 
 <!-- ══ NAV ══ -->
 <nav class="nav">
