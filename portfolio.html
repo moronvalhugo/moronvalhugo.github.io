@@ -7,7 +7,6 @@
 <meta name="description" content="Hugo Moronval · Portfolio · 10 ans d'impact en branding et marketing opérationnel pour PME et ETI.">
 <meta name="author" content="Hugo Moronval">
 <meta property="og:title" content="Portfolio — Hugo Moronval">
-<meta property="og:description" content="10 ans d'impact concret en branding et marketing opérationnel. Région lilloise.">
 <meta property="og:image" content="og-image.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23F5F2EC'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-size='66' font-weight='900' fill='%23C8A96B' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;800&display=swap" rel="stylesheet">
@@ -69,7 +68,7 @@ body {
   color: var(--ink); text-decoration: none;
 }
 .nav-logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 40px; align-items: center; }
+.nav-links { display: flex; gap: 40px; }
 .nav-link {
   font-size: 12px; font-weight: 500; letter-spacing: 1px;
   text-transform: uppercase; color: var(--ink2);
@@ -80,476 +79,350 @@ body {
   width: 0; height: 1px; background: var(--accent); transition: width .35s;
 }
 .nav-link:hover { color: var(--ink); }
-.nav-link:hover::after { width: 100%; }
+.nav-link:hover::after, .nav-link.active::after { width: 100%; }
 .nav-link.active { color: var(--ink); }
-.nav-link.active::after { width: 100%; }
 .nav-status {
   display: flex; align-items: center; gap: 8px;
   font-size: 11px; font-weight: 500; letter-spacing: 1px;
   text-transform: uppercase; color: var(--ink2);
 }
-.nav-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: #3DA05A; animation: blink 2s ease-in-out infinite;
-}
+.nav-dot { width: 7px; height: 7px; border-radius: 50%; background: #3DA05A; animation: blink 2s ease-in-out infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
-
-/* ══ PHOTO WATERMARK ══ */
-.photo-watermark {
-  position: fixed; top: 0; right: 0;
-  width: 38vw; height: 100vh;
-  background: url('og-image.jpg') center top / cover no-repeat;
-  opacity: .22; mix-blend-mode: multiply; filter: grayscale(100%);
-  mask-image: linear-gradient(to left, rgba(0,0,0,.8) 0%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,.8) 0%, rgba(0,0,0,0) 100%);
-  pointer-events: none; z-index: 0;
-}
 
 /* ══ HERO ══ */
 .hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 0 48px 80px;
-  border-bottom: 1px solid var(--border);
-  position: relative; z-index: 1; overflow: hidden;
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 48px 80px; border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
 }
-.hero-bg-text {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
+.hero-photo {
+  position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+  background: url('og-image.jpg') center top / cover no-repeat;
+  opacity: .18; mix-blend-mode: multiply; filter: grayscale(100%);
+  mask-image: linear-gradient(to left, rgba(0,0,0,.9) 0%, rgba(0,0,0,0) 70%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,.9) 0%, rgba(0,0,0,0) 70%);
+}
+.hero-bg-num {
+  position: absolute; bottom: -40px; right: -20px;
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: clamp(180px, 30vw, 420px);
-  color: transparent; -webkit-text-stroke: 1px rgba(10,10,10,.05);
-  white-space: nowrap; pointer-events: none; letter-spacing: -10px;
+  font-weight: 800; font-size: 40vw; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1px rgba(10,10,10,.04);
+  pointer-events: none; user-select: none;
 }
 .hero-eyebrow {
   font-size: 11px; font-weight: 500; letter-spacing: 3px;
   text-transform: uppercase; color: var(--accent);
-  display: flex; align-items: center; gap: 16px;
-  margin-bottom: 32px;
+  display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
+  position: relative; z-index: 1;
 }
 .hero-eyebrow::before { content:''; width:40px; height:1px; background:var(--accent); }
 .hero-headline {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 800; font-size: clamp(56px, 10vw, 148px);
-  line-height: .88; letter-spacing: -4px;
-  text-transform: uppercase; color: var(--ink);
-  margin-bottom: 48px;
+  line-height: .88; letter-spacing: -4px; text-transform: uppercase;
+  color: var(--ink); margin-bottom: 48px; position: relative; z-index: 1;
 }
 .hero-headline .outline { color: transparent; -webkit-text-stroke: 2px var(--ink); }
 .hero-headline .gold { color: var(--accent); }
-.hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
-.hero-bio {
-  max-width: 520px; font-size: 16px; font-weight: 300;
-  line-height: 1.65; color: var(--ink2);
-}
+.hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; position: relative; z-index: 1; }
+.hero-bio { max-width: 520px; font-size: 16px; font-weight: 300; line-height: 1.65; color: var(--ink2); }
 .hero-bio strong { color: var(--ink); font-weight: 600; }
-.hero-scroll {
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  font-size: 10px; font-weight: 500; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--ink3);
-}
-.hero-scroll-line {
-  width: 1px; height: 60px; background: var(--accent);
-  animation: scrollLine 2s ease-in-out infinite;
-}
+.hero-scroll { display: flex; flex-direction: column; align-items: center; gap: 12px; font-size: 10px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--ink3); }
+.hero-scroll-line { width: 1px; height: 60px; background: var(--accent); animation: scrollLine 2s ease-in-out infinite; }
 @keyframes scrollLine { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:.3;transform:scaleY(.5)} }
 
 /* ══ TICKER ══ */
-.ticker {
-  overflow: hidden; border-bottom: 1px solid var(--border);
-  background: var(--black); padding: 14px 0; position: relative; z-index: 1;
-}
-.ticker-inner {
-  display: flex; animation: ticker 30s linear infinite; white-space: nowrap;
-}
-.ticker-item {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 13px;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--bg); padding: 0 32px;
-}
+.ticker { overflow: hidden; border-bottom: 1px solid var(--border); background: var(--black); padding: 14px 0; }
+.ticker-inner { display: flex; animation: ticker 30s linear infinite; white-space: nowrap; }
+.ticker-item { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--bg); padding: 0 32px; }
 .ticker-item span { color: var(--accent); margin-left: 32px; }
 @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-/* ══ SECTION GENERIC ══ */
-.section {
-  padding: 96px 48px;
-  border-bottom: 1px solid var(--border);
-  position: relative; z-index: 1;
-}
-.sec-eyebrow {
-  font-size: 10px; font-weight: 600; letter-spacing: 4px;
-  text-transform: uppercase; color: var(--accent);
-  display: flex; align-items: center; gap: 16px;
-  margin-bottom: 16px;
-}
+/* ══ SECTIONS ══ */
+.section { padding: 96px 48px; border-bottom: 1px solid var(--border); position: relative; }
+.sec-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
 .sec-eyebrow::after { content:''; flex:1; height:1px; background:var(--border); }
-.sec-num {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: 100px; font-weight: 800; line-height: 1;
-  color: transparent; -webkit-text-stroke: 1px var(--border);
-  margin-bottom: -28px; margin-left: -4px;
-  pointer-events: none;
-}
-.sec-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: clamp(36px, 5vw, 72px);
-  line-height: 1; letter-spacing: -2px;
-  text-transform: uppercase; color: var(--ink);
-  margin-bottom: 56px;
-}
+.sec-num { font-family: 'Bricolage Grotesque', sans-serif; font-size: 100px; font-weight: 800; line-height: 1; color: transparent; -webkit-text-stroke: 1px var(--border); margin-bottom: -28px; margin-left: -4px; pointer-events: none; }
+.sec-title { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(36px, 5vw, 72px); line-height: 1; letter-spacing: -2px; text-transform: uppercase; color: var(--ink); margin-bottom: 56px; }
 .sec-title .outline { color: transparent; -webkit-text-stroke: 2px var(--ink); }
 .sec-title .gold { color: var(--accent); }
 
+/* ══ FADE-IN ANIMATION ══ */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+
 /* ══ 01 PROFIL ══ */
-.profil-grid {
-  display: grid; grid-template-columns: 1fr 280px; gap: 80px; align-items: start;
+.profil-layout { display: grid; grid-template-columns: 340px 1fr 240px; gap: 64px; align-items: start; }
+.profil-photo-col { position: relative; }
+.profil-photo-frame {
+  width: 100%; aspect-ratio: 3/4;
+  overflow: hidden; position: relative;
 }
-.profil-quote {
-  font-size: 18px; font-weight: 300; line-height: 1.7;
-  color: var(--ink2); margin-bottom: 48px;
+.profil-photo-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  filter: grayscale(20%); display: block;
 }
+.profil-photo-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(200,169,107,.15) 100%);
+}
+.profil-photo-label {
+  position: absolute; bottom: -1px; left: 0; right: 0;
+  background: var(--accent); padding: 12px 20px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800; font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--black);
+}
+.profil-quote { font-size: 18px; font-weight: 300; line-height: 1.75; color: var(--ink2); margin-bottom: 48px; }
 .profil-quote strong { color: var(--ink); font-weight: 600; }
-.pillars { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.pillars { display: flex; flex-direction: column; gap: 24px; }
 .pillar { border-left: 2px solid var(--accent); padding-left: 20px; }
-.pillar-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 16px; text-transform: uppercase;
-  color: var(--ink); margin-bottom: 8px;
-}
+.pillar-title { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 14px; text-transform: uppercase; color: var(--ink); margin-bottom: 6px; }
 .pillar-text { font-size: 13px; color: var(--ink2); line-height: 1.5; }
-.stats-grid { display: flex; flex-direction: column; gap: 2px; }
-.stat-box {
-  background: var(--black); padding: 24px 20px;
-  display: flex; flex-direction: column; gap: 4px;
+.stats-col { display: flex; flex-direction: column; gap: 2px; }
+.stat-box { background: var(--black); padding: 24px 20px; display: flex; flex-direction: column; gap: 4px; }
+.stat-num { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 36px; color: var(--accent); line-height: 1; }
+.stat-lbl { font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: rgba(245,242,236,.45); }
+
+/* ══ QUOTE STRIP ══ */
+.quote-strip {
+  background: var(--black); padding: 80px 48px;
+  overflow: hidden; position: relative;
 }
-.stat-num {
+.quote-strip-bg {
+  position: absolute; top: 50%; left: -5%;
+  transform: translateY(-50%);
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 36px; color: var(--accent); line-height: 1;
+  font-weight: 800; font-size: 20vw; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1px rgba(245,242,236,.04);
+  white-space: nowrap; pointer-events: none;
 }
-.stat-lbl {
-  font-size: 11px; font-weight: 500; letter-spacing: 1px;
-  text-transform: uppercase; color: rgba(245,242,236,.45);
+.quote-text {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800; font-size: clamp(28px, 4.5vw, 64px);
+  line-height: 1.05; letter-spacing: -2px;
+  text-transform: uppercase; color: var(--bg);
+  position: relative; z-index: 1; max-width: 900px;
 }
+.quote-text span { color: var(--accent); }
+.quote-author {
+  font-size: 12px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(245,242,236,.3);
+  margin-top: 32px; position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 16px;
+}
+.quote-author::before { content:''; width:32px; height:1px; background:var(--accent); }
 
 /* ══ 02 PARCOURS ══ */
-.timeline { display: flex; flex-direction: column; }
+.timeline-wrap { position: relative; padding-left: 0; }
 .tl-item {
-  display: grid; grid-template-columns: 160px 1fr auto;
+  display: grid; grid-template-columns: 180px 1fr auto;
   align-items: center; gap: 40px;
-  padding: 28px 0; border-bottom: 1px solid var(--border);
+  padding: 32px 0 32px 32px; border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.tl-item::before {
+  content: ''; position: absolute; left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 10px; height: 10px; border-radius: 50%;
+  border: 2px solid var(--accent); background: var(--bg);
 }
 .tl-item:last-child { border-bottom: none; }
-.tl-date {
-  font-size: 12px; font-weight: 500; letter-spacing: 1px;
-  color: var(--ink3); text-transform: uppercase;
-}
-.tl-role {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 20px; color: var(--ink); margin-bottom: 4px;
-}
+.tl-date { font-size: 12px; font-weight: 500; letter-spacing: 1px; color: var(--ink3); text-transform: uppercase; }
+.tl-role { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; color: var(--ink); margin-bottom: 4px; }
 .tl-company { font-size: 13px; color: var(--ink2); }
-.tl-tag {
-  font-size: 11px; font-weight: 500; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--accent);
-  border: 1px solid rgba(200,169,107,.4); padding: 5px 14px;
-  white-space: nowrap;
+.tl-tag { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(200,169,107,.4); padding: 5px 14px; white-space: nowrap; }
+
+/* ══ CASE STUDY BAND ══ */
+.case-band {
+  padding: 56px 48px; margin: -96px -48px 64px -48px;
+  position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 40px;
+}
+.case-band-bg-text {
+  position: absolute; bottom: -30px; left: -10px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800; font-size: 18vw; line-height: 1;
+  text-transform: uppercase; white-space: nowrap; pointer-events: none;
+}
+.case-band-content { position: relative; z-index: 1; }
+.case-band-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 12px; }
+.case-band-name { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(40px, 6vw, 88px); text-transform: uppercase; line-height: .9; letter-spacing: -2px; }
+.case-band-meta { font-size: 14px; margin-top: 16px; opacity: .7; }
+.case-band-logo { position: relative; z-index: 1; flex-shrink: 0; }
+.case-band-logo img { height: 80px; width: auto; object-fit: contain; }
+.logo-placeholder {
+  height: 80px; min-width: 160px; border: 1px dashed currentColor;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; opacity: .35;
+  padding: 0 20px;
 }
 
-/* ══ CASE STUDY ══ */
-.case-head {
-  display: grid; grid-template-columns: 1fr auto; gap: 60px;
-  align-items: start; margin-bottom: 56px;
-}
-.case-co {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: clamp(32px, 4vw, 56px);
-  text-transform: uppercase; color: var(--ink); margin-bottom: 8px;
-}
-.case-meta-line { font-size: 13px; color: var(--ink2); margin-bottom: 4px; }
-.case-role-line { font-size: 15px; font-weight: 600; color: var(--accent); }
-.case-stats-row { display: flex; gap: 2px; }
-.case-stat-box {
-  background: var(--black); padding: 20px 24px; min-width: 100px;
-  display: flex; flex-direction: column; gap: 4px;
-}
-.case-stat-num {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 28px; color: var(--accent); line-height: 1;
-}
-.case-stat-lbl {
-  font-size: 10px; font-weight: 500; letter-spacing: 1px;
-  text-transform: uppercase; color: rgba(245,242,236,.4);
-}
-.case-items-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
-}
+/* Cosmogroup band: beige on dark */
+.band-cosmo { background: #1A1410; color: #F5F2EC; }
+.band-cosmo .case-band-bg-text { color: transparent; -webkit-text-stroke: 1px rgba(200,169,107,.08); }
+.band-cosmo .case-band-eyebrow { color: var(--accent); }
+.band-cosmo .case-band-name span { color: var(--accent); }
+
+/* HPC band: black + green */
+.band-hpc { background: #050F06; color: #F0F8F0; }
+.band-hpc .case-band-bg-text { color: transparent; -webkit-text-stroke: 1px rgba(0,200,60,.06); }
+.band-hpc .case-band-eyebrow { color: #3EBF5A; }
+.band-hpc .case-band-name { color: #F0F8F0; }
+.band-hpc .case-band-name span { color: #3EBF5A; }
+
+/* Les 3 Rois band: warm */
+.band-3rois { background: #1C1208; color: #FAF4EC; }
+.band-3rois .case-band-bg-text { color: transparent; -webkit-text-stroke: 1px rgba(200,169,107,.07); }
+.band-3rois .case-band-eyebrow { color: var(--accent); }
+.band-3rois .case-band-name span { color: var(--accent); }
+
+/* Carré Rond band: dark + colorful */
+.band-carre { background: #0A0A14; color: #F5F2EC; }
+.band-carre .case-band-bg-text { color: transparent; -webkit-text-stroke: 1px rgba(0,190,255,.05); }
+.band-carre .case-band-eyebrow { color: #00BEFF; }
+.band-carre .case-band-name span { color: #00BEFF; }
+
+/* ══ CASE STATS ROW ══ */
+.case-stats-row { display: flex; gap: 2px; margin-bottom: 56px; }
+.case-stat-box { background: var(--black); padding: 24px 28px; flex: 1; }
+.case-stat-num { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 36px; color: var(--accent); line-height: 1; margin-bottom: 6px; }
+.case-stat-lbl { font-size: 10px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: rgba(245,242,236,.35); }
+
+/* ══ CASE ITEMS ══ */
+.case-items-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; }
 .case-item {
-  background: var(--surface); padding: 32px;
-  border: 1px solid var(--border);
-  transition: background .3s, color .3s;
-  position: relative; overflow: hidden;
+  background: var(--surface); padding: 36px; border: 1px solid var(--border);
+  transition: background .4s; position: relative; overflow: hidden;
 }
 .case-item::before {
-  content: ''; position: absolute; inset: 0;
-  background: var(--black); transform: translateY(100%);
-  transition: transform .45s cubic-bezier(.77,0,.175,1);
+  content: ''; position: absolute; inset: 0; background: var(--black);
+  transform: translateY(101%); transition: transform .45s cubic-bezier(.77,0,.175,1);
 }
 .case-item:hover::before { transform: translateY(0); }
 .case-item-inner { position: relative; z-index: 1; }
-.case-item-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 18px; text-transform: uppercase;
-  color: var(--ink); margin-bottom: 12px;
-  transition: color .3s;
-}
+.case-item-num { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 13px; color: var(--accent); margin-bottom: 12px; transition: color .3s; }
+.case-item-title { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px; text-transform: uppercase; color: var(--ink); margin-bottom: 12px; transition: color .3s; }
 .case-item:hover .case-item-title { color: var(--accent); }
-.case-item-desc {
-  font-size: 14px; font-weight: 300; line-height: 1.6;
-  color: var(--ink2); transition: color .3s;
-}
-.case-item:hover .case-item-desc { color: rgba(245,242,236,.7); }
+.case-item-desc { font-size: 14px; font-weight: 300; line-height: 1.6; color: var(--ink2); transition: color .3s; }
+.case-item:hover .case-item-desc { color: rgba(245,242,236,.6); }
 
-/* ══ BEFORE / AFTER (HPC) ══ */
-.ba-wrap {
-  display: grid; grid-template-columns: 1fr 80px 1fr; gap: 0;
-  align-items: center; margin-bottom: 56px;
-}
-.ba-box {
-  padding: 40px; border: 1px solid var(--border); background: var(--surface);
-}
-.ba-box.after { background: var(--black); border-color: var(--black); }
-.ba-label {
-  font-size: 10px; font-weight: 600; letter-spacing: 3px;
-  text-transform: uppercase; color: var(--ink3); margin-bottom: 16px;
-}
-.ba-box.after .ba-label { color: rgba(245,242,236,.4); }
-.ba-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 28px; text-transform: uppercase;
-  color: var(--ink); margin-bottom: 20px;
-}
-.ba-box.after .ba-title { color: var(--accent); }
-.ba-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-.ba-list li { font-size: 14px; color: var(--ink2); padding-left: 16px; position: relative; }
-.ba-list li::before { content: '—'; position: absolute; left:0; color: var(--accent); }
-.ba-box.after .ba-list li { color: rgba(245,242,236,.6); }
-.ba-arrow {
-  display: flex; align-items: center; justify-content: center;
-}
-.ba-arrow-inner {
-  width: 40px; height: 1px; background: var(--accent); position: relative;
-}
-.ba-arrow-inner::after {
-  content: ''; position: absolute; right: -1px; top: -4px;
-  width: 0; height: 0;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 8px solid var(--accent);
-}
+/* ══ HPC BEFORE/AFTER ══ */
+.ba-wrap { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; align-items: stretch; margin-bottom: 48px; }
+.ba-box { padding: 40px; }
+.ba-before { background: var(--surface); border: 1px solid var(--border); }
+.ba-after { background: #050F06; border: 1px solid #3EBF5A33; }
+.ba-label { font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+.ba-before .ba-label { color: var(--ink3); }
+.ba-after .ba-label { color: #3EBF5A; }
+.ba-title { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 28px; text-transform: uppercase; margin-bottom: 20px; }
+.ba-before .ba-title { color: var(--ink); }
+.ba-after .ba-title { color: #3EBF5A; }
+.ba-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.ba-list li { font-size: 14px; padding-left: 18px; position: relative; }
+.ba-list li::before { content: '—'; position: absolute; left:0; font-size: 12px; }
+.ba-before .ba-list li { color: var(--ink2); }
+.ba-before .ba-list li::before { color: var(--accent); }
+.ba-after .ba-list li { color: rgba(240,248,240,.65); }
+.ba-after .ba-list li::before { color: #3EBF5A; }
+.ba-arrow-col { display: flex; align-items: center; justify-content: center; background: transparent; }
+.ba-arrow-inner { width: 1px; height: 40px; background: var(--accent); position: relative; }
+.ba-arrow-inner::after { content:''; position:absolute; bottom:-1px; left:-4px; width:0; height:0; border-left:5px solid transparent; border-right:5px solid transparent; border-top:8px solid var(--accent); }
 .steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
-.step-box {
-  background: var(--surface); padding: 32px; border: 1px solid var(--border);
-}
-.step-num {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 48px; color: transparent;
-  -webkit-text-stroke: 1px var(--border); line-height: 1; margin-bottom: 16px;
-}
-.step-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 18px; text-transform: uppercase;
-  color: var(--ink); margin-bottom: 12px;
-}
-.step-desc { font-size: 14px; color: var(--ink2); line-height: 1.6; }
+.step-box { background: var(--surface); padding: 36px; border: 1px solid var(--border); }
+.step-num { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 56px; color: transparent; -webkit-text-stroke: 1px var(--border); line-height: 1; margin-bottom: 20px; }
+.step-title { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 17px; text-transform: uppercase; color: var(--ink); margin-bottom: 12px; }
+.step-desc { font-size: 13px; color: var(--ink2); line-height: 1.6; }
 
 /* ══ 06 EXPERTISES ══ */
 .skills-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; }
-.skill-block {
-  padding: 40px; background: var(--surface); border: 1px solid var(--border);
-}
-.skill-block-header {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 20px;
-}
-.skill-block-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 18px; text-transform: uppercase; color: var(--ink);
-}
-.skill-level {
-  font-size: 10px; font-weight: 600; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--accent);
-  border: 1px solid rgba(200,169,107,.4); padding: 3px 10px;
-}
-.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.skill-tag {
-  font-size: 12px; color: var(--ink2);
-  border: 1px solid var(--border); padding: 5px 12px; background: transparent;
-}
+.skill-block { padding: 40px; background: var(--surface); border: 1px solid var(--border); }
+.skill-block-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.skill-block-title { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 18px; text-transform: uppercase; color: var(--ink); }
+.skill-level { font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(200,169,107,.4); padding: 3px 10px; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.skill-tag { font-size: 12px; color: var(--ink2); border: 1px solid var(--border); padding: 5px 12px; }
+.skill-bar { height: 2px; background: var(--border); overflow: hidden; margin-top: 4px; }
+.skill-bar-fill { height: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 1.2s cubic-bezier(.77,0,.175,1); }
+.skill-bar-fill.animated { transform: scaleX(1); }
 
 /* ══ 07 FORMATION ══ */
 .formation-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
 .formation-list { display: flex; flex-direction: column; }
-.form-item {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  padding: 24px 0; border-bottom: 1px solid var(--border); gap: 20px;
-}
+.form-item { display: flex; justify-content: space-between; align-items: flex-start; padding: 24px 0; border-bottom: 1px solid var(--border); gap: 20px; }
 .form-item:last-child { border-bottom: none; }
 .form-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
 .form-school { font-size: 13px; color: var(--ink2); margin-bottom: 4px; }
 .form-desc { font-size: 12px; color: var(--ink3); }
-.form-date {
-  font-size: 12px; font-weight: 500; letter-spacing: 1px;
-  color: var(--accent); white-space: nowrap; padding-top: 2px;
-}
-.langues-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 20px; text-transform: uppercase;
-  color: var(--ink); margin-bottom: 24px;
-}
+.form-date { font-size: 12px; font-weight: 500; letter-spacing: 1px; color: var(--accent); white-space: nowrap; padding-top: 2px; }
+.langues-title { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 20px; text-transform: uppercase; color: var(--ink); margin-bottom: 24px; }
 .langue-item { margin-bottom: 20px; }
-.langue-header {
-  display: flex; justify-content: space-between;
-  margin-bottom: 8px;
-}
+.langue-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
 .langue-name { font-size: 14px; font-weight: 500; color: var(--ink); }
 .langue-level { font-size: 12px; font-weight: 600; color: var(--accent); }
-.langue-bar {
-  height: 2px; background: var(--border); overflow: hidden;
-}
+.langue-bar { height: 2px; background: var(--border); overflow: hidden; }
 .langue-fill { height: 100%; background: var(--accent); }
-.interets-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 16px; text-transform: uppercase;
-  color: var(--ink); margin: 40px 0 16px;
-}
+.interets-title { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; color: var(--ink); margin: 40px 0 16px; }
 .interets-list { display: flex; flex-wrap: wrap; gap: 8px; }
-.interet {
-  font-size: 12px; font-weight: 500; color: var(--ink2);
-  border: 1px solid var(--border); padding: 6px 14px;
-  transition: background .25s, color .25s;
-}
+.interet { font-size: 12px; font-weight: 500; color: var(--ink2); border: 1px solid var(--border); padding: 6px 14px; transition: background .25s, color .25s; }
 .interet:hover { background: var(--ink); color: var(--bg); }
 
 /* ══ 08 PROJET PRO ══ */
 .projet-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
-.projet-box {
-  padding: 40px; background: var(--surface); border: 1px solid var(--border);
-  transition: background .3s;
-}
+.projet-box { padding: 40px; background: var(--surface); border: 1px solid var(--border); transition: background .35s; }
 .projet-box:hover { background: var(--black); }
-.projet-num {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 56px; color: transparent;
-  -webkit-text-stroke: 1px var(--border); line-height: 1; margin-bottom: 20px;
-  transition: -webkit-text-stroke .3s;
-}
+.projet-num { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 56px; color: transparent; -webkit-text-stroke: 1px var(--border); line-height: 1; margin-bottom: 20px; transition: -webkit-text-stroke-color .35s; }
 .projet-box:hover .projet-num { -webkit-text-stroke-color: rgba(200,169,107,.3); }
-.projet-title {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 16px; text-transform: uppercase;
-  color: var(--ink); margin-bottom: 12px; transition: color .3s;
-}
+.projet-title { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; color: var(--ink); margin-bottom: 12px; transition: color .35s; }
 .projet-box:hover .projet-title { color: var(--accent); }
-.projet-desc { font-size: 13px; color: var(--ink2); line-height: 1.6; transition: color .3s; }
-.projet-box:hover .projet-desc { color: rgba(245,242,236,.5); }
+.projet-desc { font-size: 13px; color: var(--ink2); line-height: 1.6; transition: color .35s; }
+.projet-box:hover .projet-desc { color: rgba(245,242,236,.45); }
 
 /* ══ 09 RÉFÉRENCES ══ */
 .refs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; }
-.ref-card {
-  padding: 40px; background: var(--surface); border: 1px solid var(--border);
-}
+.ref-card { padding: 40px; background: var(--surface); border: 1px solid var(--border); }
 .ref-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
-.ref-avatar {
-  width: 48px; height: 48px; background: var(--black);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 14px; color: var(--accent);
-  flex-shrink: 0;
-}
+.ref-avatar { width: 48px; height: 48px; background: var(--black); display: flex; align-items: center; justify-content: center; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 14px; color: var(--accent); flex-shrink: 0; }
 .ref-name { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
 .ref-role { font-size: 12px; color: var(--ink2); }
 .ref-context { font-size: 13px; color: var(--ink2); line-height: 1.6; margin-bottom: 20px; }
-.ref-email-label {
-  font-size: 10px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--ink3); margin-bottom: 6px;
-}
-.ref-email {
-  font-size: 14px; color: var(--accent); text-decoration: none;
-  border-bottom: 1px solid rgba(200,169,107,.3);
-  transition: border-color .3s;
-}
+.ref-email-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 6px; }
+.ref-email { font-size: 14px; color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(200,169,107,.3); transition: border-color .3s; }
 .ref-email:hover { border-color: var(--accent); }
 
 /* ══ CONTACT ══ */
-.contact-section {
-  padding: 96px 48px; background: var(--black);
-  position: relative; z-index: 1;
-}
+.contact-section { padding: 96px 48px; background: var(--black); }
 .contact-grid { display: grid; grid-template-columns: 1fr 280px; gap: 80px; align-items: end; }
-.contact-headline {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: clamp(48px, 8vw, 112px);
-  line-height: .9; letter-spacing: -3px;
-  text-transform: uppercase; color: var(--bg);
-  margin-bottom: 32px;
-}
+.contact-headline { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(48px, 8vw, 112px); line-height: .9; letter-spacing: -3px; text-transform: uppercase; color: var(--bg); margin-bottom: 32px; }
 .contact-headline span { color: var(--accent); }
-.contact-sub { font-size: 15px; color: rgba(245,242,236,.45); margin-bottom: 40px; }
-.contact-list { display: flex; flex-direction: column; gap: 0; }
-.contact-row {
-  display: flex; align-items: center; gap: 24px;
-  padding: 16px 0; border-bottom: 1px solid rgba(245,242,236,.1);
-}
-.contact-label {
-  font-size: 10px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: rgba(245,242,236,.3);
-  width: 100px; flex-shrink: 0;
-}
-.contact-value {
-  font-size: 15px; color: rgba(245,242,236,.75); text-decoration: none;
-  transition: color .3s;
-}
+.contact-sub { font-size: 15px; color: rgba(245,242,236,.4); margin-bottom: 40px; }
+.contact-list { display: flex; flex-direction: column; }
+.contact-row { display: flex; align-items: center; gap: 24px; padding: 16px 0; border-bottom: 1px solid rgba(245,242,236,.08); }
+.contact-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,242,236,.25); width: 100px; flex-shrink: 0; }
+.contact-value { font-size: 15px; color: rgba(245,242,236,.7); text-decoration: none; transition: color .3s; }
 .contact-value:hover { color: var(--accent); }
-.salary-box { background: rgba(245,242,236,.05); padding: 32px; border: 1px solid rgba(245,242,236,.1); }
-.salary-label {
-  font-size: 10px; font-weight: 600; letter-spacing: 2px;
-  text-transform: uppercase; color: rgba(245,242,236,.3);
-  margin-bottom: 12px;
-}
-.salary-num {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 48px; color: var(--accent);
-  line-height: 1; margin-bottom: 8px;
-}
+.salary-box { background: rgba(245,242,236,.04); padding: 32px; border: 1px solid rgba(245,242,236,.08); }
+.salary-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(245,242,236,.3); margin-bottom: 12px; }
+.salary-num { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 48px; color: var(--accent); line-height: 1; margin-bottom: 8px; }
 .salary-detail { font-size: 13px; color: rgba(245,242,236,.3); }
 
 /* ══ FOOTER ══ */
-.footer {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 32px 48px; background: var(--black);
-  border-top: 1px solid rgba(245,242,236,.08);
-  position: relative; z-index: 1;
-}
-.footer-left {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800; font-size: 13px; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--bg);
-}
+.footer { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px; background: var(--black); border-top: 1px solid rgba(245,242,236,.06); }
+.footer-left { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--bg); }
 .footer-left span { color: var(--accent); }
 .footer-nav { display: flex; gap: 32px; }
-.footer-link {
-  font-size: 11px; font-weight: 500; letter-spacing: 1px;
-  text-transform: uppercase; color: rgba(245,242,236,.3);
-  text-decoration: none; transition: color .3s;
-}
+.footer-link { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: rgba(245,242,236,.3); text-decoration: none; transition: color .3s; }
 .footer-link:hover { color: var(--accent); }
-.footer-year {
-  font-size: 10px; font-weight: 400; letter-spacing: 3px;
-  text-transform: uppercase; color: rgba(245,242,236,.2);
-}
+.footer-year { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,242,236,.2); }
 
 /* ══ RESPONSIVE ══ */
+@media (max-width: 1100px) {
+  .profil-layout { grid-template-columns: 240px 1fr 200px; gap: 40px; }
+}
 @media (max-width: 900px) {
   .nav { padding: 20px 24px; }
   .nav-links, .nav-status { display: none; }
@@ -557,24 +430,26 @@ body {
   .hero-headline { letter-spacing: -2px; }
   .hero-bottom { flex-direction: column; gap: 32px; align-items: flex-start; }
   .section { padding: 64px 24px; }
-  .profil-grid, .formation-wrap { grid-template-columns: 1fr; gap: 48px; }
-  .pillars { grid-template-columns: 1fr; }
+  .profil-layout { grid-template-columns: 1fr; gap: 40px; }
+  .profil-photo-col { display: none; }
+  .formation-wrap { grid-template-columns: 1fr; gap: 48px; }
   .tl-item { grid-template-columns: 1fr; gap: 8px; }
   .tl-tag { width: fit-content; }
-  .case-head { grid-template-columns: 1fr; gap: 32px; }
+  .case-band { margin: -64px -24px 48px -24px; padding: 40px 24px; }
+  .case-band-bg-text { font-size: 28vw; }
   .case-stats-row { flex-wrap: wrap; }
   .case-items-grid, .skills-grid, .refs-grid { grid-template-columns: 1fr; }
   .ba-wrap { grid-template-columns: 1fr; }
-  .ba-arrow { display: none; }
+  .ba-arrow-col { display: none; }
   .steps-grid { grid-template-columns: 1fr; }
-  .projet-grid { grid-template-columns: 1fr; }
+  .projet-grid { grid-template-columns: 1fr 1fr; }
   .contact-section { padding: 64px 24px; }
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
   .footer { flex-direction: column; gap: 24px; padding: 32px 24px; }
   .footer-nav { display: none; }
-  .photo-watermark { display: none; }
   .cursor, .cursor-ring { display: none; }
   body { cursor: auto; }
+  .quote-strip { padding: 60px 24px; }
 }
 </style>
 </head>
@@ -582,7 +457,6 @@ body {
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-<div class="photo-watermark"></div>
 
 <!-- ══ NAV ══ -->
 <nav class="nav">
@@ -601,7 +475,8 @@ body {
 
 <!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="hero-bg-text">HM</div>
+  <div class="hero-photo"></div>
+  <div class="hero-bg-num">10</div>
   <div class="hero-eyebrow">Portfolio · Marketing &amp; Branding · 2026</div>
   <h1 class="hero-headline">
     <span class="outline">10 ans</span><br>
@@ -645,29 +520,35 @@ body {
   <div class="sec-eyebrow">01 · Profil</div>
   <div class="sec-num">01</div>
   <h2 class="sec-title">Qui<br>suis-je ?</h2>
-  <div class="profil-grid">
+  <div class="profil-layout">
+    <div class="profil-photo-col reveal">
+      <div class="profil-photo-frame">
+        <img src="og-image.jpg" alt="Hugo Moronval">
+      </div>
+      <div class="profil-photo-label">Hugo Moronval · Mkg &amp; Branding</div>
+    </div>
     <div>
-      <p class="profil-quote">
+      <p class="profil-quote reveal">
         Expert en branding et marketing opérationnel, j'accompagne les PME et ETI dans la construction et le déploiement de leur identité de marque — <strong>de la stratégie à l'exécution terrain.</strong> Plus de 10 ans d'expérience alliant vision stratégique, sens du concret et management d'équipe.
       </p>
       <div class="pillars">
-        <div class="pillar">
+        <div class="pillar reveal reveal-delay-1">
           <div class="pillar-title">Vision</div>
           <p class="pillar-text">Stratégie de marque, positionnement, plateforme de valeurs</p>
         </div>
-        <div class="pillar">
+        <div class="pillar reveal reveal-delay-2">
           <div class="pillar-title">Terrain</div>
           <p class="pillar-text">Marketing opérationnel, campagnes omnicanales, ROI mesuré</p>
         </div>
-        <div class="pillar">
+        <div class="pillar reveal reveal-delay-3">
           <div class="pillar-title">Humain</div>
           <p class="pillar-text">Management bienveillant, culture d'équipe, impact réel</p>
         </div>
       </div>
     </div>
-    <div class="stats-grid">
+    <div class="stats-col reveal">
       <div class="stat-box">
-        <span class="stat-num">10+</span>
+        <span class="stat-num" data-count="10" data-suffix="+">10+</span>
         <span class="stat-lbl">Ans d'expérience</span>
       </div>
       <div class="stat-box">
@@ -675,7 +556,7 @@ body {
         <span class="stat-lbl">CA doublé en 3 ans</span>
       </div>
       <div class="stat-box">
-        <span class="stat-num">7</span>
+        <span class="stat-num" data-count="7">7</span>
         <span class="stat-lbl">Pers. managées</span>
       </div>
       <div class="stat-box">
@@ -686,13 +567,23 @@ body {
   </div>
 </section>
 
+<!-- ══ QUOTE STRIP ══ -->
+<div class="quote-strip">
+  <div class="quote-strip-bg">IMPACT</div>
+  <div class="quote-text reveal">
+    3 marques transformées.<br>
+    <span>Des résultats</span> qui se voient.
+  </div>
+  <div class="quote-author">Hugo Moronval · 10 ans de terrain</div>
+</div>
+
 <!-- ══ 02 · PARCOURS ══ -->
 <section class="section">
   <div class="sec-eyebrow">02 · Parcours</div>
   <div class="sec-num">02</div>
   <h2 class="sec-title">Expériences<br>professionnelles</h2>
-  <div class="timeline">
-    <div class="tl-item">
+  <div class="timeline-wrap">
+    <div class="tl-item reveal">
       <div class="tl-date">2012 – 2019</div>
       <div>
         <div class="tl-role">Brand Manager</div>
@@ -700,7 +591,7 @@ body {
       </div>
       <div class="tl-tag">+300K€ → +600K€ CA</div>
     </div>
-    <div class="tl-item">
+    <div class="tl-item reveal reveal-delay-1">
       <div class="tl-date">2019 – 2021</div>
       <div>
         <div class="tl-role">Resp. Marketing &amp; Commercial</div>
@@ -708,7 +599,7 @@ body {
       </div>
       <div class="tl-tag">Transformation identité</div>
     </div>
-    <div class="tl-item">
+    <div class="tl-item reveal reveal-delay-2">
       <div class="tl-date">Déc. 2021 – Août 2022</div>
       <div>
         <div class="tl-role">Resp. Entreprises &amp; Formateur</div>
@@ -716,7 +607,7 @@ body {
       </div>
       <div class="tl-tag">Pédagogie &amp; réseau</div>
     </div>
-    <div class="tl-item">
+    <div class="tl-item reveal reveal-delay-3">
       <div class="tl-date">2020 – Août 2025</div>
       <div>
         <div class="tl-role">Associé &amp; Co-gérant</div>
@@ -724,7 +615,7 @@ body {
       </div>
       <div class="tl-tag">P&amp;L complet · 5 ans</div>
     </div>
-    <div class="tl-item">
+    <div class="tl-item reveal reveal-delay-3">
       <div class="tl-date">Jan. 2024 – Sept. 2025</div>
       <div>
         <div class="tl-role">Directeur d'Agence</div>
@@ -737,51 +628,61 @@ body {
 
 <!-- ══ 03 · COSMOGROUP ══ -->
 <section class="section">
-  <div class="sec-eyebrow">03 · Réalisation clé</div>
-  <div class="sec-num">03</div>
-  <h2 class="sec-title"><span class="outline">Cosmogroup</span><br><span class="gold">Grande Distrib.</span></h2>
-  <div class="case-head">
-    <div>
-      <div class="case-co">Cosmogroup</div>
-      <div class="case-meta-line">2012 – 2019 · 7 ans · Distribution cosmétique Europe</div>
-      <div class="case-role-line">Brand Manager Europe</div>
+  <div class="case-band band-cosmo">
+    <div class="case-band-bg-text">COSMO</div>
+    <div class="case-band-content">
+      <div class="case-band-eyebrow">03 · Réalisation clé · 2012–2019</div>
+      <div class="case-band-name"><span>Cosmogroup</span><br>Grande Distribution</div>
+      <div class="case-band-meta">Brand Manager Europe · 7 ans · Distribution cosmétique</div>
     </div>
-    <div class="case-stats-row">
-      <div class="case-stat-box">
-        <div class="case-stat-num">+300K€</div>
-        <div class="case-stat-lbl">CA année 1</div>
-      </div>
-      <div class="case-stat-box">
-        <div class="case-stat-num">+600K€</div>
-        <div class="case-stat-lbl">CA année 3</div>
-      </div>
-      <div class="case-stat-box">
-        <div class="case-stat-num">×2</div>
-        <div class="case-stat-lbl">En 3 ans</div>
-      </div>
+    <div class="case-band-logo">
+      <!-- Logo Cosmogroup → remplacer src par logo-cosmo.png quand disponible -->
+      <div class="logo-placeholder" style="border-color:#C8A96B;color:#C8A96B;">Logo Cosmogroup</div>
+    </div>
+  </div>
+  <div class="case-stats-row reveal">
+    <div class="case-stat-box">
+      <div class="case-stat-num">+300K€</div>
+      <div class="case-stat-lbl">CA année 1</div>
+    </div>
+    <div class="case-stat-box">
+      <div class="case-stat-num">+600K€</div>
+      <div class="case-stat-lbl">CA année 3</div>
+    </div>
+    <div class="case-stat-box">
+      <div class="case-stat-num">×2</div>
+      <div class="case-stat-lbl">En 3 ans</div>
+    </div>
+    <div class="case-stat-box">
+      <div class="case-stat-num">7</div>
+      <div class="case-stat-lbl">Pers. managées</div>
     </div>
   </div>
   <div class="case-items-grid">
-    <div class="case-item">
+    <div class="case-item reveal">
       <div class="case-item-inner">
+        <div class="case-item-num">— 01</div>
         <div class="case-item-title">Référencement Grande Distribution</div>
         <p class="case-item-desc">Entrée chez Auchan et Carrefour Europe — ouverture de marchés sur plusieurs pays.</p>
       </div>
     </div>
-    <div class="case-item">
+    <div class="case-item reveal reveal-delay-1">
       <div class="case-item-inner">
+        <div class="case-item-num">— 02</div>
         <div class="case-item-title">Stratégie de marque multi-marchés</div>
         <p class="case-item-desc">Positionnement, identité visuelle, supports déployés sur l'ensemble des marchés européens.</p>
       </div>
     </div>
-    <div class="case-item">
+    <div class="case-item reveal reveal-delay-2">
       <div class="case-item-inner">
+        <div class="case-item-num">— 03</div>
         <div class="case-item-title">Management d'équipe</div>
         <p class="case-item-desc">Animation et montée en compétences d'une équipe de 5 à 7 personnes sur 7 ans.</p>
       </div>
     </div>
-    <div class="case-item">
+    <div class="case-item reveal reveal-delay-3">
       <div class="case-item-inner">
+        <div class="case-item-num">— 04</div>
         <div class="case-item-title">Campagnes omnicanales</div>
         <p class="case-item-desc">Print, digital, événementiel, partenariats — suivi KPIs et optimisation continue.</p>
       </div>
@@ -791,12 +692,20 @@ body {
 
 <!-- ══ 04 · HPC ADLIS ══ -->
 <section class="section">
-  <div class="sec-eyebrow">04 · Réalisation clé</div>
-  <div class="sec-num">04</div>
-  <h2 class="sec-title">HPC Adlis —<br><span class="gold">Transformation</span></h2>
-  <p style="font-size:14px;color:var(--ink2);margin-bottom:48px;">2019 – Oct. 2021 · Resp. Marketing &amp; Commercial · Imprimeur Solutions 360°</p>
-  <div class="ba-wrap">
-    <div class="ba-box">
+  <div class="case-band band-hpc">
+    <div class="case-band-bg-text">HPC</div>
+    <div class="case-band-content">
+      <div class="case-band-eyebrow">04 · Réalisation clé · 2019–2021</div>
+      <div class="case-band-name"><span>HPC Adlis</span><br>Transformation</div>
+      <div class="case-band-meta">Resp. Marketing &amp; Commercial · Imprimeur Solutions 360°</div>
+    </div>
+    <div class="case-band-logo">
+      <!-- Logo HPC Adlis → remplacer src par logo-hpc.png quand disponible -->
+      <div class="logo-placeholder" style="border-color:#3EBF5A;color:#3EBF5A;">Logo HPC Adlis</div>
+    </div>
+  </div>
+  <div class="ba-wrap reveal">
+    <div class="ba-box ba-before">
       <div class="ba-label">Avant</div>
       <div class="ba-title">Imprimerie<br>traditionnelle</div>
       <ul class="ba-list">
@@ -805,10 +714,10 @@ body {
         <li>Pas de stratégie marque</li>
       </ul>
     </div>
-    <div class="ba-arrow">
+    <div class="ba-arrow-col">
       <div class="ba-arrow-inner"></div>
     </div>
-    <div class="ba-box after">
+    <div class="ba-box ba-after">
       <div class="ba-label">Après</div>
       <div class="ba-title">Acteur<br>360°</div>
       <ul class="ba-list">
@@ -819,17 +728,17 @@ body {
     </div>
   </div>
   <div class="steps-grid">
-    <div class="step-box">
+    <div class="step-box reveal">
       <div class="step-num">01</div>
       <div class="step-title">Refonte identité</div>
       <p class="step-desc">Nouveau logo, charte graphique, discours de marque, supports commerciaux complets</p>
     </div>
-    <div class="step-box">
+    <div class="step-box reveal reveal-delay-1">
       <div class="step-num">02</div>
       <div class="step-title">Offre redessinée</div>
       <p class="step-desc">Repositionnement stratégique, catalogue refondu, pricing optimisé</p>
     </div>
-    <div class="step-box">
+    <div class="step-box reveal reveal-delay-2">
       <div class="step-num">03</div>
       <div class="step-title">Plan commercial</div>
       <p class="step-desc">Prospection structurée, intégration de nouveaux grands comptes, suivi rentabilité</p>
@@ -839,53 +748,58 @@ body {
 
 <!-- ══ 05 · LES 3 ROIS ══ -->
 <section class="section">
-  <div class="sec-eyebrow">05 · Réalisation clé</div>
-  <div class="sec-num">05</div>
-  <h2 class="sec-title"><span class="outline">Les 3 Rois</span><br><span class="gold">P&amp;L & Marque</span></h2>
-  <div class="case-head">
-    <div>
-      <div class="case-co">Le Bar Les 3 Rois</div>
-      <div class="case-meta-line">2020 – Août 2025 · 5 ans · Affaire familiale · Hazebrouck</div>
-      <div class="case-role-line">Associé &amp; Co-gérant</div>
+  <div class="case-band band-3rois">
+    <div class="case-band-bg-text">3ROIS</div>
+    <div class="case-band-content">
+      <div class="case-band-eyebrow">05 · Réalisation clé · 2020–2025</div>
+      <div class="case-band-name"><span>Les 3 Rois</span><br>P&amp;L &amp; Marque</div>
+      <div class="case-band-meta">Associé &amp; Co-gérant · Affaire familiale · Hazebrouck</div>
     </div>
-    <div class="case-stats-row">
-      <div class="case-stat-box">
-        <div class="case-stat-num">5 ans</div>
-        <div class="case-stat-lbl">Activité menée à terme</div>
-      </div>
-      <div class="case-stat-box">
-        <div class="case-stat-num">P&amp;L</div>
-        <div class="case-stat-lbl">Pilotage complet</div>
-      </div>
-      <div class="case-stat-box">
-        <div class="case-stat-num">360°</div>
-        <div class="case-stat-lbl">Gestion intégrale</div>
-      </div>
+    <div class="case-band-logo">
+      <div class="logo-placeholder" style="border-color:#C8A96B;color:#C8A96B;">Logo Les 3 Rois</div>
+    </div>
+  </div>
+  <div class="case-stats-row reveal">
+    <div class="case-stat-box">
+      <div class="case-stat-num">5 ans</div>
+      <div class="case-stat-lbl">Activité menée à terme</div>
+    </div>
+    <div class="case-stat-box">
+      <div class="case-stat-num">P&amp;L</div>
+      <div class="case-stat-lbl">Pilotage complet</div>
+    </div>
+    <div class="case-stat-box">
+      <div class="case-stat-num">360°</div>
+      <div class="case-stat-lbl">Gestion intégrale</div>
     </div>
   </div>
   <div class="case-items-grid">
-    <div class="case-item">
+    <div class="case-item reveal">
       <div class="case-item-inner">
+        <div class="case-item-num">— 01</div>
         <div class="case-item-title">Modernisation &amp; repositionnement</div>
-        <p class="case-item-desc">Refonte du positionnement d'une affaire familiale, digitalisation de la communication, structuration des process de gestion.</p>
+        <p class="case-item-desc">Refonte du positionnement, digitalisation de la communication, structuration des process de gestion.</p>
       </div>
     </div>
-    <div class="case-item">
+    <div class="case-item reveal reveal-delay-1">
       <div class="case-item-inner">
+        <div class="case-item-num">— 02</div>
         <div class="case-item-title">Identité de marque locale forte</div>
-        <p class="case-item-desc">Ligne éditoriale, supports de communication, animation d'une communauté fidélisée sur les réseaux sociaux.</p>
+        <p class="case-item-desc">Ligne éditoriale, supports, animation d'une communauté fidélisée sur les réseaux sociaux.</p>
       </div>
     </div>
-    <div class="case-item">
+    <div class="case-item reveal reveal-delay-2">
       <div class="case-item-inner">
+        <div class="case-item-num">— 03</div>
         <div class="case-item-title">Repositionnement événementiel</div>
         <p class="case-item-desc">Programmation thématique, partenariats avec les commerçants et acteurs culturels du territoire.</p>
       </div>
     </div>
-    <div class="case-item">
+    <div class="case-item reveal reveal-delay-3">
       <div class="case-item-inner">
+        <div class="case-item-num">— 04</div>
         <div class="case-item-title">Pilotage P&amp;L complet · 5 ans</div>
-        <p class="case-item-desc">Trésorerie, marges, fournisseurs, fiscalité, relation banque — équilibre maintenu malgré le contexte Covid.</p>
+        <p class="case-item-desc">Trésorerie, marges, fournisseurs, fiscalité, relation banque — équilibre maintenu malgré Covid.</p>
       </div>
     </div>
   </div>
@@ -897,7 +811,7 @@ body {
   <div class="sec-num">06</div>
   <h2 class="sec-title">Compétences<br>clés</h2>
   <div class="skills-grid">
-    <div class="skill-block">
+    <div class="skill-block reveal">
       <div class="skill-block-header">
         <div class="skill-block-title">Branding &amp; Identité</div>
         <span class="skill-level">Expert</span>
@@ -909,8 +823,9 @@ body {
         <span class="skill-tag">Discours commercial</span>
         <span class="skill-tag">Refonte totale</span>
       </div>
+      <div class="skill-bar"><div class="skill-bar-fill" data-width="0.95"></div></div>
     </div>
-    <div class="skill-block">
+    <div class="skill-block reveal reveal-delay-1">
       <div class="skill-block-header">
         <div class="skill-block-title">Marketing Opérationnel</div>
         <span class="skill-level">Expert</span>
@@ -922,8 +837,9 @@ body {
         <span class="skill-tag">Partenariats</span>
         <span class="skill-tag">Inbound / Outbound</span>
       </div>
+      <div class="skill-bar"><div class="skill-bar-fill" data-width="0.95"></div></div>
     </div>
-    <div class="skill-block">
+    <div class="skill-block reveal reveal-delay-2">
       <div class="skill-block-header">
         <div class="skill-block-title">Stratégie &amp; Analyse</div>
         <span class="skill-level">Expert</span>
@@ -935,8 +851,9 @@ body {
         <span class="skill-tag">Segmentation</span>
         <span class="skill-tag">Plan marketing</span>
       </div>
+      <div class="skill-bar"><div class="skill-bar-fill" data-width="0.92"></div></div>
     </div>
-    <div class="skill-block">
+    <div class="skill-block reveal reveal-delay-3">
       <div class="skill-block-header">
         <div class="skill-block-title">Management &amp; ROI</div>
         <span class="skill-level">Avancé</span>
@@ -948,6 +865,7 @@ body {
         <span class="skill-tag">Objectifs quali/quanti</span>
         <span class="skill-tag">Process internes</span>
       </div>
+      <div class="skill-bar"><div class="skill-bar-fill" data-width="0.82"></div></div>
     </div>
   </div>
 </section>
@@ -959,7 +877,7 @@ body {
   <h2 class="sec-title">Parcours<br>académique</h2>
   <div class="formation-wrap">
     <div class="formation-list">
-      <div class="form-item">
+      <div class="form-item reveal">
         <div>
           <div class="form-title">Manager Marketing Stratégique</div>
           <div class="form-school">ISEFAC · Alternance</div>
@@ -967,7 +885,7 @@ body {
         </div>
         <div class="form-date">2013 – 2015</div>
       </div>
-      <div class="form-item">
+      <div class="form-item reveal reveal-delay-1">
         <div>
           <div class="form-title">DEES Marketing</div>
           <div class="form-school">ISEFAC · Alternance</div>
@@ -975,7 +893,7 @@ body {
         </div>
         <div class="form-date">2012 – 2013</div>
       </div>
-      <div class="form-item">
+      <div class="form-item reveal reveal-delay-2">
         <div>
           <div class="form-title">BTS NRC</div>
           <div class="form-school">Lycée Paul Hazard · Initial</div>
@@ -984,27 +902,18 @@ body {
         <div class="form-date">2009 – 2011</div>
       </div>
     </div>
-    <div>
+    <div class="reveal">
       <div class="langues-title">Langues</div>
       <div class="langue-item">
-        <div class="langue-header">
-          <span class="langue-name">Français</span>
-          <span class="langue-level">Natif</span>
-        </div>
+        <div class="langue-header"><span class="langue-name">Français</span><span class="langue-level">Natif</span></div>
         <div class="langue-bar"><div class="langue-fill" style="width:100%"></div></div>
       </div>
       <div class="langue-item">
-        <div class="langue-header">
-          <span class="langue-name">Anglais</span>
-          <span class="langue-level">C1</span>
-        </div>
+        <div class="langue-header"><span class="langue-name">Anglais</span><span class="langue-level">C1</span></div>
         <div class="langue-bar"><div class="langue-fill" style="width:82%"></div></div>
       </div>
       <div class="langue-item">
-        <div class="langue-header">
-          <span class="langue-name">Espagnol</span>
-          <span class="langue-level">B1</span>
-        </div>
+        <div class="langue-header"><span class="langue-name">Espagnol</span><span class="langue-level">B1</span></div>
         <div class="langue-bar"><div class="langue-fill" style="width:50%"></div></div>
       </div>
       <div class="interets-title">Centres d'intérêt</div>
@@ -1027,22 +936,22 @@ body {
   <div class="sec-num">08</div>
   <h2 class="sec-title">Ce que<br>je cherche</h2>
   <div class="projet-grid">
-    <div class="projet-box">
+    <div class="projet-box reveal">
       <div class="projet-num">01</div>
       <div class="projet-title">Un vrai impact</div>
       <p class="projet-desc">Piloter des projets de marque de bout en bout — de la stratégie à l'exécution. Pas seulement exécuter des briefs.</p>
     </div>
-    <div class="projet-box">
+    <div class="projet-box reveal reveal-delay-1">
       <div class="projet-num">02</div>
       <div class="projet-title">Une structure à taille humaine</div>
       <p class="projet-desc">PME ou ETI où les décisions sont proches du terrain, les projets ont du sens et la contribution est visible.</p>
     </div>
-    <div class="projet-box">
+    <div class="projet-box reveal reveal-delay-2">
       <div class="projet-num">03</div>
       <div class="projet-title">Un management horizontal</div>
       <p class="projet-desc">Culture bienveillante, collaboration réelle, confiance mutuelle — environnement à la hauteur de l'engagement apporté.</p>
     </div>
-    <div class="projet-box">
+    <div class="projet-box reveal reveal-delay-3">
       <div class="projet-num">04</div>
       <div class="projet-title">Un poste ancré</div>
       <p class="projet-desc">Responsable ou Directeur Marketing · Région Lilloise · 45 000 – 52 000 € brut</p>
@@ -1057,7 +966,7 @@ body {
   <h2 class="sec-title">Ils peuvent<br>en témoigner</h2>
   <p style="font-size:14px;color:var(--ink2);margin-bottom:48px;">Ces personnes ont accepté d'être contactées directement.</p>
   <div class="refs-grid">
-    <div class="ref-card">
+    <div class="ref-card reveal">
       <div class="ref-header">
         <div class="ref-avatar">RM</div>
         <div>
@@ -1069,7 +978,7 @@ body {
       <div class="ref-email-label">Email</div>
       <a href="mailto:Rmeyboom@cosmogroup.com" class="ref-email">Rmeyboom@cosmogroup.com</a>
     </div>
-    <div class="ref-card">
+    <div class="ref-card reveal reveal-delay-1">
       <div class="ref-header">
         <div class="ref-avatar">EL</div>
         <div>
@@ -1129,22 +1038,48 @@ body {
 </footer>
 
 <script>
+  // Cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{
+    mx=e.clientX; my=e.clientY;
+    cursor.style.left=mx+'px'; cursor.style.top=my+'px';
   });
-  function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
+  (function animateRing(){
+    rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px';
     requestAnimationFrame(animateRing);
-  }
-  animateRing();
+  })();
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+        // Animate skill bars
+        const bar = e.target.querySelector('.skill-bar-fill');
+        if(bar){
+          const w = bar.dataset.width || '1';
+          setTimeout(()=>{ bar.style.transform=`scaleX(${w})`; bar.classList.add('animated'); },300);
+        }
+      }
+    });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+  // Animate skill bars that are already visible
+  const skillObserver = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const bar = e.target;
+        const w = bar.dataset.width || '1';
+        setTimeout(()=>{ bar.style.transform=`scaleX(${w})`; },400);
+        skillObserver.unobserve(bar);
+      }
+    });
+  },{threshold:.5});
+  document.querySelectorAll('.skill-bar-fill').forEach(el=>skillObserver.observe(el));
 </script>
 
 </body>
