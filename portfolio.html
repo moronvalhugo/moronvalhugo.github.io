@@ -419,6 +419,30 @@ body {
 .footer-link:hover { color: var(--accent); }
 .footer-year { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(245,242,236,.2); }
 
+/* ══ CATALOGUE PREVIEW ══ */
+.catalogue-block {
+  margin-top: 56px; padding-top: 48px;
+  border-top: 1px solid var(--border);
+}
+.catalogue-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--ink3); margin-bottom: 20px;
+}
+.catalogue-spread {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+  margin-bottom: 20px; box-shadow: 0 8px 40px rgba(0,0,0,.12);
+}
+.catalogue-spread img { width: 100%; display: block; object-fit: cover; }
+.catalogue-spread.single { grid-template-columns: 1fr; max-width: 480px; }
+.catalogue-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--accent);
+  text-decoration: none; transition: gap .3s;
+}
+.catalogue-link:hover { gap: 16px; }
+.catalogue-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
 /* ══ RESPONSIVE ══ */
 @media (max-width: 1100px) {
   .profil-layout { grid-template-columns: 240px 1fr 200px; gap: 40px; }
@@ -744,6 +768,19 @@ body {
       <p class="step-desc">Prospection structurée, intégration de nouveaux grands comptes, suivi rentabilité</p>
     </div>
   </div>
+
+  <!-- Catalogue HPC -->
+  <div class="catalogue-block reveal">
+    <div class="catalogue-label">Catalogue réalisé · Juin 2020</div>
+    <div class="catalogue-spread">
+      <img src="assets/catalogues/hpc-01.png" alt="Catalogue HPC Adlis — couverture">
+      <img src="assets/catalogues/hpc-02.png" alt="Catalogue HPC Adlis — manifeste">
+    </div>
+    <a href="assets/docs/catalogue-hpc-adlis.pdf" target="_blank" class="catalogue-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16V4M12 16l-4-4M12 16l4-4M4 20h16"/></svg>
+      Voir le catalogue complet (PDF · 12 pages)
+    </a>
+  </div>
 </section>
 
 <!-- ══ 05 · LES 3 ROIS ══ -->
@@ -805,10 +842,103 @@ body {
   </div>
 </section>
 
-<!-- ══ 06 · EXPERTISES ══ -->
+<!-- ══ 06 · CARRÉ ROND ══ -->
 <section class="section">
-  <div class="sec-eyebrow">06 · Expertises</div>
-  <div class="sec-num">06</div>
+  <div class="case-band band-carre">
+    <div class="case-band-bg-text">CARRE</div>
+    <div class="case-band-content">
+      <div class="case-band-eyebrow">06 · Réalisation clé · 2024–2025</div>
+      <div class="case-band-name"><span>Carré Rond</span><br>Direction Agence</div>
+      <div class="case-band-meta">Directeur d'Agence · Agence communication &amp; digitale</div>
+    </div>
+    <div class="case-band-logo">
+      <div class="logo-placeholder" style="border-color:#00BEFF;color:#00BEFF;">Logo Carré Rond</div>
+    </div>
+  </div>
+  <div class="case-stats-row reveal">
+    <div class="case-stat-box">
+      <div class="case-stat-num">360°</div>
+      <div class="case-stat-lbl">Refonte communication</div>
+    </div>
+    <div class="case-stat-box">
+      <div class="case-stat-num">Audit</div>
+      <div class="case-stat-lbl">Data · Media</div>
+    </div>
+    <div class="case-stat-box">
+      <div class="case-stat-num">2025</div>
+      <div class="case-stat-lbl">Brochure réalisée</div>
+    </div>
+  </div>
+  <div class="case-items-grid">
+    <div class="case-item reveal">
+      <div class="case-item-inner">
+        <div class="case-item-num">— 01</div>
+        <div class="case-item-title">Refonte de la communication agence</div>
+        <p class="case-item-desc">Repositionnement complet : ligne éditoriale, supports, discours commercial orienté performance digitale.</p>
+      </div>
+    </div>
+    <div class="case-item reveal reveal-delay-1">
+      <div class="case-item-inner">
+        <div class="case-item-num">— 02</div>
+        <div class="case-item-title">Management créatif &amp; opérationnel</div>
+        <p class="case-item-desc">Coordination de l'équipe, pilotage des projets clients, montée en compétences.</p>
+      </div>
+    </div>
+    <div class="case-item reveal reveal-delay-2">
+      <div class="case-item-inner">
+        <div class="case-item-num">— 03</div>
+        <div class="case-item-title">Développement commercial</div>
+        <p class="case-item-desc">Audit clients, stratégie de communication, structuration de l'offre digitale &amp; media.</p>
+      </div>
+    </div>
+    <div class="case-item reveal reveal-delay-3">
+      <div class="case-item-inner">
+        <div class="case-item-num">— 04</div>
+        <div class="case-item-title">Brochure commerciale 2025</div>
+        <p class="case-item-desc">Conception et production de la brochure institutionnelle positionnant l'agence sur Audit · Data · Media.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Catalogue Carré Rond -->
+  <div class="catalogue-block reveal">
+    <div class="catalogue-label">Brochure commerciale réalisée · 2025</div>
+    <div class="catalogue-spread">
+      <img src="assets/catalogues/carre-01.png" alt="Brochure Carré Rond — couverture">
+      <img src="assets/catalogues/carre-02.png" alt="Brochure Carré Rond — services">
+    </div>
+    <a href="assets/docs/brochure-carre-rond.pdf" target="_blank" class="catalogue-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16V4M12 16l-4-4M12 16l4-4M4 20h16"/></svg>
+      Voir la brochure complète (PDF · 45 pages)
+    </a>
+  </div>
+</section>
+
+<!-- ══ 06b · EPSI ══ -->
+<section class="section">
+  <div class="sec-eyebrow" style="--accent:#F5C518;">06b · Réalisation · 2021–2022</div>
+  <div class="sec-num" style="-webkit-text-stroke-color:rgba(33,43,95,.15);">EPSI</div>
+  <h2 class="sec-title" style="color:#21274A;">EPSI —<br><span style="color:#F5C518;">Plaquette école</span></h2>
+  <p style="font-size:14px;color:var(--ink2);margin-bottom:48px;max-width:600px;">Resp. Entreprises &amp; Formateur · Déc. 2021 – Août 2022 · École d'ingénierie informatique · Développement des partenariats entreprises et animation de cours marketing auprès des étudiants ingénieurs.</p>
+
+  <!-- Catalogue EPSI -->
+  <div class="catalogue-block reveal" style="border-top:none;padding-top:0;margin-top:0;">
+    <div class="catalogue-label">Plaquette école produite · 2021</div>
+    <div class="catalogue-spread">
+      <img src="assets/catalogues/epsi-01.png" alt="Plaquette EPSI — couverture">
+      <img src="assets/catalogues/epsi-02.png" alt="Plaquette EPSI — contenu">
+    </div>
+    <a href="assets/docs/plaquette-epsi.pdf" target="_blank" class="catalogue-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 16V4M12 16l-4-4M12 16l4-4M4 20h16"/></svg>
+      Voir la plaquette complète (PDF · 87 pages)
+    </a>
+  </div>
+</section>
+
+<!-- ══ 07 · EXPERTISES ══ -->
+<section class="section">
+  <div class="sec-eyebrow">07 · Expertises</div>
+  <div class="sec-num">07</div>
   <h2 class="sec-title">Compétences<br>clés</h2>
   <div class="skills-grid">
     <div class="skill-block reveal">
