@@ -73,18 +73,19 @@ body::after {
 /* ══ NOM VERTICAL ══ */
 .vertical-name {
   position: fixed;
-  right: 20px;
+  right: -160px;
   top: 50%;
   transform: translateY(-50%) rotate(90deg);
   transform-origin: center center;
   z-index: 10;
   pointer-events: none;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 600;
-  font-size: 9px;
-  letter-spacing: 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(48px, 7vw, 88px);
+  letter-spacing: 12px;
   text-transform: uppercase;
-  color: rgba(200,169,107,0.5);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(200,169,107,0.35);
   white-space: nowrap;
 }
 
@@ -531,7 +532,7 @@ body::after {
 
 <div class="frame"><span></span><span></span></div>
 <div class="photo-watermark"></div>
-<div class="vertical-name">Hugo Moronval · Marketing &amp; Branding</div>
+<div class="vertical-name">Hugo Moronval</div>
 
 <div class="wrap">
 
