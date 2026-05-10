@@ -146,11 +146,13 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   width: 45vw;
   height: 100vh;
   background: url('og-image.jpg') center top / cover no-repeat;
-  opacity: 0.08;
+  opacity: 0.18;
   pointer-events: none;
   z-index: 0;
-  mask-image: linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+  mix-blend-mode: multiply;
+  filter: grayscale(100%);
+  mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
 }
 
 /* ══ HERO ══ */
