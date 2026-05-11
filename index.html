@@ -330,6 +330,18 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   letter-spacing: 3px;
 }
 
+/* ══ STATS STRIP ══ */
+.stats-strip { display: flex; border-bottom: 1px solid var(--border); }
+.stat-item { flex: 1; padding: 32px 40px; border-right: 1px solid var(--border); }
+.stat-item:last-child { border-right: none; }
+.stat-num { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(28px, 3.5vw, 48px); color: var(--ink); line-height: 1; margin-bottom: 8px; }
+.stat-num span { color: var(--accent); }
+.stat-lbl { font-size: 10px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); }
+
+/* ══ HERO CTA ══ */
+.hero-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--black); background: var(--accent); text-decoration: none; padding: 14px 28px; margin-top: 28px; transition: background .3s, color .3s; }
+.hero-cta:hover { background: var(--ink); color: var(--bg); }
+
 @keyframes ticker {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -731,6 +743,7 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   <div class="nav-links">
     <a href="cv.html" class="nav-link">CV Digital</a>
     <a href="portfolio.html" class="nav-link">Portfolio</a>
+    <a href="https://www.linkedin.com/in/hugo-moronval/" class="nav-link" target="_blank" rel="noopener">LinkedIn</a>
     <a href="mailto:moronval.hugo@gmail.com" class="nav-link">Contact</a>
   </div>
   <div class="nav-status">
@@ -752,17 +765,40 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   </h1>
 
   <div class="hero-bottom">
-    <p class="hero-bio">
-      10 ans d'impact concret au service des marques.<br>
-      <strong>De la vision stratégique à l'exécution terrain</strong> —<br>
-      là où l'idée rencontre le résultat.
-    </p>
+    <div>
+      <p class="hero-bio">
+        10 ans d'impact concret au service des marques.<br>
+        <strong>De la vision stratégique à l'exécution terrain</strong> —<br>
+        là où l'idée rencontre le résultat.
+      </p>
+      <a href="cv.html" class="hero-cta">Voir mon CV →</a>
+    </div>
     <div class="hero-scroll">
       <span>Scroll</span>
       <div class="hero-scroll-line"></div>
     </div>
   </div>
 </section>
+
+<!-- ══ STATS STRIP ══ -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num">10<span>+</span></div>
+    <div class="stat-lbl">Ans d'expérience</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5</div>
+    <div class="stat-lbl">Marques développées</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num"><span>+</span>600K€</div>
+    <div class="stat-lbl">CA généré</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">40<span>+</span></div>
+    <div class="stat-lbl">Pays · Europe</div>
+  </div>
+</div>
 
 <!-- ══ TICKER ══ -->
 <div class="ticker">
@@ -883,7 +919,7 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
         <span class="footer-contact-label">Email</span>
         <span class="footer-contact-value">moronval.hugo@gmail.com</span>
       </a>
-      <a href="https://www.linkedin.com/in/hugomoronval" class="footer-contact" target="_blank" rel="noopener">
+      <a href="https://www.linkedin.com/in/hugo-moronval/" class="footer-contact" target="_blank" rel="noopener">
         <span class="footer-contact-label">LinkedIn</span>
         <span class="footer-contact-value">Hugo Moronval</span>
       </a>
