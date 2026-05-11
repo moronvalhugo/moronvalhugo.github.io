@@ -99,7 +99,7 @@ body {
 .photo-watermark {
   position: fixed; top: 0; right: 0;
   width: 38vw; height: 100vh;
-  background: url('og-image.jpg') center top / cover no-repeat;
+  background: url('assets/photo-hugo.jpg') center top / cover no-repeat;
   opacity: .28; mix-blend-mode: multiply; filter: grayscale(100%);
   mask-image: linear-gradient(to left, rgba(0,0,0,.85) 0%, rgba(0,0,0,0) 100%);
   -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,.85) 0%, rgba(0,0,0,0) 100%);
@@ -137,6 +137,14 @@ body {
 .hero-bottom {
   display: flex; justify-content: space-between;
   align-items: flex-end; gap: 40px;
+}
+.hero-portrait {
+  position: absolute; top: 60px; right: 48px;
+  width: 190px; height: 230px;
+  object-fit: cover; object-position: center 15%;
+  filter: grayscale(15%);
+  outline: 1px solid var(--border);
+  outline-offset: 6px;
 }
 .hero-title-block {}
 .hero-title {
@@ -403,6 +411,7 @@ body {
   .nav-status { display: none; }
   .nav-hamburger { display: flex; }
   .hero { padding: 100px 24px 60px; }
+  .hero-portrait { display: none; }
   .hero-name { letter-spacing: -2px; }
   .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
   .hero-contacts { text-align: left; }
@@ -459,6 +468,7 @@ body {
 
 <!-- ══ HERO ══ -->
 <header class="hero">
+  <img src="assets/photo-hugo.jpg" alt="Hugo Moronval" class="hero-portrait">
   <div class="hero-eyebrow">Curriculum Vitæ · 2026</div>
   <h1 class="hero-name">
     <span class="outline">Hugo</span><br>

@@ -124,9 +124,18 @@ html, body {
 .kpi { font-size: 7pt; font-weight: 700; color: var(--gold); background: #F5F2EC; padding: 1mm 2.5mm; font-family: 'Bricolage Grotesque', sans-serif; }
 
 /* ══ SIDEBAR ══ */
+.side-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: center 10%;
+  display: block;
+  margin-bottom: 4mm;
+  filter: grayscale(10%);
+}
 .side {
   background: var(--bg-side);
-  padding: 10mm 6mm 8mm 6mm;
+  padding: 0 0 8mm 0;
   display: flex;
   flex-direction: column;
   gap: 4mm;
@@ -314,6 +323,8 @@ html, body {
 
   <!-- ══ SIDEBAR ══ -->
   <div class="side">
+    <img src="assets/photo-hugo.jpg" alt="Hugo Moronval" class="side-photo">
+    <div style="padding: 0 6mm;">
 
     <div class="side-section">
       <div class="side-label">Compétences</div>
@@ -403,6 +414,7 @@ html, body {
       </div>
     </div>
 
+    </div><!-- /padding wrapper -->
   </div>
 </div>
 
