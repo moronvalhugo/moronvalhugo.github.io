@@ -526,6 +526,20 @@ body {
 .catalogue-link:hover { background: var(--black); color: var(--accent); gap: 18px; }
 .catalogue-link svg { width: 14px; height: 14px; flex-shrink: 0; }
 
+/* ══ HAMBURGER ══ */
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; z-index: 301; }
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); transition: transform .3s; }
+.nav-mobile { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 300; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+.nav-mobile.open { display: flex; }
+.nav-mobile-close { position: absolute; top: 24px; right: 24px; background: none; border: none; font-size: 32px; cursor: pointer; color: var(--ink); line-height: 1; padding: 4px; }
+.nav-mobile-link { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: clamp(28px,8vw,40px); text-transform: uppercase; text-decoration: none; color: var(--ink); letter-spacing: -1px; padding: 10px 0; transition: color .2s; }
+.nav-mobile-link:hover, .nav-mobile-link.active { color: var(--accent); }
+.nav-mobile-sep { width: 32px; height: 1px; background: var(--border); margin: 2px 0; }
+.nav-mobile-contacts { display: flex; flex-direction: column; gap: 8px; margin-top: 24px; text-align: center; }
+.nav-mobile-contact { font-size: 13px; color: var(--ink2); text-decoration: none; transition: color .2s; }
+.nav-mobile-contact:hover { color: var(--accent); }
+.apercu-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 2px; }
+
 /* ══ RESPONSIVE ══ */
 @media (max-width: 1100px) {
   .profil-layout { grid-template-columns: 240px 1fr 200px; gap: 40px; }
@@ -533,6 +547,8 @@ body {
 @media (max-width: 900px) {
   .nav { padding: 20px 24px; }
   .nav-links, .nav-status { display: none; }
+  .nav-hamburger { display: flex; }
+  .apercu-grid { grid-template-columns: 1fr 1fr; }
   .hero { padding: 0 24px 60px; }
   .hero-headline { letter-spacing: -2px; }
   .hero-bottom { flex-direction: column; gap: 32px; align-items: flex-start; }
@@ -582,7 +598,25 @@ body {
     <span class="nav-dot"></span>
     Disponible · Région lilloise
   </div>
+  <button class="nav-hamburger" onclick="document.getElementById('navMobile').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" onclick="document.getElementById('navMobile').classList.remove('open')" aria-label="Fermer">×</button>
+  <a href="index.html" class="nav-mobile-link">Accueil</a>
+  <div class="nav-mobile-sep"></div>
+  <a href="cv.html" class="nav-mobile-link">CV Digital</a>
+  <div class="nav-mobile-sep"></div>
+  <a href="portfolio.html" class="nav-mobile-link active">Portfolio</a>
+  <div class="nav-mobile-sep"></div>
+  <a href="https://www.linkedin.com/in/hugo-moronval/" class="nav-mobile-link" target="_blank" rel="noopener">LinkedIn</a>
+  <div class="nav-mobile-contacts">
+    <a href="tel:+33782246610" class="nav-mobile-contact">07 82 24 66 10</a>
+    <a href="mailto:moronval.hugo@gmail.com" class="nav-mobile-contact">moronval.hugo@gmail.com</a>
+  </div>
+</div>
 
 <!-- ══ HERO ══ -->
 <section class="hero">
@@ -634,7 +668,7 @@ body {
     <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(22px,3vw,36px);text-transform:uppercase;letter-spacing:-1px;color:var(--ink);line-height:1;">Mes réalisations <span style="color:var(--accent);">en un coup d'œil</span></h2>
     <span style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--ink3);white-space:nowrap;">↓ Cliquez pour accéder</span>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;">
+  <div class="apercu-grid">
     <a href="#cosmogroup" style="padding:24px 20px;background:var(--surface);border:1px solid var(--border);text-decoration:none;display:block;transition:background .2s,transform .2s;position:relative;overflow:hidden;" onmouseover="this.style.background='var(--black)';this.style.transform='translateY(-3px)'" onmouseout="this.style.background='var(--surface)';this.style.transform='translateY(0)'">
       <div style="position:absolute;bottom:-10px;right:-8px;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:72px;text-transform:uppercase;color:rgba(200,169,107,.13);line-height:1;pointer-events:none;letter-spacing:-2px;">COSMO</div>
       <div style="position:relative;z-index:1;height:48px;display:flex;align-items:center;margin-bottom:12px;"><img src="assets/logo-cosmogroup.png" alt="Cosmogroup" style="max-height:40px;max-width:100%;object-fit:contain;filter:grayscale(1);opacity:.7;"></div>
