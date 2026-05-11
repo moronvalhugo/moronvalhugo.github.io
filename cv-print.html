@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV — Hugo Moronval · Responsable / Directeur Marketing</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --gold: #C8A96B;
+  --ink: #1A1A1A;
+  --ink2: #555;
+  --ink3: #888;
+  --border: #D8D5CE;
+  --bg-side: #F5F2EC;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+html, body {
+  width: 210mm;
+  height: 297mm;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 8.5pt;
+  color: var(--ink);
+  background: white;
+  line-height: 1.4;
+}
+
+.page {
+  width: 210mm;
+  height: 297mm;
+  display: grid;
+  grid-template-columns: 138mm 72mm;
+  overflow: hidden;
+}
+
+/* ══ COLONNE PRINCIPALE ══ */
+.main {
+  padding: 10mm 8mm 8mm 12mm;
+  display: flex;
+  flex-direction: column;
+  gap: 5mm;
+  border-right: 0.3mm solid var(--border);
+  overflow: hidden;
+}
+
+/* Header */
+.header { border-bottom: 0.4mm solid var(--ink); padding-bottom: 4mm; margin-bottom: 1mm; }
+.header-name {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 28pt;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 2mm;
+}
+.header-name span { color: var(--gold); }
+.header-title {
+  font-size: 9pt;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink2);
+  margin-bottom: 2mm;
+}
+.header-contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3mm 6mm;
+  font-size: 7.5pt;
+  color: var(--ink2);
+}
+.header-contacts a { color: var(--ink2); text-decoration: none; }
+.contact-dot { color: var(--gold); margin-right: 2mm; }
+
+/* Accroche */
+.accroche {
+  font-size: 7.8pt;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--ink2);
+  border-left: 1.5mm solid var(--gold);
+  padding-left: 3mm;
+}
+.accroche strong { color: var(--ink); font-weight: 600; }
+
+/* Section label */
+.sec-label {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 7pt;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 2.5mm;
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+}
+.sec-label::after { content: ''; flex: 1; height: 0.2mm; background: var(--border); }
+
+/* Expériences */
+.exp-list { display: flex; flex-direction: column; gap: 3.5mm; }
+.exp {}
+.exp-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5mm; }
+.exp-role { font-weight: 700; font-size: 8.5pt; color: var(--ink); }
+.exp-period { font-size: 7pt; color: var(--gold); font-weight: 600; letter-spacing: 0.5px; white-space: nowrap; }
+.exp-meta { font-size: 7.5pt; color: var(--ink2); margin-bottom: 1.5mm; }
+.exp-company { font-weight: 600; color: var(--ink); }
+.exp-sep { color: var(--border); margin: 0 1.5mm; }
+.exp-bullets { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.8mm; }
+.exp-bullets li { font-size: 7.5pt; color: var(--ink2); padding-left: 3mm; position: relative; line-height: 1.4; }
+.exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--gold); font-size: 7pt; }
+.exp-bullets li strong { color: var(--ink); font-weight: 600; }
+.exp-kpi { display: flex; gap: 2mm; margin-top: 1.5mm; flex-wrap: wrap; }
+.kpi { font-size: 7pt; font-weight: 700; color: var(--gold); background: #F5F2EC; padding: 1mm 2.5mm; font-family: 'Bricolage Grotesque', sans-serif; }
+
+/* ══ SIDEBAR ══ */
+.side {
+  background: var(--bg-side);
+  padding: 10mm 6mm 8mm 6mm;
+  display: flex;
+  flex-direction: column;
+  gap: 4mm;
+  overflow: hidden;
+}
+
+.side-section {}
+.side-label {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 6.5pt;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 0.2mm solid var(--border);
+  padding-bottom: 1.5mm;
+  margin-bottom: 2mm;
+}
+
+.skill-group { margin-bottom: 2mm; }
+.skill-name { font-size: 7.5pt; font-weight: 600; color: var(--ink); margin-bottom: 1mm; display: flex; justify-content: space-between; }
+.skill-lvl { font-size: 6.5pt; font-weight: 500; color: var(--gold); letter-spacing: 0.5px; }
+.skill-bar { height: 1mm; background: var(--border); overflow: hidden; }
+.skill-fill { height: 100%; background: var(--gold); }
+
+.form-item { margin-bottom: 2mm; }
+.form-title { font-size: 7.5pt; font-weight: 600; color: var(--ink); line-height: 1.3; }
+.form-school { font-size: 7pt; color: var(--ink2); }
+.form-year { font-size: 6.5pt; color: var(--gold); font-weight: 600; }
+
+.lang-row { display: flex; justify-content: space-between; align-items: center; padding: 1mm 0; border-bottom: 0.2mm solid var(--border); }
+.lang-row:last-child { border-bottom: none; }
+.lang-name { font-size: 7.5pt; color: var(--ink); }
+.lang-lvl { font-size: 7pt; font-weight: 600; color: var(--gold); }
+
+.info-row { margin-bottom: 1.5mm; }
+.info-lbl { font-size: 6.5pt; letter-spacing: 1px; text-transform: uppercase; color: var(--ink3); margin-bottom: 0.5mm; }
+.info-val { font-size: 7.5pt; color: var(--ink); font-weight: 500; }
+
+.tag-list { display: flex; flex-wrap: wrap; gap: 1.5mm; }
+.tag { font-size: 6.5pt; color: var(--ink2); background: white; border: 0.2mm solid var(--border); padding: 1mm 2mm; }
+
+/* Bouton print (caché à l'impression) */
+.print-bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  background: var(--ink); color: white;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 24px; font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px; z-index: 100;
+}
+.print-bar a { color: rgba(255,255,255,.5); text-decoration: none; font-size: 11px; letter-spacing: 1px; }
+.print-bar a:hover { color: var(--gold); }
+.btn-print {
+  background: var(--gold); color: var(--ink); border: none; cursor: pointer;
+  padding: 8px 20px; font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+}
+.btn-print:hover { background: white; }
+
+@media print {
+  .print-bar { display: none !important; }
+  html, body { margin: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- Barre d'impression (visible uniquement à l'écran) -->
+<div class="print-bar">
+  <div style="display:flex;gap:24px;">
+    <a href="index.html">← Accueil</a>
+    <a href="cv.html">CV Digital</a>
+    <a href="portfolio.html">Portfolio</a>
+  </div>
+  <button class="btn-print" onclick="window.print()">↓ Imprimer / Enregistrer PDF</button>
+</div>
+
+<div class="page" style="margin-top:38px;">
+
+  <!-- ══ COLONNE PRINCIPALE ══ -->
+  <div class="main">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="header-name">Hugo <span>Moronval</span></div>
+      <div class="header-title">Responsable / Directeur Marketing &amp; Branding · 10 ans d'expérience</div>
+      <div class="header-contacts">
+        <span><span class="contact-dot">·</span>Hazebrouck (59) · Mobile région lilloise</span>
+        <a href="tel:+33782246610"><span class="contact-dot">·</span>07 82 24 66 10</a>
+        <a href="mailto:moronval.hugo@gmail.com"><span class="contact-dot">·</span>moronval.hugo@gmail.com</a>
+        <a href="https://www.linkedin.com/in/hugo-moronval/" target="_blank"><span class="contact-dot">·</span>linkedin.com/in/hugo-moronval</a>
+      </div>
+    </div>
+
+    <!-- Accroche -->
+    <div class="accroche">
+      10 ans à construire et déployer des marques pour PME et ETI — du positionnement stratégique à la conversion commerciale. Entrée d'une marque cosmétique en grande distribution européenne <strong>(×2 de CA en 3 ans)</strong>, repositionnement d'une imprimerie traditionnelle en acteur 360°, co-gestion d'une affaire familiale pendant 5 ans. <strong>Aligner stratégie, équipe et exécution pour des résultats qui se voient.</strong>
+    </div>
+
+    <!-- Expériences -->
+    <div class="sec-label">Expériences Professionnelles</div>
+    <div class="exp-list">
+
+      <div class="exp">
+        <div class="exp-header">
+          <div class="exp-role">Brand Manager Europe</div>
+          <div class="exp-period">2012 – 2019</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-company">Cosmogroup</span><span class="exp-sep">/</span>Distribution cosmétique · Europe · 40+ pays
+        </div>
+        <ul class="exp-bullets">
+          <li>Piloté l'entrée en grande distribution européenne — référencement <strong>Auchan &amp; Carrefour Europe</strong></li>
+          <li>Stratégie de marque complète, management équipe <strong>5–7 pers.</strong>, campagnes omnicanales print / digital / événements</li>
+          <li>Suivi KPIs, reporting direction, coordination filiales Diacosmo (FR, BE, NL)</li>
+        </ul>
+        <div class="exp-kpi">
+          <span class="kpi">+300K€ CA an 1</span>
+          <span class="kpi">+600K€ CA an 3</span>
+          <span class="kpi">×2 en 3 ans</span>
+        </div>
+      </div>
+
+      <div class="exp">
+        <div class="exp-header">
+          <div class="exp-role">Responsable Marketing &amp; Commercial</div>
+          <div class="exp-period">2019 – Oct. 2021</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-company">HPC Adlis</span><span class="exp-sep">/</span>Imprimeur · Solutions 360°
+        </div>
+        <ul class="exp-bullets">
+          <li><strong>Transformation complète de l'identité de marque</strong> — repositionnement imprimerie traditionnelle → acteur 360°</li>
+          <li>Refonte offre produit/service, supports mkg &amp; commerciaux, plan commercial complet</li>
+        </ul>
+        <div class="exp-kpi">
+          <span class="kpi">2 × 100K+ livres / contrat</span>
+          <span class="kpi">Nouveaux clients grands comptes</span>
+        </div>
+      </div>
+
+      <div class="exp">
+        <div class="exp-header">
+          <div class="exp-role">Directeur d'Agence</div>
+          <div class="exp-period">Jan. 2024 – Sept. 2025</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-company">Carré Rond</span><span class="exp-sep">/</span>Agence communication &amp; digitale
+        </div>
+        <ul class="exp-bullets">
+          <li>Refonte complète de la politique de communication — repositionnement, ligne éditoriale, discours commercial</li>
+          <li>Management équipe créative, pilotage projets clients, développement commercial</li>
+        </ul>
+      </div>
+
+      <div class="exp">
+        <div class="exp-header">
+          <div class="exp-role">Associé &amp; Co-gérant</div>
+          <div class="exp-period">2020 – Août 2025</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-company">Le Bar Les 3 Rois</span><span class="exp-sep">/</span>Affaire familiale · Hazebrouck
+        </div>
+        <ul class="exp-bullets">
+          <li>Modernisation, refonte identité, digitalisation communication, pilotage <strong>P&amp;L complet</strong> sur 5 ans</li>
+          <li>Management d'équipe, programmation événementielle, partenariats territoriaux</li>
+        </ul>
+      </div>
+
+      <div class="exp">
+        <div class="exp-header">
+          <div class="exp-role">Resp. Entreprises &amp; Formateur Marketing</div>
+          <div class="exp-period">Déc. 2021 – Août 2022</div>
+        </div>
+        <div class="exp-meta">
+          <span class="exp-company">EPSI</span><span class="exp-sep">/</span>École ingénieurs · IA &amp; Digital
+        </div>
+        <ul class="exp-bullets">
+          <li>Développement partenariats entreprises, animation cours marketing, déploiement Microsoft 365</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ SIDEBAR ══ -->
+  <div class="side">
+
+    <div class="side-section">
+      <div class="side-label">Compétences</div>
+      <div class="skill-group">
+        <div class="skill-name">Branding &amp; Identité <span class="skill-lvl">Expert</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-name">Marketing Opérationnel <span class="skill-lvl">Expert</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-name">Stratégie &amp; Analyse <span class="skill-lvl">Expert</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-name">Management &amp; ROI <span class="skill-lvl">Avancé</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-name">IA &amp; Outils digitaux <span class="skill-lvl">Maîtrise</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+      </div>
+      <div style="margin-top:2mm;">
+        <div class="tag-list">
+          <span class="tag">Plateforme de marque</span>
+          <span class="tag">Positionnement</span>
+          <span class="tag">Omnicanal</span>
+          <span class="tag">Print &amp; Digital</span>
+          <span class="tag">SWOT / PESTEL</span>
+          <span class="tag">KPIs &amp; Reporting</span>
+          <span class="tag">Claude · ChatGPT</span>
+          <span class="tag">Midjourney · Copilot</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-label">Formation</div>
+      <div class="form-item">
+        <div class="form-title">Manager Marketing Stratégique</div>
+        <div class="form-school">ISEFAC · Alternance</div>
+        <div class="form-year">2013 – 2015</div>
+      </div>
+      <div class="form-item">
+        <div class="form-title">DEES Marketing</div>
+        <div class="form-school">ISEFAC · Alternance</div>
+        <div class="form-year">2012 – 2013</div>
+      </div>
+      <div class="form-item">
+        <div class="form-title">BTS NRC</div>
+        <div class="form-school">Lycée Paul Hazard</div>
+        <div class="form-year">2009 – 2011</div>
+      </div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-label">Langues</div>
+      <div class="lang-row"><span class="lang-name">Français</span><span class="lang-lvl">Natif</span></div>
+      <div class="lang-row"><span class="lang-name">Anglais</span><span class="lang-lvl">C1</span></div>
+      <div class="lang-row"><span class="lang-name">Espagnol</span><span class="lang-lvl">B1</span></div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-label">Informations</div>
+      <div class="info-row">
+        <div class="info-lbl">Localisation</div>
+        <div class="info-val">Hazebrouck (59)<br>Mobile région lilloise</div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">Prétentions</div>
+        <div class="info-val">45 000 – 52 000 € brut</div>
+      </div>
+      <div class="info-row">
+        <div class="info-lbl">Disponibilité</div>
+        <div class="info-val">Immédiate</div>
+      </div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-label">Centres d'intérêt</div>
+      <div class="tag-list">
+        <span class="tag">Crossfit</span>
+        <span class="tag">Photographie</span>
+        <span class="tag">Veille mkg</span>
+        <span class="tag">IA générative</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
