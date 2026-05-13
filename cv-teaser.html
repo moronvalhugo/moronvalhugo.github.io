@@ -63,58 +63,53 @@ html, body {
 /* Filigrane "HM" en fond */
 .bg-monogram {
   position: absolute;
-  bottom: -40mm;
-  right: -20mm;
+  bottom: -30mm;
+  left: -10mm;
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 800;
-  font-size: 320pt;
+  font-size: 260pt;
   text-transform: uppercase;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(200,169,107,.12);
+  -webkit-text-stroke: 1px rgba(200,169,107,.10);
   line-height: 1;
   pointer-events: none;
-  letter-spacing: -10px;
+  letter-spacing: -8px;
   user-select: none;
 }
 
-/* Photo watermark droite */
-.bg-photo {
-  position: absolute;
-  top: 0; right: 0;
-  width: 85mm;
-  height: 100%;
-  background: url('assets/photo-hugo.jpg') center 15% / cover no-repeat;
-  opacity: .12;
-  filter: grayscale(100%);
-  mask-image: linear-gradient(to left, rgba(0,0,0,.9) 0%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,.9) 0%, rgba(0,0,0,0) 100%);
-}
-
-/* ══ CONTENU ══ */
-.content {
+/* ══ LAYOUT PRINCIPAL ══ */
+.main-layout {
   position: relative;
   z-index: 1;
-  padding: 22mm 20mm 0 18mm;
   flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 62mm;
+  gap: 12mm;
+  padding: 22mm 20mm 0 18mm;
+  align-items: center;
+}
+
+/* ══ COLONNE TEXTE ══ */
+.text-col {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .eyebrow {
-  font-size: 9pt;
+  font-size: 8.5pt;
   font-weight: 500;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--gold);
   display: flex;
   align-items: center;
-  gap: 10mm;
+  gap: 8mm;
   margin-bottom: 8mm;
 }
 .eyebrow::before {
   content: '';
-  width: 16mm;
+  width: 12mm;
   height: 0.3mm;
   background: var(--gold);
   flex-shrink: 0;
@@ -123,9 +118,9 @@ html, body {
 .name {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 800;
-  font-size: 72pt;
+  font-size: 56pt;
   text-transform: uppercase;
-  letter-spacing: -3px;
+  letter-spacing: -2px;
   line-height: .88;
   margin-bottom: 10mm;
 }
@@ -140,30 +135,23 @@ html, body {
 }
 
 .divider {
-  width: 20mm;
+  width: 16mm;
   height: 0.4mm;
   background: var(--ink);
-  margin-bottom: 10mm;
+  margin-bottom: 9mm;
 }
 
 .tagline {
-  font-size: 13pt;
+  font-size: 11.5pt;
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--ink);
-  max-width: 110mm;
-  margin-bottom: 14mm;
+  margin-bottom: 12mm;
 }
 .tagline strong {
   font-weight: 600;
 }
 
-/* Bouton CTA */
-.cta-block {
-  display: flex;
-  flex-direction: column;
-  gap: 3mm;
-}
 .cta-link {
   display: inline-flex;
   align-items: center;
@@ -171,35 +159,79 @@ html, body {
   background: var(--dark);
   color: var(--bg);
   text-decoration: none;
-  padding: 5mm 8mm;
+  padding: 4.5mm 7mm;
   width: fit-content;
-  transition: background .2s;
 }
 .cta-link-label {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 800;
-  font-size: 12pt;
+  font-size: 11pt;
   text-transform: uppercase;
   letter-spacing: -0.5px;
 }
 .cta-link-url {
-  font-size: 9pt;
+  font-size: 8.5pt;
   font-weight: 400;
   color: var(--gold);
   letter-spacing: 0.5px;
 }
 .cta-arrow {
-  font-size: 18pt;
+  font-size: 16pt;
   color: var(--gold);
   line-height: 1;
-  margin-left: 4mm;
+  margin-left: 3mm;
+}
+
+/* ══ COLONNE PHOTO ══ */
+.photo-col {
+  display: flex;
+  align-items: center;
+}
+
+.photo-frame {
+  width: 100%;
+  position: relative;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 178mm;
+  object-fit: cover;
+  object-position: center 12%;
+  filter: grayscale(10%);
+  display: block;
+}
+
+/* Cadre doré décalé */
+.photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 0.5mm solid var(--gold);
+  pointer-events: none;
+}
+
+/* Étiquette en bas de photo */
+.photo-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--dark);
+  padding: 5px 10px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 7pt;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
 }
 
 /* ══ FOOTER ══ */
 .footer {
   position: relative;
   z-index: 1;
-  padding: 8mm 18mm;
+  padding: 7mm 18mm;
   border-top: 0.3mm solid var(--border);
   display: flex;
   justify-content: space-between;
@@ -207,11 +239,11 @@ html, body {
 }
 .footer-contacts {
   display: flex;
-  gap: 7mm;
+  gap: 6mm;
 }
 .footer-contacts a,
 .footer-contacts span {
-  font-size: 8pt;
+  font-size: 7.5pt;
   color: var(--ink2);
   text-decoration: none;
   letter-spacing: .3px;
@@ -236,27 +268,27 @@ html, body {
 
 <div class="page" style="margin-top:38px;">
 
-  <div class="bg-photo"></div>
   <div class="bg-monogram">HM</div>
 
-  <div class="content">
+  <div class="main-layout">
 
-    <div class="eyebrow">Marketing &amp; Commercial · 2026</div>
+    <div class="text-col">
 
-    <div class="name">
-      <span class="outline">Hugo</span>
-      <span class="solid">Moronval</span>
-    </div>
+      <div class="eyebrow">Marketing &amp; Commercial · 2026</div>
 
-    <div class="divider"></div>
+      <div class="name">
+        <span class="outline">Hugo</span>
+        <span class="solid">Moronval</span>
+      </div>
 
-    <p class="tagline">
-      Plutôt qu'un CV classique, j'ai construit<br>
-      <strong>un profil en ligne complet</strong> — études de cas,<br>
-      résultats concrets et 10 ans d'impact.
-    </p>
+      <div class="divider"></div>
 
-    <div class="cta-block">
+      <p class="tagline">
+        Plutôt qu'un CV classique, j'ai construit<br>
+        <strong>un profil en ligne complet</strong> — études de cas,<br>
+        résultats concrets et 10 ans d'impact.
+      </p>
+
       <a href="https://moronvalhugo.github.io" class="cta-link">
         <div>
           <div class="cta-link-label">Découvrir mon profil</div>
@@ -264,6 +296,14 @@ html, body {
         </div>
         <span class="cta-arrow">→</span>
       </a>
+
+    </div>
+
+    <div class="photo-col">
+      <div class="photo-frame">
+        <img src="assets/photo-hugo.jpg" alt="Hugo Moronval">
+        <div class="photo-label">Hugo Moronval</div>
+      </div>
     </div>
 
   </div>
