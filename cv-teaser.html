@@ -10,11 +10,11 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --gold:   #C8A96B;
+  --gold:   #8B7535;
   --ink:    #1A1A1A;
   --ink2:   #777;
   --border: #E0DDD6;
-  --bg:     #F5F2EC;
+  --bg:     #FFFFFF;
   --dark:   #0D0D0D;
 }
 
@@ -37,7 +37,7 @@ html, body {
 }
 .export-bar p { color: rgba(255,255,255,.45); font-size: 10px; }
 .btn-export {
-  background: var(--gold); color: var(--dark); border: none; cursor: pointer;
+  background: var(--gold); color: white; border: none; cursor: pointer;
   padding: 8px 20px; font-size: 11px; font-weight: 700;
   letter-spacing: 1.5px; text-transform: uppercase;
 }
@@ -55,9 +55,23 @@ html, body {
   background: var(--bg);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   position: relative;
   overflow: hidden;
+}
+
+/* Logo HM haut-gauche */
+.page-logo {
+  position: absolute;
+  top: 12mm;
+  left: 14mm;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 13pt;
+  color: transparent;
+  -webkit-text-stroke: 1.2px var(--ink);
+  letter-spacing: -0.5px;
+  z-index: 2;
+  user-select: none;
 }
 
 /* Filigrane "HM" en fond */
@@ -70,31 +84,18 @@ html, body {
   font-size: 320pt;
   text-transform: uppercase;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(200,169,107,.12);
+  -webkit-text-stroke: 1px rgba(139,117,53,.12);
   line-height: 1;
   pointer-events: none;
   letter-spacing: -10px;
   user-select: none;
 }
 
-/* Photo watermark droite */
-.bg-photo {
-  position: absolute;
-  top: 0; right: 0;
-  width: 85mm;
-  height: 100%;
-  background: url('assets/photo-hugo.jpg') center 15% / cover no-repeat;
-  opacity: .12;
-  filter: grayscale(100%);
-  mask-image: linear-gradient(to left, rgba(0,0,0,.9) 0%, rgba(0,0,0,0) 100%);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,.9) 0%, rgba(0,0,0,0) 100%);
-}
-
 /* ══ CONTENU ══ */
 .content {
   position: relative;
   z-index: 1;
-  padding: 22mm 20mm 0 18mm;
+  padding: 18mm 20mm 0 18mm;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -107,17 +108,7 @@ html, body {
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--gold);
-  display: flex;
-  align-items: center;
-  gap: 10mm;
   margin-bottom: 8mm;
-}
-.eyebrow::before {
-  content: '';
-  width: 16mm;
-  height: 0.3mm;
-  background: var(--gold);
-  flex-shrink: 0;
 }
 
 .name {
@@ -139,17 +130,10 @@ html, body {
   display: block;
 }
 
-.divider {
-  width: 20mm;
-  height: 0.4mm;
-  background: var(--ink);
-  margin-bottom: 10mm;
-}
-
 .tagline {
   font-size: 13pt;
   font-weight: 300;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--ink);
   max-width: 110mm;
   margin-bottom: 14mm;
@@ -158,51 +142,67 @@ html, body {
   font-weight: 600;
 }
 
-/* Bouton CTA */
+/* CTA texte */
 .cta-block {
   display: flex;
   flex-direction: column;
-  gap: 3mm;
 }
 .cta-link {
   display: inline-flex;
-  align-items: center;
-  gap: 4mm;
-  background: var(--dark);
-  color: var(--bg);
+  flex-direction: column;
+  gap: 2.5mm;
   text-decoration: none;
-  padding: 5mm 8mm;
+  color: inherit;
   width: fit-content;
 }
 .cta-link-label {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800;
-  font-size: 12pt;
+  font-size: 8pt;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: -0.5px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
 }
 .cta-link-url {
-  font-size: 9pt;
+  font-size: 10.5pt;
   font-weight: 400;
-  color: var(--gold);
-  letter-spacing: 0.5px;
+  color: var(--ink2);
+  display: flex;
+  align-items: center;
+  gap: 5mm;
 }
 .cta-arrow {
-  font-size: 18pt;
-  color: var(--gold);
+  font-size: 16pt;
+  color: var(--ink);
   line-height: 1;
-  margin-left: 4mm;
+}
+
+/* ══ GRILLE BAS DE PAGE ══ */
+.bottom-grid {
+  position: absolute;
+  bottom: 0;
+  left: 18mm;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 44mm);
+  gap: 3mm;
+  z-index: 1;
+}
+.grid-item {
+  height: 62mm;
+  border: 0.4mm solid var(--border);
 }
 
 /* ══ FOOTER ══ */
 .footer {
   position: relative;
-  z-index: 1;
-  padding: 8mm 18mm;
+  z-index: 2;
+  padding: 7mm 18mm;
   border-top: 0.3mm solid var(--border);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: var(--bg);
+  flex-shrink: 0;
 }
 .footer-contacts {
   display: flex;
@@ -234,7 +234,7 @@ html, body {
 
 <div class="page" style="margin-top:38px;">
 
-  <div class="bg-photo"></div>
+  <div class="page-logo">HM</div>
   <div class="bg-monogram">HM</div>
 
   <div class="content">
@@ -246,8 +246,6 @@ html, body {
       <span class="solid">Moronval</span>
     </div>
 
-    <div class="divider"></div>
-
     <p class="tagline">
       Plutôt qu'un CV classique, j'ai construit<br>
       <strong>un profil en ligne complet</strong> — études de cas,<br>
@@ -256,14 +254,21 @@ html, body {
 
     <div class="cta-block">
       <a href="https://moronvalhugo.github.io" class="cta-link">
-        <div>
-          <div class="cta-link-label">Découvrir mon profil</div>
-          <div class="cta-link-url">moronvalhugo.github.io</div>
+        <div class="cta-link-label">Découvrir mon profil</div>
+        <div class="cta-link-url">
+          moronvalhugo.github.io
+          <span class="cta-arrow">→</span>
         </div>
-        <span class="cta-arrow">→</span>
       </a>
     </div>
 
+  </div>
+
+  <div class="bottom-grid">
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
   </div>
 
   <div class="footer">
