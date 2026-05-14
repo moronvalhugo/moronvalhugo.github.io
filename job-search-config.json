@@ -1,0 +1,115 @@
+{
+  "profil": {
+    "nom": "Hugo Moronval",
+    "titre": "Responsable Marketing & Branding",
+    "experience_annees": 10,
+    "formation": "Bac+5 Master / MBA – Isefac",
+    "salaire_minimum_annuel_eur": 40000,
+    "pret_a_bouger": true,
+    "langues": ["Français", "Anglais"]
+  },
+
+  "competences": [
+    "Marketing stratégique",
+    "Marketing opérationnel",
+    "Marketing digital",
+    "SEO", "SEM",
+    "Brand Management",
+    "Adobe Photoshop",
+    "Communication",
+    "Négociation",
+    "Vente B2B",
+    "Microsoft Office",
+    "Marketing direct"
+  ],
+
+  "experience": [
+    {
+      "poste": "Responsable Marketing et Commercial",
+      "entreprise": "HPC ADLIS",
+      "debut": "2019-11"
+    },
+    {
+      "poste": "Brand Manager",
+      "entreprise": "COSMO GROUP",
+      "debut": "2015-09"
+    },
+    {
+      "poste": "Responsable Marketing et Communication",
+      "entreprise": "DIACOSMO FRANCE",
+      "debut": "2012-09"
+    }
+  ],
+
+  "recherche": {
+    "zones_prioritaires": [
+      {
+        "rang": 1,
+        "label": "Hazebrouck et environs",
+        "villes": ["Hazebrouck", "Renescure", "Morbecque", "Saint-Venant", "Aire-sur-la-Lys", "Bailleul", "Cassel", "Steenvoorde"],
+        "code_pays": "FR",
+        "rayon_km": 20
+      },
+      {
+        "rang": 2,
+        "label": "Région Lilloise",
+        "villes": ["Lille", "Villeneuve-d'Ascq", "Roubaix", "Tourcoing", "Marcq-en-Baroeul", "Lys-lez-Lannoy"],
+        "code_pays": "FR",
+        "rayon_km": 40
+      }
+    ],
+
+    "mots_cles_offres": [
+      "Responsable Marketing",
+      "Brand Manager",
+      "Responsable Communication",
+      "Directeur Marketing",
+      "Chef de Projet Marketing",
+      "Responsable Marketing Digital",
+      "Head of Marketing",
+      "Responsable Acquisition Marketing"
+    ],
+
+    "types_contrat": ["fulltime", "permanent"],
+
+    "candidature_spontanee_quotidienne": {
+      "zone": "Hazebrouck et environs",
+      "secteurs_cibles": [
+        "Agroalimentaire",
+        "Distribution / Retail",
+        "Industrie",
+        "Services B2B",
+        "Immobilier",
+        "Santé / Bien-être",
+        "Transport / Logistique"
+      ],
+      "frequence": "1 entreprise par jour ouvré"
+    }
+  },
+
+  "notion": {
+    "hub_page_id": "360cd428-4a7d-8119-9bf6-ce52a60dec6a",
+    "hub_url": "https://www.notion.so/360cd4284a7d81199bf6ce52a60dec6a",
+    "bases": {
+      "offres_emploi": {
+        "data_source_id": "032000bc-0227-4161-88b4-0222719504d2",
+        "url": "https://www.notion.so/cfe6e4155871483284304e7ddea53ead"
+      },
+      "candidatures_spontanees": {
+        "data_source_id": "624144de-fa5c-4bf8-bb47-4d01c9bd8946",
+        "url": "https://www.notion.so/d18a29ded0f94219abd8c18434011e3c"
+      }
+    }
+  },
+
+  "workflow_quotidien": [
+    "1. Recherche offres zone Hazebrouck (priorité absolue)",
+    "2. Recherche offres région Lilloise",
+    "3. Scoring compatibilité et sélection top offres",
+    "4. Génération lettre de motivation personnalisée par offre retenue",
+    "5. Sélection 1 entreprise Hazebrouck pour candidature spontanée",
+    "6. Génération lettre candidature spontanée",
+    "7. Ajout de toutes les entrées dans Notion",
+    "8. Rappel relances candidatures envoyées depuis +7 jours sans réponse"
+  ]
+}
