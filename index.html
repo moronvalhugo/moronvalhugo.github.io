@@ -208,9 +208,9 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 .hero-headline {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 800;
-  font-size: clamp(56px, 10vw, 148px);
-  line-height: 0.88;
-  letter-spacing: -4px;
+  font-size: clamp(40px, 6.5vw, 90px);
+  line-height: 0.9;
+  letter-spacing: -3px;
   text-transform: uppercase;
   color: var(--ink);
   margin-bottom: 48px;
@@ -223,6 +223,15 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 
 .hero-headline .gold {
   color: var(--accent);
+}
+
+.hero-headline .hero-sub {
+  font-size: 0.45em;
+  letter-spacing: 2px;
+  color: var(--ink2);
+  font-weight: 500;
+  display: block;
+  margin-top: 8px;
 }
 
 .hero-bottom {
@@ -768,7 +777,7 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   <h1 class="hero-headline">
     <span class="outline">Hugo</span><br>
     <span class="gold">Moronval</span><br>
-    Stratégie Marketing / Business
+    <span class="hero-sub">Stratégie Marketing / Business</span>
   </h1>
 
   <div class="hero-bottom">
