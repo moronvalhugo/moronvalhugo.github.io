@@ -158,33 +158,6 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
 }
 
-/* ══ NOM VERTICAL ══ */
-.vertical-name-1,
-.vertical-name-2 {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-  transform-origin: center center;
-  z-index: 10;
-  pointer-events: none;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800;
-  font-size: clamp(52px, 7vw, 90px);
-  letter-spacing: 14px;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(200, 169, 107, 0.6);
-  white-space: nowrap;
-  opacity: 1;
-  transition: opacity 0.4s ease;
-}
-.vertical-name-1.hidden,
-.vertical-name-2.hidden {
-  opacity: 0;
-}
-.vertical-name-1 { right: 4vw; }
-.vertical-name-2 { right: -2vw; }
-
 /* ══ HERO ══ */
 .hero {
   min-height: 100vh;
@@ -744,7 +717,6 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   .footer-right { text-align: left; }
   body { cursor: auto; }
   .cursor, .cursor-ring { display: none; }
-  .vertical-name-1, .vertical-name-2 { display: none; }
 }
 </style>
 </head>
@@ -753,8 +725,6 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="photo-watermark"></div>
-<div class="vertical-name-1">Hugo</div>
-<div class="vertical-name-2">Moronval</div>
 
 <!-- ══ NAV ══ -->
 <nav class="nav">
@@ -997,18 +967,6 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   }
   animateRing();
 
-  // Fade out vertical name on scroll
-  const vn1 = document.querySelector('.vertical-name-1');
-  const vn2 = document.querySelector('.vertical-name-2');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      vn1.classList.add('hidden');
-      vn2.classList.add('hidden');
-    } else {
-      vn1.classList.remove('hidden');
-      vn2.classList.remove('hidden');
-    }
-  }, { passive: true });
 </script>
 
 </body>
