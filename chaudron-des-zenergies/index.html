@@ -476,6 +476,106 @@
     @keyframes bounce { 0%,100% { transform:translateX(-50%) translateY(0); } 50% { transform:translateX(-50%) translateY(8px); } }
     @keyframes pulse  { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.45; transform:scale(.75); } }
     @keyframes floatY { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+    @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
+    @keyframes shimmer { 0%,100% { opacity:.6; } 50% { opacity:1; } }
+
+    /* ── LOGO ── */
+    .logo-svg { width: 38px; height: 38px; flex-shrink: 0; }
+    .logo-svg-lg { width: 80px; height: 80px; }
+
+    /* ── BOOKING ── */
+    .booking-outer { max-width: 780px; margin: 0 auto; padding: 40px 36px; }
+    .bk-progress { display: flex; align-items: center; justify-content: center; margin-bottom: 40px; }
+    .bk-step { display: flex; flex-direction: column; align-items: center; gap: 7px; }
+    .bk-circle {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 2px solid var(--glass-b); background: var(--glass);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: var(--muted);
+      transition: all .35s;
+    }
+    .bk-step.active .bk-circle {
+      background: linear-gradient(135deg, var(--purple2), var(--purple));
+      border-color: var(--purple); color: #fff;
+      box-shadow: 0 0 18px rgba(139,92,246,.45);
+    }
+    .bk-step.done .bk-circle {
+      background: rgba(139,92,246,.2); border-color: var(--purple); color: var(--purple-light);
+    }
+    .bk-label { font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); transition: color .3s; }
+    .bk-step.active .bk-label { color: var(--purple-light); }
+    .bk-line { flex: 1; height: 2px; background: var(--glass-b); margin: 0 10px 18px; max-width: 80px; transition: background .35s; }
+    .bk-line.done { background: var(--purple); }
+
+    .bk-pane { display: none; flex-direction: column; }
+    .bk-pane.active { display: flex; }
+    .bk-title { font-size: 20px; font-weight: 600; text-align: center; margin-bottom: 24px; }
+
+    /* Atelier cards */
+    .bk-ateliers { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+    .bk-acard {
+      display: flex; align-items: center; gap: 16px; padding: 18px 20px;
+      border: 2px solid var(--glass-b); border-radius: 14px;
+      background: var(--glass); cursor: pointer;
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .bk-acard:hover { background: var(--glass-h); transform: translateX(3px); }
+    .bk-acard.sel { border-color: var(--purple); background: rgba(139,92,246,.1); box-shadow: 0 0 22px rgba(139,92,246,.2); }
+    .bk-acard-icon { font-size: 34px; flex-shrink: 0; }
+    .bk-acard-info { flex: 1; }
+    .bk-acard-name { font-weight: 600; font-size: 15px; margin-bottom: 3px; }
+    .bk-acard-date { font-size: 13px; color: var(--muted); }
+    .bk-acard-spots { font-size: 12px; color: var(--gold-light); margin-top: 3px; display: flex; align-items: center; gap: 5px; }
+    .bk-acard-price { font-family:'Playfair Display',serif; font-size: 24px; font-weight: 700; color: var(--gold-light); flex-shrink: 0; }
+    .bk-check { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--glass-b); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; transition: all .2s; }
+    .bk-acard.sel .bk-check { background: var(--purple); border-color: var(--purple); color: white; }
+
+    /* Form */
+    .bk-summary {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(139,92,246,.08); border: 1px solid rgba(139,92,246,.22);
+      border-radius: 12px; padding: 14px 18px; margin-bottom: 24px;
+    }
+    .bk-sum-icon { font-size: 28px; }
+    .bk-sum-name { font-weight: 600; font-size: 14px; }
+    .bk-sum-date { font-size: 13px; color: var(--muted); }
+    .bk-form { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+    .bk-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .bk-group { display: flex; flex-direction: column; gap: 7px; }
+    .bk-group label { font-size: 13px; font-weight: 500; color: var(--muted); }
+    .bk-input {
+      padding: 12px 16px; background: var(--glass); border: 1px solid var(--glass-b); border-radius: 10px;
+      font-size: 15px; color: var(--text); outline: none; font-family: inherit;
+      transition: border-color .2s;
+    }
+    .bk-input:focus { border-color: rgba(139,92,246,.45); }
+    .bk-input::placeholder { color: var(--muted2); }
+    .bk-textarea { resize: vertical; min-height: 90px; }
+    select.bk-input { cursor: pointer; }
+    option { background: #0d0d1e; }
+    .bk-nav { display: flex; justify-content: space-between; align-items: center; }
+    .bk-nav-right { display: flex; justify-content: flex-end; }
+
+    /* Recap */
+    .bk-recap { border-radius: 14px; padding: 20px; margin-bottom: 24px; }
+    .recap-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--glass-b); font-size: 14px; }
+    .recap-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .recap-row .rl { color: var(--muted); }
+    .recap-row .rv { font-weight: 600; }
+    .recap-total .rv { color: var(--gold-light); font-family:'Playfair Display',serif; font-size: 20px; }
+
+    /* Success */
+    .bk-success { text-align: center; padding: 48px 20px; }
+    .bk-success-icon { font-size: 64px; margin-bottom: 18px; animation: floatY 3s infinite; display: block; }
+    .bk-success h3 { font-size: 26px; font-weight: 700; margin-bottom: 12px; }
+    .bk-success p { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 18px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .bk-ref {
+      display: inline-block; padding: 8px 20px; margin-bottom: 28px;
+      background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.25);
+      border-radius: 8px; font-size: 14px; color: var(--gold-light); font-weight: 600;
+    }
+
+    @media(max-width:600px) { .bk-row { grid-template-columns: 1fr; } .booking-outer { padding: 24px 20px; } }
   </style>
 </head>
 <body>
@@ -487,19 +587,44 @@
 <!-- ══ NAVBAR ══ -->
 <nav class="nav" id="nav">
   <a href="#" class="nav-brand">
-    <div class="nav-logo">🫧</div>
+    <svg class="logo-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="nlg1" x1="0" y1="48" x2="48" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#7c3aed"/><stop offset="100%" stop-color="#a78bfa"/>
+        </linearGradient>
+        <linearGradient id="nlg2" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#fbbf24"/>
+        </linearGradient>
+      </defs>
+      <path d="M17 20 C14 15 18 11 15 7" stroke="url(#nlg2)" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M24 18 C21 13 25 9 22 5" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+      <path d="M31 20 C34 15 30 11 33 7" stroke="url(#nlg2)" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M10 29 C10 39 16 42 24 42 C32 42 38 39 38 29 L35 21 C35 19 30 18 24 18 C18 18 13 19 13 21 Z" fill="url(#nlg1)"/>
+      <ellipse cx="24" cy="21" rx="11" ry="3.2" fill="#6d28d9"/>
+      <ellipse cx="20" cy="27" rx="3.5" ry="1.6" fill="white" opacity="0.08"/>
+      <path d="M15 41 L12 47" stroke="#8b5cf6" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M33 41 L36 47" stroke="#8b5cf6" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="5" cy="15" r="1.5" fill="#fbbf24" opacity="0.9"/>
+      <circle cx="43" cy="13" r="1.2" fill="#a78bfa"/>
+      <circle cx="6" cy="35" r="1" fill="#a78bfa" opacity="0.8"/>
+      <circle cx="43" cy="37" r="1.3" fill="#fbbf24" opacity="0.85"/>
+      <circle cx="24" cy="2" r="1.8" fill="#fbbf24" opacity="0.9"/>
+      <circle cx="10" cy="6" r="0.8" fill="#a78bfa" opacity="0.8"/>
+      <circle cx="40" cy="5" r="0.9" fill="#fbbf24" opacity="0.8"/>
+    </svg>
     Le Chaudron
   </a>
   <ul class="nav-links">
     <li><a href="#univers">Univers</a></li>
     <li><a href="#boutique">Boutique</a></li>
     <li><a href="#ateliers">Ateliers</a></li>
+    <li><a href="#reservation">Réserver</a></li>
     <li><a href="#histoire">Notre histoire</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div class="nav-right">
     <a href="https://www.facebook.com/share/18gpWpjGFy/" target="_blank" class="nav-fb" title="Facebook">📘</a>
-    <button class="nav-cta" onclick="document.getElementById('boutique').scrollIntoView({behavior:'smooth'})">Boutique →</button>
+    <button class="nav-cta" onclick="document.getElementById('reservation').scrollIntoView({behavior:'smooth'})">Réserver ✨</button>
   </div>
 </nav>
 
@@ -723,6 +848,117 @@
   </div>
 </section>
 
+<!-- ══ RÉSERVATION ══ -->
+<section class="sec-bg2" id="reservation">
+  <div class="inner">
+    <p class="sec-tag sec-tag-g reveal" style="display:block;text-align:center">✦ Réservation en ligne</p>
+    <h2 class="sec-title reveal d1" style="text-align:center">Réservez votre <span class="grad">place</span></h2>
+    <p class="sec-sub reveal d2" style="margin:0 auto 48px;text-align:center">3 étapes simples pour sécuriser votre participation. Confirmation sous 24h.</p>
+
+    <div class="gc booking-outer reveal d2">
+
+      <!-- Progress -->
+      <div class="bk-progress">
+        <div class="bk-step active" id="bkstep-1"><div class="bk-circle">1</div><div class="bk-label">Atelier</div></div>
+        <div class="bk-line" id="bkline-1"></div>
+        <div class="bk-step" id="bkstep-2"><div class="bk-circle">2</div><div class="bk-label">Informations</div></div>
+        <div class="bk-line" id="bkline-2"></div>
+        <div class="bk-step" id="bkstep-3"><div class="bk-circle">3</div><div class="bk-label">Confirmation</div></div>
+      </div>
+
+      <!-- Pane 1 — Choix atelier -->
+      <div class="bk-pane active" id="bkp1">
+        <p class="bk-title">Quel atelier vous inspire ? ✨</p>
+        <div class="bk-ateliers">
+          <div class="bk-acard" data-name="Atelier Bougie Soy Wax" data-icon="🕯️" data-date="24 Mai · 14h00 – 17h00" data-price="35" data-spots="3">
+            <div class="bk-acard-icon">🕯️</div>
+            <div class="bk-acard-info">
+              <div class="bk-acard-name">Atelier Bougie Soy Wax</div>
+              <div class="bk-acard-date">24 Mai · 14h00 – 17h00 · Matériel inclus</div>
+              <div class="bk-acard-spots"><span class="ev-dot"></span> 3 places restantes</div>
+            </div>
+            <div class="bk-acard-price">35 €</div>
+            <div class="bk-check">✓</div>
+          </div>
+          <div class="bk-acard" data-name="Initiation Lithothérapie" data-icon="💎" data-date="7 Juin · 10h00 – 13h00" data-price="40" data-spots="5">
+            <div class="bk-acard-icon">💎</div>
+            <div class="bk-acard-info">
+              <div class="bk-acard-name">Initiation Lithothérapie</div>
+              <div class="bk-acard-date">7 Juin · 10h00 – 13h00 · Débutants bienvenus</div>
+              <div class="bk-acard-spots"><span class="ev-dot"></span> 5 places restantes</div>
+            </div>
+            <div class="bk-acard-price">40 €</div>
+            <div class="bk-check">✓</div>
+          </div>
+          <div class="bk-acard" data-name="Cercle de Pleine Lune" data-icon="🌕" data-date="21 Juin · 20h00 – 22h00" data-price="25" data-spots="8">
+            <div class="bk-acard-icon">🌕</div>
+            <div class="bk-acard-info">
+              <div class="bk-acard-name">Cercle de Pleine Lune</div>
+              <div class="bk-acard-date">21 Juin · 20h00 – 22h00 · Solstice d'été</div>
+              <div class="bk-acard-spots"><span class="ev-dot"></span> 8 places restantes</div>
+            </div>
+            <div class="bk-acard-price">25 €</div>
+            <div class="bk-check">✓</div>
+          </div>
+        </div>
+        <div class="bk-nav-right">
+          <button class="btn-p" id="bk-next1" disabled style="opacity:.4;cursor:not-allowed">Continuer →</button>
+        </div>
+      </div>
+
+      <!-- Pane 2 — Infos -->
+      <div class="bk-pane" id="bkp2">
+        <p class="bk-title">Vos informations 📋</p>
+        <div class="bk-summary" id="bk-summary"></div>
+        <div class="bk-form">
+          <div class="bk-row">
+            <div class="bk-group"><label>Prénom et nom *</label><input type="text" class="bk-input" id="bk-name" placeholder="Marie Dupont" /></div>
+            <div class="bk-group"><label>Email *</label><input type="email" class="bk-input" id="bk-email" placeholder="marie@email.fr" /></div>
+          </div>
+          <div class="bk-row">
+            <div class="bk-group"><label>Téléphone</label><input type="tel" class="bk-input" id="bk-phone" placeholder="06 12 34 56 78" /></div>
+            <div class="bk-group">
+              <label>Nombre de places</label>
+              <select class="bk-input" id="bk-places">
+                <option value="1">1 place</option>
+                <option value="2">2 places</option>
+                <option value="3">3 places</option>
+              </select>
+            </div>
+          </div>
+          <div class="bk-group"><label>Message (facultatif)</label><textarea class="bk-input bk-textarea" id="bk-msg" placeholder="Questions, besoins particuliers, infos utiles..."></textarea></div>
+        </div>
+        <div class="bk-nav">
+          <button class="btn-o" id="bk-back1">← Retour</button>
+          <button class="btn-p" id="bk-next2">Vérifier →</button>
+        </div>
+      </div>
+
+      <!-- Pane 3 — Récap -->
+      <div class="bk-pane" id="bkp3">
+        <p class="bk-title">Récapitulatif de votre réservation 🔍</p>
+        <div class="gc bk-recap" id="bk-recap"></div>
+        <div class="bk-nav">
+          <button class="btn-o" id="bk-back2">← Modifier</button>
+          <button class="btn-p" id="bk-confirm">✨ Confirmer ma réservation</button>
+        </div>
+      </div>
+
+      <!-- Success -->
+      <div class="bk-pane" id="bkp4">
+        <div class="bk-success">
+          <span class="bk-success-icon">🎉</span>
+          <h3>Réservation confirmée !</h3>
+          <p id="bk-ok-msg"></p>
+          <div class="bk-ref" id="bk-ref"></div>
+          <button class="btn-p" onclick="bkReset()">Faire une nouvelle réservation</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ══ NOTRE HISTOIRE ══ -->
 <section class="sec-bg2" id="histoire">
   <div class="inner">
@@ -881,6 +1117,10 @@
       <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
       Ateliers
     </a>
+    <a href="#reservation" class="mob-item">
+      <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.11-.9-2-2-2zm0 16H5V8h14v11zm-7-9h-2v4h4v-2h-2z"/></svg>
+      Réserver
+    </a>
     <a href="https://www.facebook.com/share/18gpWpjGFy/" target="_blank" class="mob-item">
       <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm-5 4h-1.5c-.3 0-.5.2-.5.5V10h2l-.3 2H13v5h-2v-5H9v-2h2V8.5C11 7.1 12.1 6 13.5 6H15v2z"/></svg>
       Facebook
@@ -999,7 +1239,7 @@ document.getElementById('cnext').addEventListener('click', () => goTo(cur + 1));
 setInterval(() => goTo(cur + 1), 5200);
 
 /* ── MOBILE NAV ACTIVE ── */
-const sections = ['hero','boutique','ateliers','histoire','avis','contact'];
+const sections = ['hero','boutique','ateliers','reservation','histoire','avis','contact'];
 const mobItems = document.querySelectorAll('.mob-item');
 window.addEventListener('scroll', () => {
   let active = 0;
@@ -1009,6 +1249,97 @@ window.addEventListener('scroll', () => {
   });
   mobItems.forEach((m,i) => m.classList.toggle('on', i === active));
 }, { passive: true });
+
+/* ── BOOKING ── */
+let bkSelected = null;
+let bkData     = {};
+
+function bkGoTo(n) {
+  [1,2,3,4].forEach(i => {
+    document.getElementById('bkp'+i).classList.toggle('active', i === n);
+  });
+  [1,2,3].forEach(i => {
+    const s = document.getElementById('bkstep-'+i);
+    const l = document.getElementById('bkline-'+i);
+    s.classList.toggle('active', i === n);
+    s.classList.toggle('done',   i < n);
+    if (l) l.classList.toggle('done', i < n);
+  });
+}
+
+/* Atelier selection */
+document.querySelectorAll('.bk-acard').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.bk-acard').forEach(c => c.classList.remove('sel'));
+    card.classList.add('sel');
+    bkSelected = {
+      name:  card.dataset.name,
+      icon:  card.dataset.icon,
+      date:  card.dataset.date,
+      price: parseInt(card.dataset.price)
+    };
+    const btn = document.getElementById('bk-next1');
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor  = 'pointer';
+  });
+});
+
+document.getElementById('bk-next1').addEventListener('click', () => {
+  if (!bkSelected) return;
+  document.getElementById('bk-summary').innerHTML = `
+    <span class="bk-sum-icon">${bkSelected.icon}</span>
+    <div><div class="bk-sum-name">${bkSelected.name}</div><div class="bk-sum-date">${bkSelected.date} · ${bkSelected.price} €</div></div>
+  `;
+  bkGoTo(2);
+});
+
+document.getElementById('bk-back1').addEventListener('click', () => bkGoTo(1));
+
+document.getElementById('bk-next2').addEventListener('click', () => {
+  const name  = document.getElementById('bk-name').value.trim();
+  const email = document.getElementById('bk-email').value.trim();
+  if (!name)  { document.getElementById('bk-name').focus();  return; }
+  if (!email || !email.includes('@')) { document.getElementById('bk-email').focus(); return; }
+  bkData = {
+    name,
+    email,
+    phone:  document.getElementById('bk-phone').value.trim(),
+    places: parseInt(document.getElementById('bk-places').value),
+    msg:    document.getElementById('bk-msg').value.trim()
+  };
+  const total = bkSelected.price * bkData.places;
+  document.getElementById('bk-recap').innerHTML = `
+    <div class="recap-row"><span class="rl">Atelier</span><span class="rv">${bkSelected.icon} ${bkSelected.name}</span></div>
+    <div class="recap-row"><span class="rl">Date</span><span class="rv">${bkSelected.date}</span></div>
+    <div class="recap-row"><span class="rl">Participant(e)</span><span class="rv">${bkData.name}</span></div>
+    <div class="recap-row"><span class="rl">Email</span><span class="rv">${bkData.email}</span></div>
+    ${bkData.phone ? `<div class="recap-row"><span class="rl">Téléphone</span><span class="rv">${bkData.phone}</span></div>` : ''}
+    <div class="recap-row"><span class="rl">Places</span><span class="rv">${bkData.places}</span></div>
+    <div class="recap-row recap-total"><span class="rl">Total</span><span class="rv">${total} €</span></div>
+  `;
+  bkGoTo(3);
+});
+
+document.getElementById('bk-back2').addEventListener('click', () => bkGoTo(2));
+
+document.getElementById('bk-confirm').addEventListener('click', () => {
+  const ref = 'CZ-' + Date.now().toString(36).toUpperCase().slice(-6);
+  document.getElementById('bk-ref').textContent = '🎫 Référence : ' + ref;
+  document.getElementById('bk-ok-msg').textContent =
+    `Merci ${bkData.name} ! Votre réservation pour "${bkSelected.name}" est bien enregistrée. Un email de confirmation sera envoyé à ${bkData.email} dans les 24h.`;
+  bkGoTo(4);
+});
+
+function bkReset() {
+  bkSelected = null; bkData = {};
+  document.querySelectorAll('.bk-acard').forEach(c => c.classList.remove('sel'));
+  ['bk-name','bk-email','bk-phone','bk-msg'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('bk-places').value = '1';
+  const btn = document.getElementById('bk-next1');
+  btn.disabled = true; btn.style.opacity = '.4'; btn.style.cursor = 'not-allowed';
+  bkGoTo(1);
+}
 </script>
 </body>
 </html>
