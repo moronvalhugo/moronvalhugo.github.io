@@ -158,33 +158,6 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
 }
 
-/* ══ NOM VERTICAL ══ */
-.vertical-name-1,
-.vertical-name-2 {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-  transform-origin: center center;
-  z-index: 10;
-  pointer-events: none;
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800;
-  font-size: clamp(52px, 7vw, 90px);
-  letter-spacing: 14px;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(200, 169, 107, 0.6);
-  white-space: nowrap;
-  opacity: 1;
-  transition: opacity 0.4s ease;
-}
-.vertical-name-1.hidden,
-.vertical-name-2.hidden {
-  opacity: 0;
-}
-.vertical-name-1 { right: 4vw; }
-.vertical-name-2 { right: -2vw; }
-
 /* ══ HERO ══ */
 .hero {
   min-height: 100vh;
@@ -235,9 +208,9 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 .hero-headline {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-weight: 800;
-  font-size: clamp(56px, 10vw, 148px);
-  line-height: 0.88;
-  letter-spacing: -4px;
+  font-size: clamp(48px, 8vw, 118px);
+  line-height: 0.9;
+  letter-spacing: -3px;
   text-transform: uppercase;
   color: var(--ink);
   margin-bottom: 48px;
@@ -250,6 +223,15 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 
 .hero-headline .gold {
   color: var(--accent);
+}
+
+.hero-headline .hero-sub {
+  font-size: 0.6em;
+  letter-spacing: 2px;
+  color: var(--ink2);
+  font-weight: 500;
+  display: block;
+  margin-top: 10px;
 }
 
 .hero-bottom {
@@ -730,7 +712,7 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 /* ══ RESPONSIVE ══ */
 @media (max-width: 900px) {
   .nav { padding: 20px 24px; }
-  .nav-links { display: none; }
+  .nav-links, .nav-status { display: none; }
   .nav-hamburger { display: flex; }
   .hero { padding: 0 24px 60px; }
   .hero-headline { letter-spacing: -2px; }
@@ -744,7 +726,6 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   .footer-right { text-align: left; }
   body { cursor: auto; }
   .cursor, .cursor-ring { display: none; }
-  .vertical-name-1, .vertical-name-2 { display: none; }
 }
 </style>
 </head>
@@ -753,8 +734,6 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="photo-watermark"></div>
-<div class="vertical-name-1">Hugo</div>
-<div class="vertical-name-2">Moronval</div>
 
 <!-- ══ NAV ══ -->
 <nav class="nav">
@@ -796,9 +775,8 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   <div class="hero-meta">Marketing &amp; Commercial · 2026</div>
 
   <h1 class="hero-headline">
-    <span class="outline">Stratégie.</span><br>
-    <span class="gold">Branding.</span><br>
-    Résultats.
+    <span class="outline">Hugo</span> <span class="gold">Moronval</span><br>
+    <span class="hero-sub">Stratégie Marketing / Business</span>
   </h1>
 
   <div class="hero-bottom">
@@ -807,7 +785,10 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
         Un profil Marketing 360°, vision stratégique et impact terrain —<br>
         <strong>disponible maintenant · Région lilloise.</strong>
       </p>
-      <a href="cv.html" class="hero-cta">Voir mon CV →</a>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
+        <a href="cv.html" class="hero-cta" style="margin-top:0;">Voir mon CV →</a>
+        <a href="portfolio.html" class="hero-cta" style="margin-top:0;background:var(--ink);color:var(--bg);">Voir mon portfolio →</a>
+      </div>
       <a href="tel:+33782246610" class="hero-phone">07 82 24 66 10</a>
     </div>
     <div class="hero-scroll">
@@ -897,7 +878,7 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
         <h3 class="card-title">Port-<br>folio</h3>
         <p class="card-sub">Projets, réalisations &amp; études de cas</p>
         <p class="card-desc">
-          Sélection de projets concrets : campagnes, identités de marque, lancements et accompagnements stratégiques.
+          Sélection de projets concrets : campagnes, identités de marque, lancements et accompagnements stratégiques.
         </p>
         <div class="card-tags">
           <span class="card-tag">Projets</span>
@@ -997,18 +978,6 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   }
   animateRing();
 
-  // Fade out vertical name on scroll
-  const vn1 = document.querySelector('.vertical-name-1');
-  const vn2 = document.querySelector('.vertical-name-2');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      vn1.classList.add('hidden');
-      vn2.classList.add('hidden');
-    } else {
-      vn1.classList.remove('hidden');
-      vn2.classList.remove('hidden');
-    }
-  }, { passive: true });
 </script>
 
 </body>
