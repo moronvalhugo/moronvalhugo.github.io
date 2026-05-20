@@ -479,9 +479,28 @@
     @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
     @keyframes shimmer { 0%,100% { opacity:.6; } 50% { opacity:1; } }
 
+    /* ── GRAIN TEXTURE ── */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 9990; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 200px 200px; opacity: .4;
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    #progress {
+      position: fixed; top: 0; left: 0; height: 2px; z-index: 1100;
+      background: linear-gradient(90deg, #8c1a30, #d4a030, #f0c040);
+      width: 0%; transition: width .1s linear;
+    }
+
     /* ── LOGO ── */
     .logo-svg { width: 38px; height: 38px; flex-shrink: 0; }
     .logo-svg-lg { width: 80px; height: 80px; }
+
+    /* mobile hero fix: push content below fixed navbar */
+    @media(max-width:768px) {
+      .hero-content { padding-top: 76px; }
+    }
 
     /* ── BOOKING ── */
     .booking-outer { max-width: 780px; margin: 0 auto; padding: 40px 36px; }
@@ -579,6 +598,9 @@
   </style>
 </head>
 <body>
+
+<!-- ══ SCROLL PROGRESS ══ -->
+<div id="progress"></div>
 
 <!-- ══ CURSOR ══ -->
 <div class="cursor-dot" id="cdot"></div>
@@ -761,6 +783,10 @@
         </div>
       </div>
 
+    </div>
+
+    <div style="text-align:center;margin-top:44px;" class="reveal">
+      <a href="boutique.html" class="btn-p" style="display:inline-block;padding:14px 36px;text-decoration:none;">Voir toute la boutique →</a>
     </div>
   </div>
 </section>
@@ -1132,7 +1158,12 @@ document.querySelectorAll('a,button,.gc').forEach(el => {
 
 /* ── NAVBAR SHRINK ── */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('sm', scrollY > 60), { passive: true });
+const progressBar = document.getElementById('progress');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('sm', scrollY > 60);
+  const pct = scrollY / (document.documentElement.scrollHeight - innerHeight);
+  progressBar.style.width = (pct * 100) + '%';
+}, { passive: true });
 
 /* ── CANVAS PARTICLES ── */
 const canvas = document.getElementById('particles');

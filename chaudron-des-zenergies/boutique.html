@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boutique — Le Chaudron des Zen'rgies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:    #180c11; --bg2: #231320;
+      --gold:  #d4a030; --gl:  #f0c040;
+      --cr:    #b83050; --cr2: #8c1a30; --fl: #d4740a;
+      --text:  #f5e8d4; --muted: #a88878; --muted2: #6a5048;
+      --glass: rgba(212,160,48,.05); --gb: rgba(212,160,48,.14); --gh: rgba(212,160,48,.1);
+      --r: 16px;
+      --glow: 0 0 36px rgba(184,48,80,.28);
+      --glow-g: 0 0 36px rgba(212,160,48,.22);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; cursor:none; }
+    @media(hover:none){ body{cursor:auto}.cursor-dot,.cursor-ring{display:none} }
+    h1,h2,h3,.serif { font-family:'Playfair Display',Georgia,serif; }
+    a { text-decoration:none; color:inherit; }
+
+    /* ── GRAIN ── */
+    .grain {
+      position:fixed; inset:0; pointer-events:none; z-index:9990; opacity:.045;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:200px 200px;
+    }
+
+    /* ── PROGRESS ── */
+    #progress { position:fixed; top:0; left:0; height:2px; width:0; background:linear-gradient(90deg,var(--cr),var(--gl),var(--fl)); z-index:9999; transition:width .08s linear; }
+
+    /* ── CURSOR ── */
+    .cursor-dot { position:fixed;top:0;left:0;width:8px;height:8px;background:var(--gl);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);will-change:transform;transition:width .2s,background .2s; }
+    .cursor-ring { position:fixed;top:0;left:0;width:36px;height:36px;border:1.5px solid rgba(212,160,48,.5);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);will-change:transform;transition:width .3s,height .3s,border-color .3s,background .3s; }
+    .cursor-ring.hov { width:52px;height:52px;border-color:var(--cr);background:rgba(184,48,80,.06); }
+
+    /* ── NAVBAR ── */
+    .nav {
+      position:fixed;top:0;left:0;right:0;z-index:1000;padding:12px 40px;
+      background:rgba(24,12,17,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--gb);
+      display:flex;align-items:center;justify-content:space-between;transition:padding .3s;
+    }
+    .nav.sm { padding:8px 40px; }
+    .nav-brand { display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-size:17px;font-weight:600; }
+    .nav-brand img { width:40px;height:40px;object-fit:contain; }
+    .nav-links { display:flex;align-items:center;gap:4px;list-style:none; }
+    .nav-links a { padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--muted);transition:color .2s,background .2s; }
+    .nav-links a:hover,.nav-links a.active { color:var(--text);background:var(--glass); }
+    .nav-links a.active { color:var(--gl); }
+    .nav-right { display:flex;align-items:center;gap:10px; }
+    .nav-cta { padding:9px 20px;border-radius:9px;background:linear-gradient(135deg,var(--cr2),var(--cr),var(--fl));color:#fff;border:none;cursor:pointer;font-size:14px;font-weight:600;box-shadow:0 2px 16px rgba(184,48,80,.45);transition:filter .2s; }
+    .nav-cta:hover { filter:brightness(1.15); }
+    .nav-fb { width:36px;height:36px;border-radius:8px;background:var(--glass);border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:18px;transition:background .2s; }
+    .nav-fb:hover { background:var(--gh); }
+    @media(max-width:768px){ .nav-links{display:none}.nav{padding:12px 20px} }
+
+    /* ── HERO STRIP ── */
+    .hero-strip {
+      padding-top: 80px;
+      position:relative; overflow:hidden;
+      background: url('bg.png') center/cover no-repeat;
+      min-height: 340px;
+      display:flex; align-items:flex-end;
+    }
+    .hero-strip::before { content:'';position:absolute;inset:0;background:rgba(18,8,12,.72); }
+    .hero-strip-content { position:relative;z-index:1;padding:40px 40px 48px;max-width:1100px;width:100%;margin:0 auto; }
+    .breadcrumb { font-size:13px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:8px; }
+    .breadcrumb a { color:var(--muted);transition:color .2s; }
+    .breadcrumb a:hover { color:var(--gl); }
+    .breadcrumb span { color:var(--muted2); }
+    .hero-strip h1 { font-size:clamp(36px,6vw,64px);font-weight:700;line-height:1.1;margin-bottom:12px;
+      background:linear-gradient(135deg,#f5e8d4,var(--gl),var(--fl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .hero-strip p { font-size:16px;color:var(--muted);max-width:480px;line-height:1.7; }
+    .hero-count { display:inline-flex;align-items:center;gap:8px;margin-top:20px;
+      padding:8px 16px;background:var(--glass);border:1px solid var(--gb);border-radius:100px;
+      font-size:13px;font-weight:500;color:var(--gl); }
+
+    /* ── FILTER BAR ── */
+    .filter-wrap { position:sticky;top:56px;z-index:900;
+      background:rgba(24,12,17,.92);backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--gb);padding:0 40px; }
+    .filter-inner { max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:8px;padding:14px 0;overflow-x:auto;scrollbar-width:none; }
+    .filter-inner::-webkit-scrollbar { display:none; }
+    .filter-btn {
+      padding:8px 20px;border-radius:100px;border:1px solid var(--gb);
+      background:transparent;color:var(--muted);font-size:13px;font-weight:600;
+      cursor:pointer;white-space:nowrap;transition:all .25s;font-family:inherit;
+    }
+    .filter-btn:hover { background:var(--glass);color:var(--text); }
+    .filter-btn.on { background:linear-gradient(135deg,var(--cr2),var(--cr));color:#fff;border-color:transparent;box-shadow:0 2px 14px rgba(184,48,80,.4); }
+    .filter-sep { width:1px;height:20px;background:var(--gb);flex-shrink:0; }
+    .product-count { margin-left:auto;font-size:13px;color:var(--muted);white-space:nowrap;flex-shrink:0; }
+
+    /* ── BENTO FEATURED ── */
+    .bento-section { max-width:1100px;margin:48px auto 0;padding:0 40px; }
+    .bento-label { font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gl);margin-bottom:16px; }
+    .bento-grid {
+      display:grid;
+      grid-template-columns:1.4fr 1fr;
+      grid-template-rows:220px 220px;
+      gap:16px;
+      margin-bottom:16px;
+    }
+    .bento-card {
+      border-radius:20px;overflow:hidden;position:relative;cursor:pointer;
+      border:1px solid var(--gb);
+      transition:transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s;
+    }
+    .bento-card:hover { transform:scale(1.02);box-shadow:0 16px 48px rgba(0,0,0,.6); }
+    .bento-card:first-child { grid-row:span 2; }
+    .bento-img {
+      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+      font-size:80px;transition:transform .4s;
+    }
+    .bento-card:hover .bento-img { transform:scale(1.08); }
+    .bento-overlay {
+      position:absolute;inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.1) 60%);
+      display:flex;flex-direction:column;justify-content:flex-end;padding:24px;
+    }
+    .bento-badge {
+      position:absolute;top:16px;left:16px;
+      padding:4px 12px;border-radius:100px;
+      font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    }
+    .badge-new  { background:rgba(184,48,80,.25);border:1px solid rgba(184,48,80,.5);color:#f08090; }
+    .badge-best { background:rgba(212,160,48,.2); border:1px solid rgba(212,160,48,.4);color:var(--gl); }
+    .badge-lim  { background:rgba(99,60,20,.4);   border:1px solid rgba(212,116,10,.4);color:#f0a040; }
+    .badge-gift { background:rgba(30,80,30,.3);    border:1px solid rgba(80,160,80,.3);color:#80d080; }
+    .badge-prem { background:rgba(60,40,0,.5);     border:1px solid rgba(212,160,48,.5);color:var(--gl); }
+    .bento-cat  { font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gl);margin-bottom:6px; }
+    .bento-name { font-family:'Playfair Display',serif;font-size:clamp(18px,2.5vw,26px);font-weight:700;margin-bottom:8px; }
+    .bento-price { font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gl); }
+    @media(max-width:700px){ .bento-grid{grid-template-columns:1fr;grid-template-rows:auto;}.bento-card:first-child{grid-row:auto;} .bento-img{font-size:60px;} }
+
+    /* ── PRODUCT GRID ── */
+    .grid-section { max-width:1100px;margin:0 auto;padding:0 40px 96px; }
+    .grid-label { font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:40px 0 20px; }
+    .products-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:20px;
+    }
+    .product-card {
+      border-radius:var(--r);overflow:hidden;
+      background:var(--glass);border:1px solid var(--gb);
+      cursor:pointer;
+      transition:transform .3s cubic-bezier(.34,1.4,.64,1), box-shadow .3s, border-color .3s;
+      transform-style:preserve-3d;
+      will-change:transform;
+    }
+    .product-card:hover { border-color:rgba(212,160,48,.3);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 30px rgba(212,116,10,.15); }
+    .product-card.hidden { display:none; }
+    .prod-img {
+      height:200px;display:flex;align-items:center;justify-content:center;font-size:60px;
+      position:relative;overflow:hidden;transition:transform .4s;
+    }
+    .product-card:hover .prod-img { transform:scale(1.04); }
+    .prod-badge { position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700; }
+    .prod-body { padding:20px; }
+    .prod-cat { font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gl);margin-bottom:6px; }
+    .prod-name { font-weight:600;font-size:16px;margin-bottom:4px; }
+    .prod-stars { color:var(--gold);font-size:12px;letter-spacing:1px;margin-bottom:8px; }
+    .prod-desc { font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden; }
+    .prod-foot { display:flex;align-items:center;justify-content:space-between; }
+    .prod-price { font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gl); }
+    .prod-btn {
+      padding:9px 18px;border-radius:9px;
+      background:rgba(184,48,80,.15);border:1px solid rgba(184,48,80,.3);
+      color:#f08090;font-size:13px;font-weight:600;cursor:pointer;
+      transition:background .2s,border-color .2s,transform .15s;font-family:inherit;
+    }
+    .prod-btn:hover { background:rgba(184,48,80,.3);border-color:rgba(212,116,10,.5);transform:scale(1.04); }
+
+    /* ── EMPTY STATE ── */
+    .empty-state { display:none;text-align:center;padding:80px 20px;color:var(--muted); }
+    .empty-state.on { display:block; }
+    .empty-state .es-icon { font-size:48px;margin-bottom:16px;opacity:.5; }
+    .empty-state p { font-size:16px; }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      background:var(--bg2);border-top:1px solid var(--gb);border-bottom:1px solid var(--gb);
+      padding:64px 40px;text-align:center;
+      position:relative;overflow:hidden;
+    }
+    .cta-band::before { content:'';position:absolute;inset:0;background:url('bg.png') center/cover;opacity:.12; }
+    .cta-band-inner { position:relative;z-index:1;max-width:600px;margin:0 auto; }
+    .cta-band h2 { font-size:clamp(26px,4vw,40px);font-weight:700;margin-bottom:14px;
+      background:linear-gradient(135deg,#f5e8d4,var(--gl),var(--fl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .cta-band p { font-size:16px;color:var(--muted);line-height:1.7;margin-bottom:28px; }
+    .cta-btns { display:flex;gap:12px;justify-content:center;flex-wrap:wrap; }
+    .btn-p { padding:14px 30px;border-radius:12px;background:linear-gradient(135deg,var(--cr2),var(--cr),var(--fl));color:#fff;border:none;cursor:pointer;font-size:15px;font-weight:600;font-family:inherit;box-shadow:0 4px 24px rgba(184,48,80,.5);transition:filter .2s,transform .2s; }
+    .btn-p:hover { filter:brightness(1.15);transform:translateY(-2px); }
+    .btn-o { padding:13px 30px;border-radius:12px;background:var(--glass);border:1px solid var(--gb);color:var(--text);cursor:pointer;font-size:15px;font-weight:600;font-family:inherit;backdrop-filter:blur(8px);transition:background .2s,transform .2s; }
+    .btn-o:hover { background:var(--gh);transform:translateY(-2px); }
+
+    /* ── FOOTER ── */
+    .footer { background:var(--bg2);border-top:1px solid var(--gb);padding:48px 40px 32px; }
+    .footer-inner { max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px; }
+    .footer-brand h3 { font-family:'Playfair Display',serif;font-size:18px;margin-bottom:12px; }
+    .footer-brand p { font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px; }
+    .footer-socials { display:flex;gap:10px; }
+    .fsoc { width:36px;height:36px;border-radius:10px;background:var(--glass);border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:16px;transition:background .2s,transform .2s; }
+    .fsoc:hover { background:var(--gh);transform:translateY(-2px); }
+    .footer-col h4 { font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:14px; }
+    .footer-links { list-style:none;display:flex;flex-direction:column;gap:9px; }
+    .footer-links a { font-size:14px;color:var(--muted);transition:color .2s; }
+    .footer-links a:hover { color:var(--text); }
+    .footer-bottom { max-width:1100px;margin:32px auto 0;padding-top:20px;border-top:1px solid var(--gb);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;font-size:13px;color:var(--muted2); }
+    @media(max-width:768px){ .footer-inner{grid-template-columns:1fr 1fr}.footer{padding:40px 20px 100px} }
+    @media(max-width:480px){ .footer-inner{grid-template-columns:1fr} }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position:fixed;inset:0;z-index:2000;
+      background:rgba(12,5,8,.8);backdrop-filter:blur(16px);
+      display:flex;align-items:center;justify-content:center;padding:20px;
+      opacity:0;pointer-events:none;transition:opacity .35s;
+    }
+    .modal-overlay.on { opacity:1;pointer-events:all; }
+    .modal-card {
+      background:linear-gradient(135deg,#231320,#180c11);
+      border:1px solid var(--gb);border-radius:24px;
+      max-width:760px;width:100%;max-height:90vh;overflow-y:auto;
+      display:grid;grid-template-columns:1fr 1fr;
+      transform:translateY(40px) scale(.96);transition:transform .4s cubic-bezier(.34,1.4,.64,1);
+      scrollbar-width:thin;scrollbar-color:var(--gb) transparent;
+    }
+    .modal-overlay.on .modal-card { transform:none; }
+    .modal-img {
+      height:100%;min-height:320px;display:flex;align-items:center;justify-content:center;
+      font-size:90px;border-radius:24px 0 0 24px;position:relative;overflow:hidden;
+    }
+    .modal-body { padding:36px 32px;display:flex;flex-direction:column;gap:0; }
+    .modal-close {
+      position:absolute;top:16px;right:16px;z-index:10;
+      width:36px;height:36px;border-radius:50%;border:1px solid var(--gb);
+      background:rgba(24,12,17,.8);color:var(--text);font-size:16px;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;transition:background .2s;
+    }
+    .modal-close:hover { background:rgba(184,48,80,.2); }
+    .modal-cat { font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gl);margin-bottom:10px; }
+    .modal-name { font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,30px);font-weight:700;margin-bottom:8px; }
+    .modal-stars { color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:16px; }
+    .modal-desc { font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:20px; }
+    .modal-props { list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px;flex:1; }
+    .modal-props li { display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted); }
+    .modal-props li::before { content:'✦';color:var(--gl);font-size:10px;flex-shrink:0; }
+    .modal-footer { display:flex;align-items:center;justify-content:space-between;padding-top:20px;border-top:1px solid var(--gb);margin-top:auto; }
+    .modal-price { font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gl); }
+    .modal-btn { padding:11px 22px;border-radius:10px;background:linear-gradient(135deg,var(--cr2),var(--cr),var(--fl));color:#fff;border:none;cursor:pointer;font-size:14px;font-weight:600;font-family:inherit;box-shadow:0 4px 16px rgba(184,48,80,.4);transition:filter .2s; }
+    .modal-btn:hover { filter:brightness(1.15); }
+    @media(max-width:640px){ .modal-card{grid-template-columns:1fr}.modal-img{min-height:200px;border-radius:24px 24px 0 0;font-size:64px}.modal-body{padding:24px} }
+
+    /* ── BACK TO TOP ── */
+    #btt {
+      position:fixed;bottom:32px;right:32px;z-index:500;
+      width:44px;height:44px;border-radius:50%;
+      background:linear-gradient(135deg,var(--cr2),var(--cr));color:#fff;
+      border:none;cursor:pointer;font-size:18px;
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 4px 20px rgba(184,48,80,.5);
+      opacity:0;pointer-events:none;transform:translateY(16px);
+      transition:opacity .3s,transform .3s;
+    }
+    #btt.on { opacity:1;pointer-events:all;transform:none; }
+    @media(max-width:768px){ #btt{bottom:80px;} }
+
+    /* ── MOBILE NAV ── */
+    .mob-nav { display:none;position:fixed;bottom:0;left:0;right:0;z-index:1000;background:rgba(24,12,17,.92);backdrop-filter:blur(24px);border-top:1px solid var(--gb);padding:8px 0 calc(8px + env(safe-area-inset-bottom)); }
+    .mob-nav-inner { display:flex;justify-content:space-around; }
+    .mob-item { display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 12px;font-size:10px;font-weight:500;color:var(--muted2);cursor:pointer;transition:color .2s;text-decoration:none; }
+    .mob-item.on { color:var(--gl); }
+    .mob-item svg { width:22px;height:22px;fill:currentColor; }
+    @media(max-width:768px){ .mob-nav{display:block};body{padding-bottom:68px} }
+
+    /* ── REVEAL ── */
+    .reveal { opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease; }
+    .reveal.on { opacity:1;transform:none; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width:6px; }
+    ::-webkit-scrollbar-track { background:var(--bg); }
+    ::-webkit-scrollbar-thumb { background:var(--gb);border-radius:4px; }
+  </style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div id="progress"></div>
+<div class="cursor-dot" id="cdot"></div>
+<div class="cursor-ring" id="cring"></div>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="nav" id="nav">
+  <a href="index.html" class="nav-brand">
+    <img src="logo.png" alt="Logo" />
+    Le Chaudron
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#univers">Univers</a></li>
+    <li><a href="boutique.html" class="active">Boutique</a></li>
+    <li><a href="index.html#ateliers">Ateliers</a></li>
+    <li><a href="index.html#reservation">Réserver</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://www.facebook.com/share/18gpWpjGFy/" target="_blank" class="nav-fb">📘</a>
+    <button class="nav-cta" onclick="window.location='index.html#reservation'">Réserver ✨</button>
+  </div>
+</nav>
+
+<!-- ══ HERO STRIP ══ -->
+<div class="hero-strip">
+  <div class="hero-strip-content">
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a>
+      <span>›</span>
+      <span style="color:var(--gl)">Boutique</span>
+    </div>
+    <h1>Notre Boutique</h1>
+    <p>Cristaux, bougies artisanales et coffrets soigneusement sélectionnés — chaque pièce est choisie avec intention.</p>
+    <div class="hero-count">✦ <span id="total-count">12</span> produits disponibles</div>
+  </div>
+</div>
+
+<!-- ══ FILTER BAR ══ -->
+<div class="filter-wrap">
+  <div class="filter-inner">
+    <button class="filter-btn on" data-cat="all">Tout voir</button>
+    <div class="filter-sep"></div>
+    <button class="filter-btn" data-cat="cristaux">💎 Cristaux</button>
+    <button class="filter-btn" data-cat="bougies">🕯️ Bougies</button>
+    <button class="filter-btn" data-cat="coffrets">🎁 Coffrets</button>
+    <div class="filter-sep"></div>
+    <span class="product-count" id="count-label"></span>
+  </div>
+</div>
+
+<!-- ══ BENTO FEATURED ══ -->
+<div class="bento-section reveal">
+  <div class="bento-label">✦ Coups de cœur</div>
+  <div class="bento-grid" id="bento-grid"></div>
+</div>
+
+<!-- ══ PRODUCT GRID ══ -->
+<div class="grid-section">
+  <div class="grid-label" id="grid-label">Tous les produits</div>
+  <div class="products-grid" id="products-grid"></div>
+  <div class="empty-state" id="empty-state">
+    <div class="es-icon">🔮</div>
+    <p>Aucun produit dans cette catégorie pour le moment.</p>
+  </div>
+</div>
+
+<!-- ══ CTA BAND ══ -->
+<div class="cta-band">
+  <div class="cta-band-inner reveal">
+    <h2>Commander ou poser une question ?</h2>
+    <p>Toutes les commandes se font par message privé sur Facebook. Réponse sous 24h — livraison ou retrait en boutique à Hazebrouck.</p>
+    <div class="cta-btns">
+      <a href="https://www.facebook.com/share/18gpWpjGFy/" target="_blank"><button class="btn-p">📘 Nous contacter sur Facebook</button></a>
+      <a href="index.html#reservation"><button class="btn-o">Réserver un atelier</button></a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h3>🫧 Le Chaudron<br>des Zen'rgies</h3>
+      <p>Boutique bien-être à Hazebrouck — cristaux, bougies artisanales et ateliers énergétiques depuis 2019.</p>
+      <div class="footer-socials">
+        <a href="https://www.facebook.com/share/18gpWpjGFy/" target="_blank" class="fsoc">📘</a>
+        <a href="#" class="fsoc">📸</a>
+        <a href="#" class="fsoc">✉️</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Boutique</h4><ul class="footer-links"><li><a href="?cat=cristaux">Cristaux</a></li><li><a href="?cat=bougies">Bougies</a></li><li><a href="?cat=coffrets">Coffrets</a></li></ul></div>
+    <div class="footer-col"><h4>Ateliers</h4><ul class="footer-links"><li><a href="index.html#ateliers">Bougie Soy Wax</a></li><li><a href="index.html#ateliers">Lithothérapie</a></li><li><a href="index.html#ateliers">Pleine Lune</a></li></ul></div>
+    <div class="footer-col"><h4>Info</h4><ul class="footer-links"><li><a href="index.html#histoire">Notre histoire</a></li><li><a href="index.html#avis">Avis clients</a></li><li><a href="index.html#reservation">Réserver</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Le Chaudron des Zen'rgies · Hazebrouck</span><span>Fait avec ✨ &amp; 💜</span></div>
+</footer>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- ══ MOBILE NAV ══ -->
+<nav class="mob-nav">
+  <div class="mob-nav-inner">
+    <a href="index.html" class="mob-item"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>Accueil</a>
+    <a href="boutique.html" class="mob-item on"><svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96C5 16.1 6.9 18 9 18h12v-2H9.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63H19c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0023.45 5H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>Boutique</a>
+    <a href="index.html#ateliers" class="mob-item"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>Ateliers</a>
+    <a href="index.html#reservation" class="mob-item"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.11-.9-2-2-2zm0 16H5V8h14v11z"/></svg>Réserver</a>
+    <a href="https://www.facebook.com/share/18gpWpjGFy/" target="_blank" class="mob-item"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm-5 4h-1.5c-.3 0-.5.2-.5.5V10h2l-.3 2H13v5h-2v-5H9v-2h2V8.5C11 7.1 12.1 6 13.5 6H15v2z"/></svg>Facebook</a>
+  </div>
+</nav>
+
+<!-- ══ MODAL ══ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-card" id="modal-card">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div class="modal-img" id="modal-img"></div>
+    <div class="modal-body">
+      <div class="modal-cat" id="modal-cat"></div>
+      <h2 class="modal-name" id="modal-name"></h2>
+      <div class="modal-stars">⭐⭐⭐⭐⭐</div>
+      <p class="modal-desc" id="modal-desc"></p>
+      <ul class="modal-props" id="modal-props"></ul>
+      <div class="modal-footer">
+        <div class="modal-price" id="modal-price"></div>
+        <a href="https://www.facebook.com/share/18gpWpjGFy/" target="_blank"><button class="modal-btn">Commander →</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── DATA ── */
+const PRODUCTS = [
+  {id:1,cat:'cristaux',name:'Améthyste Brute',price:12,icon:'💎',bg:'linear-gradient(135deg,#1a0540,#5b21b6,#a855f7)',desc:"Pierre de sérénité par excellence, l'améthyste purifie l'espace et apaise l'esprit. Idéale pour la méditation et le sommeil.",props:['Apaisante & protectrice','Favorise le sommeil','Purifie l\'énergie','Chakra couronne'],badge:'Nouveau',btype:'badge-new'},
+  {id:2,cat:'cristaux',name:'Quartz Rose',price:15,icon:'🌸',bg:'linear-gradient(135deg,#4a0820,#be185d,#fda4af)',desc:"La pierre de l'amour inconditionnel. Le quartz rose ouvre le cœur à la compassion, la douceur et l'amour de soi.",props:['Amour & compassion','Douceur émotionnelle','Estime de soi','Chakra cœur'],badge:null},
+  {id:3,cat:'cristaux',name:'Labradorite',price:28,icon:'🌊',bg:'linear-gradient(135deg,#0c1a40,#1d4ed8,#7dd3fc)',desc:"Pierre de transformation et de magie, la labradorite protège l'aura et développe l'intuition. Ses reflets irisés sont fascinants.",props:['Protection de l\'aura','Intuition & magie','Créativité','Chakra 3e œil'],badge:'Best-seller',btype:'badge-best'},
+  {id:4,cat:'cristaux',name:'Obsidienne Noire',price:18,icon:'🖤',bg:'linear-gradient(135deg,#0a0a0a,#1f1f2e,#374151)',desc:"Puissant bouclier énergétique, l'obsidienne absorbe les énergies négatives et ancre profondément dans le présent.",props:['Protection énergétique','Ancrage','Purification','Chakra racine'],badge:null},
+  {id:5,cat:'cristaux',name:'Sélénite Baguette',price:22,icon:'🌙',bg:'linear-gradient(135deg,#0f172a,#1e3a5f,#bfdbfe)',desc:"Lumière cristallisée, la sélénite purifie les autres pierres et connecte aux énergies spirituelles supérieures.",props:['Purifie les cristaux','Connexion spirituelle','Clarté mentale','Chakra couronne'],badge:null},
+  {id:6,cat:'cristaux',name:"Œil de Tigre",price:16,icon:'🐯',bg:'linear-gradient(135deg,#3d1a00,#92400e,#fbbf24)',desc:"Pierre de courage et de volonté, l'œil de tigre renforce la confiance en soi et aide à prendre des décisions claires.",props:['Courage & force','Confiance en soi','Protection','Chakra sacral'],badge:null},
+  {id:7,cat:'bougies',name:'Lavande & Vanille',price:18,icon:'🕯️',bg:'linear-gradient(135deg,#2d1b6b,#6d28d9,#ddd6fe)',desc:"Fabriquée à la main en cire de soja 100% naturelle. Le parfum enveloppant de lavande et vanille invite à la détente profonde.",props:['Cire de soja naturelle','40h de combustion','HE bio','Sans paraffine'],badge:null},
+  {id:8,cat:'bougies',name:'Cèdre & Encens',price:22,icon:'🌲',bg:'linear-gradient(135deg,#0f2010,#166534,#86efac)',desc:"Un parfum boisé, chaud et spirituel qui transforme votre intérieur en sanctuaire. Idéale pour la méditation.",props:['Cire de soja naturelle','45h de combustion','Ambiance méditative','Parfum boisé & sacré'],badge:null},
+  {id:9,cat:'bougies',name:'Pleine Lune ✦',price:28,icon:'🌕',bg:'linear-gradient(135deg,#0f172a,#1e3a5f,#94a3b8)',desc:"Édition limitée — bougie avec cristaux incrustés. Parfum jasmin, musc blanc et bergamote. À brûler lors des rituels de pleine lune.",props:['Cristaux incrustés','Jasmin & musc blanc','Rituel pleine lune','Édition unique'],badge:'Édition limitée',btype:'badge-lim'},
+  {id:10,cat:'coffrets',name:'Kit Méditation',price:35,icon:'🎁',bg:'linear-gradient(135deg,#1a0540,#701a75,#e879f9)',desc:"5 pierres soigneusement sélectionnées + pochette en velours + guide d'utilisation illustré. Idéal pour débuter la lithothérapie.",props:['5 pierres assorties','Pochette velours','Guide illustré','Idéal débutant'],badge:'Best-seller',btype:'badge-best'},
+  {id:11,cat:'coffrets',name:'Coffret Découverte',price:45,icon:'✨',bg:'linear-gradient(135deg,#450a0a,#991b1b,#fca5a5)',desc:"6 cristaux + guide complet de lithothérapie + bougie artisanale offerte. Un cadeau parfait pour offrir ou se faire plaisir.",props:['6 cristaux variés','Guide lithothérapie','Bougie offerte','Emballage cadeau'],badge:'Idée cadeau',btype:'badge-gift'},
+  {id:12,cat:'coffrets',name:'Coffret Premium',price:65,icon:'👑',bg:'linear-gradient(135deg,#1c1400,#78350f,#f59e0b)',desc:"Le coffret ultime — 3 cristaux rares + bougie grande taille + diffuseur céramique + carnet des rituels. Un rituel complet.",props:['3 cristaux rares','Bougie grande taille','Diffuseur céramique','Carnet des rituels'],badge:'Premium',btype:'badge-prem'},
+];
+
+/* ── CURSOR ── */
+const dot=document.getElementById('cdot'),ring=document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px)`;});
+(function l(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.transform=`translate(${rx}px,${ry}px)`;requestAnimationFrame(l);})();
+function addHov(el){el.addEventListener('mouseenter',()=>ring.classList.add('hov'));el.addEventListener('mouseleave',()=>ring.classList.remove('hov'));}
+
+/* ── PROGRESS & NAVBAR ── */
+const prog=document.getElementById('progress'),nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  prog.style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
+  nav.classList.toggle('sm',scrollY>60);
+  document.getElementById('btt').classList.toggle('on',scrollY>400);
+},{passive:true});
+
+/* ── SCROLL REVEAL ── */
+const ro=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* ── MAGNETIC BUTTONS ── */
+function magnetic(el){
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const dx=(e.clientX-r.left-r.width/2)*.35;
+    const dy=(e.clientY-r.top-r.height/2)*.35;
+    el.style.transform=`translate(${dx}px,${dy}px)`;
+  });
+  el.addEventListener('mouseleave',()=>{el.style.transform='';el.style.transition='transform .5s cubic-bezier(.34,1.56,.64,1)';setTimeout(()=>el.style.transition='',500);});
+}
+
+/* ── 3D TILT ── */
+function tilt(el){
+  el.addEventListener('mousemove',e=>{
+    const r=el.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    el.style.transform=`perspective(700px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.04)`;
+  });
+  el.addEventListener('mouseleave',()=>{el.style.transform='';});
+}
+
+/* ── RENDER ── */
+function badgeHTML(p){
+  if(!p.badge) return '';
+  return `<span class="prod-badge ${p.btype||'badge-best'}">${p.badge}</span>`;
+}
+
+function renderBento(){
+  const featured=[PRODUCTS[0],PRODUCTS[9],PRODUCTS[2]]; // Améthyste, Kit Méditation, Labradorite
+  const cats={'cristaux':'💎 Cristaux','bougies':'🕯️ Bougies','coffrets':'🎁 Coffrets'};
+  document.getElementById('bento-grid').innerHTML = featured.map(p=>`
+    <div class="bento-card" data-id="${p.id}" style="background:${p.bg}">
+      <div class="bento-img">${p.icon}</div>
+      ${p.badge?`<div class="bento-badge ${p.btype||'badge-best'}">${p.badge}</div>`:''}
+      <div class="bento-overlay">
+        <div class="bento-cat">${cats[p.cat]||p.cat}</div>
+        <div class="bento-name">${p.name}</div>
+        <div class="bento-price">${p.price} €</div>
+      </div>
+    </div>
+  `).join('');
+  document.querySelectorAll('.bento-card').forEach(c=>{
+    tilt(c); addHov(c);
+    c.addEventListener('click',()=>openModal(parseInt(c.dataset.id)));
+  });
+}
+
+let currentCat='all';
+function renderGrid(cat){
+  currentCat=cat;
+  const cats={'cristaux':'💎 Cristaux','bougies':'🕯️ Bougies','coffrets':'🎁 Coffrets'};
+  const catLabels={'all':'Tous les produits','cristaux':'Cristaux & Pierres','bougies':'Bougies Artisanales','coffrets':'Coffrets & Cadeaux'};
+  document.getElementById('grid-label').textContent = catLabels[cat]||'Tous les produits';
+  const grid=document.getElementById('products-grid');
+  const filtered=cat==='all'?PRODUCTS:PRODUCTS.filter(p=>p.cat===cat);
+  document.getElementById('count-label').textContent=filtered.length+' produit'+(filtered.length>1?'s':'');
+  document.getElementById('total-count').textContent=PRODUCTS.length;
+  document.getElementById('empty-state').classList.toggle('on',filtered.length===0);
+  grid.innerHTML=filtered.map((p,i)=>`
+    <div class="product-card reveal" data-id="${p.id}" style="transition-delay:${i*.05}s">
+      <div class="prod-img" style="background:${p.bg}">
+        ${p.icon}
+        ${badgeHTML(p)}
+      </div>
+      <div class="prod-body">
+        <div class="prod-cat">${cats[p.cat]||p.cat}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-stars">★★★★★</div>
+        <div class="prod-desc">${p.desc}</div>
+        <div class="prod-foot">
+          <span class="prod-price">${p.price} €</span>
+          <button class="prod-btn" data-id="${p.id}">Voir ›</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  document.querySelectorAll('.product-card').forEach(c=>{
+    tilt(c); addHov(c);
+    c.addEventListener('click',()=>openModal(parseInt(c.dataset.id)));
+    ro.observe(c);
+  });
+  document.querySelectorAll('.prod-btn').forEach(b=>{
+    magnetic(b); addHov(b);
+    b.addEventListener('click',e=>{e.stopPropagation();openModal(parseInt(b.dataset.id));});
+  });
+}
+
+/* ── FILTER ── */
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  addHov(btn);
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    renderGrid(btn.dataset.cat);
+  });
+});
+
+/* ── MODAL ── */
+function openModal(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  const cats={'cristaux':'💎 Cristaux','bougies':'🕯️ Bougies','coffrets':'🎁 Coffrets'};
+  document.getElementById('modal-img').style.background=p.bg;
+  document.getElementById('modal-img').textContent=p.icon;
+  document.getElementById('modal-cat').textContent=cats[p.cat]||p.cat;
+  document.getElementById('modal-name').textContent=p.name;
+  document.getElementById('modal-desc').textContent=p.desc;
+  document.getElementById('modal-price').textContent=p.price+' €';
+  document.getElementById('modal-props').innerHTML=p.props.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('modal').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal').classList.remove('on');
+  document.body.style.overflow='';
+}
+document.getElementById('modal-close').addEventListener('click',closeModal);
+document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+/* ── MAGNETIC CTA ── */
+document.querySelectorAll('.btn-p,.btn-o,.nav-cta').forEach(magnetic);
+document.querySelectorAll('a,button,.bento-card,.modal-close').forEach(addHov);
+
+/* ── INIT ── */
+renderBento();
+renderGrid('all');
+
+/* ── URL PARAM ── */
+const urlCat=new URLSearchParams(location.search).get('cat');
+if(urlCat){
+  const btn=document.querySelector(`.filter-btn[data-cat="${urlCat}"]`);
+  if(btn){btn.click();}
+}
+</script>
+</body>
+</html>
