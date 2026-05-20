@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Le Chaudron des Zen'rgies · Facebook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1877f2;
+      --blue-hover: #166fe5;
+      --bg: #f0f2f5;
+      --white: #fff;
+      --border: #dde1e7;
+      --text: #050505;
+      --muted: #65676b;
+      --radius: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 56px;
+      box-shadow: var(--shadow);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+    .nav-logo svg { width: 40px; height: 40px; fill: var(--blue); }
+    .nav-search {
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 8px 14px;
+      gap: 8px;
+      flex: 1;
+      max-width: 240px;
+      margin: 0 12px;
+    }
+    .nav-search input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 15px;
+      color: var(--text);
+      width: 100%;
+    }
+    .nav-search svg { width: 16px; height: 16px; fill: var(--muted); flex-shrink: 0; }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+    .nav-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: none;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .nav-btn:hover { background: #e4e6ea; }
+    .nav-btn svg { width: 20px; height: 20px; fill: var(--text); }
+    .nav-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, #7c5c2e, #c49a6c);
+      border: none; cursor: pointer; overflow: hidden; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: white; font-size: 16px;
+    }
+
+    /* ── COVER ── */
+    .profile-header { background: var(--white); box-shadow: var(--shadow); }
+    .cover-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .cover-photo {
+      width: 100%;
+      height: 350px;
+      border-radius: 0 0 var(--radius) var(--radius);
+      background: linear-gradient(135deg, #2d5016 0%, #4a7c2a 25%, #6b9e3e 50%, #8bc34a 70%, #c8e6c9 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cover-photo::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(255,255,255,.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,.05) 0%, transparent 40%);
+    }
+    .cover-deco {
+      position: absolute;
+      font-size: 80px;
+      opacity: .18;
+      user-select: none;
+    }
+    .cover-deco:nth-child(1) { top: 30px; left: 60px; transform: rotate(-15deg); font-size: 100px; }
+    .cover-deco:nth-child(2) { top: 50px; right: 80px; transform: rotate(10deg); font-size: 70px; }
+    .cover-deco:nth-child(3) { bottom: 40px; left: 200px; transform: rotate(5deg); font-size: 60px; }
+    .cover-deco:nth-child(4) { bottom: 20px; right: 160px; transform: rotate(-8deg); font-size: 90px; }
+    .cover-title {
+      position: relative;
+      text-align: center;
+      color: white;
+      text-shadow: 0 2px 12px rgba(0,0,0,.4);
+    }
+    .cover-title h1 { font-size: 36px; font-weight: 700; letter-spacing: -.5px; }
+    .cover-title p { font-size: 16px; margin-top: 6px; opacity: .9; }
+    .cover-edit-btn {
+      position: absolute;
+      bottom: 16px; right: 16px;
+      background: rgba(255,255,255,.9);
+      border: none; border-radius: 6px;
+      padding: 8px 14px;
+      display: flex; align-items: center; gap: 6px;
+      cursor: pointer; font-weight: 500; font-size: 14px;
+      backdrop-filter: blur(4px);
+      transition: background .15s;
+    }
+    .cover-edit-btn:hover { background: white; }
+    .cover-edit-btn svg { width: 16px; height: 16px; }
+
+    /* ── PROFILE INFO ROW ── */
+    .profile-info-row {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      padding: 0 16px;
+      position: relative;
+    }
+    .profile-pic-wrap {
+      position: relative;
+      margin-top: -36px;
+      flex-shrink: 0;
+    }
+    .profile-pic {
+      width: 168px; height: 168px;
+      border-radius: 50%;
+      border: 4px solid white;
+      background: linear-gradient(135deg, #5d4037, #8d6e63, #4e342e);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 72px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+      overflow: hidden;
+    }
+    .profile-pic-badge {
+      position: absolute;
+      bottom: 6px; right: 6px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid white;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .profile-pic-badge svg { width: 18px; height: 18px; fill: var(--text); }
+
+    .profile-text { flex: 1; padding-bottom: 12px; }
+    .profile-text h1 { font-size: 28px; font-weight: 700; }
+    .profile-text .followers { color: var(--muted); font-size: 15px; margin-top: 2px; }
+    .profile-text .followers span { color: var(--text); font-weight: 600; }
+
+    .profile-actions { display: flex; gap: 8px; padding-bottom: 14px; flex-shrink: 0; }
+    .btn {
+      border: none; border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 15px; font-weight: 600;
+      cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      transition: background .15s, filter .15s;
+    }
+    .btn svg { width: 18px; height: 18px; }
+    .btn-primary { background: var(--blue); color: white; }
+    .btn-primary:hover { background: var(--blue-hover); }
+    .btn-secondary { background: #e4e6ea; color: var(--text); }
+    .btn-secondary:hover { filter: brightness(.94); }
+    .btn-icon { padding: 8px 10px; }
+
+    /* ── NAV TABS ── */
+    .profile-tabs {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      border-top: 1px solid var(--border);
+      padding: 0 16px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .profile-tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      padding: 14px 16px;
+      font-size: 15px; font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: color .15s, border-color .15s;
+    }
+    .tab:hover { background: var(--bg); border-radius: 6px; }
+    .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+    /* ── MAIN CONTENT ── */
+    .content-wrap {
+      max-width: 1080px;
+      margin: 16px auto;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+    @media (max-width: 860px) {
+      .content-wrap { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .cover-photo { height: 220px; }
+      .profile-pic { width: 120px; height: 120px; font-size: 52px; }
+      .profile-pic-wrap { margin-top: -24px; }
+      .profile-text h1 { font-size: 22px; }
+      .cover-title h1 { font-size: 24px; }
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .card h2 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+    .card-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .card-link { color: var(--blue); font-size: 14px; font-weight: 500; cursor: pointer; }
+
+    /* ── ABOUT / SIDEBAR ── */
+    .about-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      font-size: 15px;
+      color: var(--text);
+    }
+    .about-item svg { width: 20px; height: 20px; fill: var(--muted); flex-shrink: 0; }
+    .about-item .label { color: var(--muted); }
+
+    .photos-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .photo-cell {
+      aspect-ratio: 1;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .photo-cell div {
+      width: 100%; height: 100%;
+      transition: transform .2s;
+    }
+    .photo-cell:hover div { transform: scale(1.05); }
+
+    /* Zen / nature themed photo placeholders */
+    .ph1 { background: linear-gradient(135deg, #1b5e20, #4caf50); display:flex;align-items:center;justify-content:center;font-size:32px; }
+    .ph2 { background: linear-gradient(135deg, #4e342e, #8d6e63); display:flex;align-items:center;justify-content:center;font-size:32px; }
+    .ph3 { background: linear-gradient(135deg, #f57f17, #ffca28); display:flex;align-items:center;justify-content:center;font-size:32px; }
+    .ph4 { background: linear-gradient(135deg, #4a148c, #9c27b0); display:flex;align-items:center;justify-content:center;font-size:32px; }
+    .ph5 { background: linear-gradient(135deg, #006064, #00bcd4); display:flex;align-items:center;justify-content:center;font-size:32px; }
+    .ph6 { background: linear-gradient(135deg, #37474f, #78909c); display:flex;align-items:center;justify-content:center;font-size:32px; }
+    .ph7 { background: linear-gradient(135deg, #880e4f, #e91e63); display:flex;align-items:center;justify-content:center;font-size:32px; }
+    .ph8 { background: linear-gradient(135deg, #1a237e, #3f51b5); display:flex;align-items:center;justify-content:center;font-size:32px; }
+    .ph9 { background: linear-gradient(135deg, #e65100, #ff9800); display:flex;align-items:center;justify-content:center;font-size:32px; }
+
+    /* ── FEED ── */
+    .post-composer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .post-composer-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, #5d4037, #8d6e63);
+      flex-shrink: 0; display:flex;align-items:center;justify-content:center;
+      font-size: 18px;
+    }
+    .post-composer-input {
+      flex: 1;
+      background: var(--bg);
+      border: none; border-radius: 20px;
+      padding: 10px 16px;
+      font-size: 15px; color: var(--muted);
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .post-composer-input:hover { background: #e4e6ea; }
+    .composer-actions {
+      display: flex;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      gap: 4px;
+    }
+    .composer-action {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px;
+      border-radius: 6px; cursor: pointer;
+      font-size: 14px; font-weight: 600; color: var(--muted);
+      transition: background .15s;
+    }
+    .composer-action:hover { background: var(--bg); }
+    .composer-action svg { width: 22px; height: 22px; }
+
+    /* ── POST ── */
+    .post { margin-bottom: 16px; }
+    .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .post-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      flex-shrink: 0; display:flex;align-items:center;justify-content:center;
+      font-size: 20px; overflow: hidden;
+    }
+    .post-meta { flex: 1; }
+    .post-name { font-weight: 600; font-size: 15px; }
+    .post-time { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+    .post-time svg { width: 12px; height: 12px; fill: var(--muted); }
+    .post-options {
+      width: 36px; height: 36px; border-radius: 50%; border: none;
+      background: transparent; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .post-options:hover { background: var(--bg); }
+    .post-options svg { width: 20px; height: 20px; fill: var(--muted); }
+
+    .post-text { font-size: 15px; line-height: 1.5; margin-bottom: 12px; }
+    .post-text.large { font-size: 22px; font-weight: 500; }
+
+    .post-image {
+      width: 100%; border-radius: 0;
+      margin: 0 -16px;
+      width: calc(100% + 32px);
+      min-height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 64px;
+      margin-bottom: 0;
+    }
+
+    .post-reactions {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px; color: var(--muted);
+    }
+    .reaction-icons { display: flex; align-items: center; gap: 4px; }
+    .reaction-bubble {
+      width: 20px; height: 20px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      border: 2px solid white;
+      margin-right: -4px;
+    }
+    .rb-like { background: var(--blue); }
+    .rb-love { background: #f33e58; }
+    .rb-wow  { background: #f7b125; }
+    .reaction-count { margin-left: 8px; }
+
+    .post-actions {
+      display: flex;
+      padding: 4px 0;
+      gap: 4px;
+    }
+    .post-action {
+      flex: 1;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 8px;
+      border-radius: 6px; border: none;
+      background: transparent; cursor: pointer;
+      font-size: 15px; font-weight: 600; color: var(--muted);
+      transition: background .15s;
+    }
+    .post-action:hover { background: var(--bg); }
+    .post-action svg { width: 20px; height: 20px; fill: var(--muted); }
+    .post-action.liked { color: var(--blue); }
+    .post-action.liked svg { fill: var(--blue); }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-block;
+      background: #e7f3ff;
+      color: var(--blue);
+      font-size: 12px; font-weight: 600;
+      padding: 2px 8px; border-radius: 4px;
+      margin-left: 6px;
+    }
+
+    /* ── LIKE BTN ── */
+    .like-btn-wrap { display: flex; gap: 4px; align-items: center; }
+
+    /* ── FRIENDS GRID ── */
+    .friends-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .friend-cell { cursor: pointer; }
+    .friend-avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px;
+      margin-bottom: 4px;
+    }
+    .friend-name { font-size: 13px; font-weight: 600; text-align: center; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: #c5c8ce; border-radius: 4px; }
+
+    /* ── NOTIFICATION DOT ── */
+    .notif-dot {
+      position: absolute; top: 6px; right: 6px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: #e41e3f; color: white;
+      font-size: 10px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid white;
+    }
+    .nav-btn-wrap { position: relative; }
+
+    /* ── TAG/CHIPS ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .tag {
+      background: #e7f3ff; color: var(--blue);
+      font-size: 13px; font-weight: 500;
+      padding: 4px 10px; border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav class="nav">
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 36 36"><path d="M20.181 35.87C29.094 34.791 36 27.202 36 18c0-9.941-8.059-18-18-18S0 8.059 0 18c0 8.442 5.811 15.526 13.652 17.471L14 34h5.5l.681 1.87z"/><path fill="#fff" d="M13.651 35.471v-11.97H9.936V18h3.715v-2.37c0-6.127 2.772-8.964 8.784-8.964 1.138 0 3.103.223 3.91.446v4.983c-.425-.043-1.167-.065-2.081-.065-2.952 0-4.09 1.116-4.09 4.025V18h5.883l-1.012 5.501h-4.871v12.319a18.183 18.183 0 01-6.523-.349z"/></svg>
+  </a>
+  <div class="nav-search">
+    <svg viewBox="0 0 16 16"><path d="M6.5 12a5.5 5.5 0 100-11 5.5 5.5 0 000 11zm4.243-1.757l3.5 3.5-.707.707-3.5-3.5.707-.707z"/></svg>
+    <input type="text" placeholder="Rechercher sur Facebook" />
+  </div>
+  <div class="nav-actions">
+    <div class="nav-btn-wrap">
+      <button class="nav-btn" title="Menu">
+        <svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"/></svg>
+      </button>
+    </div>
+    <div class="nav-btn-wrap">
+      <button class="nav-btn" title="Messenger">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.02 2 11c0 2.67 1.17 5.08 3.07 6.79V21l3.57-1.96A10.9 10.9 0 0012 20c5.52 0 10-4.02 10-9S17.52 2 12 2zm1.07 12.19l-2.54-2.72-4.97 2.72 5.47-5.82 2.6 2.72 4.91-2.72-5.47 5.82z"/></svg>
+      </button>
+      <span class="notif-dot">3</span>
+    </div>
+    <div class="nav-btn-wrap">
+      <button class="nav-btn" title="Notifications">
+        <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4a2 2 0 002 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+      </button>
+      <span class="notif-dot">5</span>
+    </div>
+    <button class="nav-avatar" title="Mon compte">C</button>
+  </div>
+</nav>
+
+<!-- ══════════════ PROFILE HEADER ══════════════ -->
+<div class="profile-header">
+  <div class="cover-wrap">
+    <div class="cover-photo">
+      <span class="cover-deco">🌿</span>
+      <span class="cover-deco">🔮</span>
+      <span class="cover-deco">🌙</span>
+      <span class="cover-deco">✨</span>
+      <div class="cover-title">
+        <h1>🫧 Le Chaudron des Zen'rgies</h1>
+        <p>Énergie · Bien-être · Sérénité</p>
+      </div>
+      <button class="cover-edit-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5H8.5A2.5 2.5 0 006 7.5v9A2.5 2.5 0 008.5 19h9A2.5 2.5 0 0020 16.5V13"/><path d="M18.37 3.63a2.12 2.12 0 013 3L12 16l-4 1 1-4 9.37-9.37z"/></svg>
+        Modifier la photo de couverture
+      </button>
+    </div>
+
+    <div class="profile-info-row">
+      <div class="profile-pic-wrap">
+        <div class="profile-pic">🫧</div>
+        <div class="profile-pic-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+        </div>
+      </div>
+
+      <div class="profile-text">
+        <h1>Le Chaudron des Zen'rgies <span class="badge">Page</span></h1>
+        <p class="followers"><span>1 284</span> J'aime · <span>1 391</span> abonnés</p>
+      </div>
+
+      <div class="profile-actions">
+        <button class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="white"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+          Suivre
+        </button>
+        <button class="btn btn-secondary">
+          <svg viewBox="0 0 24 24"><path d="M21 6.5c0-1.93-1.57-3.5-3.5-3.5h-10C5.57 3 4 4.57 4 6.5v5c0 1.93 1.57 3.5 3.5 3.5H10l4 4v-4h3.5c1.93 0 3.5-1.57 3.5-3.5v-5z"/></svg>
+          Message
+        </button>
+        <button class="btn btn-secondary btn-icon">
+          <svg viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="profile-tabs">
+      <div class="tab active">Publications</div>
+      <div class="tab">À propos</div>
+      <div class="tab">Photos</div>
+      <div class="tab">Vidéos</div>
+      <div class="tab">Boutique</div>
+      <div class="tab">Avis</div>
+      <div class="tab">Plus ▾</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ MAIN CONTENT ══════════════ -->
+<div class="content-wrap">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+
+    <!-- À propos -->
+    <div class="card">
+      <h2>À propos</h2>
+      <div class="about-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
+        <span>Hazebrouck, Hauts-de-France</span>
+      </div>
+      <div class="about-item">
+        <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+        <span>Ouverte depuis <span style="font-weight:600">2019</span></span>
+      </div>
+      <div class="about-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+        <span class="label">Boutique de bien-être &amp; soins énergétiques</span>
+      </div>
+      <div class="about-item">
+        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm6.93 6h-2.95a15.65 15.65 0 00-1.38-3.56A8.03 8.03 0 0118.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H4.26zm.82 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 015.08 16zm2.95-8H5.08a7.987 7.987 0 014.33-3.56A15.65 15.65 0 008.03 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.09-.66-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.34-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 01-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg>
+        <a href="#" style="color: var(--blue); text-decoration: none;">lechaudrondeszenergie.fr</a>
+      </div>
+      <div class="tags">
+        <span class="tag">🌿 Lithothérapie</span>
+        <span class="tag">🕯️ Bougies</span>
+        <span class="tag">🔮 Cristaux</span>
+        <span class="tag">🌸 Bien-être</span>
+        <span class="tag">🧘 Méditation</span>
+        <span class="tag">✨ Énergies</span>
+      </div>
+    </div>
+
+    <!-- Photos -->
+    <div class="card">
+      <div class="card-title-row">
+        <h2>Photos</h2>
+        <span class="card-link">Voir toutes les photos</span>
+      </div>
+      <div class="photos-grid">
+        <div class="photo-cell"><div class="ph1">🌿</div></div>
+        <div class="photo-cell"><div class="ph2">🔮</div></div>
+        <div class="photo-cell"><div class="ph3">🕯️</div></div>
+        <div class="photo-cell"><div class="ph4">🌙</div></div>
+        <div class="photo-cell"><div class="ph5">💎</div></div>
+        <div class="photo-cell"><div class="ph6">🌊</div></div>
+        <div class="photo-cell"><div class="ph7">🌸</div></div>
+        <div class="photo-cell"><div class="ph8">⭐</div></div>
+        <div class="photo-cell"><div class="ph9">🍃</div></div>
+      </div>
+    </div>
+
+    <!-- Amis / Abonnés -->
+    <div class="card">
+      <div class="card-title-row">
+        <h2>Abonnés récents</h2>
+        <span class="card-link">Voir tout</span>
+      </div>
+      <div class="friends-grid">
+        <div class="friend-cell">
+          <div class="friend-avatar" style="background:linear-gradient(135deg,#e91e63,#f48fb1)">👩</div>
+          <div class="friend-name">Marie L.</div>
+        </div>
+        <div class="friend-cell">
+          <div class="friend-avatar" style="background:linear-gradient(135deg,#2196f3,#90caf9)">👨</div>
+          <div class="friend-name">Thomas R.</div>
+        </div>
+        <div class="friend-cell">
+          <div class="friend-avatar" style="background:linear-gradient(135deg,#ff9800,#ffe082)">👩</div>
+          <div class="friend-name">Sophie M.</div>
+        </div>
+        <div class="friend-cell">
+          <div class="friend-avatar" style="background:linear-gradient(135deg,#4caf50,#a5d6a7)">👩</div>
+          <div class="friend-name">Lucie V.</div>
+        </div>
+        <div class="friend-cell">
+          <div class="friend-avatar" style="background:linear-gradient(135deg,#9c27b0,#ce93d8)">👩</div>
+          <div class="friend-name">Claire B.</div>
+        </div>
+        <div class="friend-cell">
+          <div class="friend-avatar" style="background:linear-gradient(135deg,#607d8b,#b0bec5)">👨</div>
+          <div class="friend-name">Julien D.</div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ── FEED ── -->
+  <main>
+
+    <!-- Composer -->
+    <div class="card">
+      <div class="post-composer">
+        <div class="post-composer-avatar">🫧</div>
+        <div class="post-composer-input">Quoi de neuf, Le Chaudron des Zen'rgies ?</div>
+      </div>
+      <div class="composer-actions">
+        <div class="composer-action" style="color:#f02849">
+          <svg viewBox="0 0 24 24" fill="#f02849"><path d="M21 3H3a2 2 0 00-2 2v14a2 2 0 002 2h18a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H3V5h18v14zm-10-7l-3-3.75L5 15h14l-4.5-6-2.5 3z"/></svg>
+          Photo / vidéo
+        </div>
+        <div class="composer-action" style="color:#45bd62">
+          <svg viewBox="0 0 24 24" fill="#45bd62"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45 7.77 18l1.12-4.81-3.73-3.23 4.92-.42L12 5l1.92 4.53 4.92.42-3.73 3.23L16.23 18z"/></svg>
+          Évènement
+        </div>
+        <div class="composer-action" style="color:#f7b928">
+          <svg viewBox="0 0 24 24" fill="#f7b928"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/></svg>
+          Humeur
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 1 -->
+    <div class="card post">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#2d5016,#6b9e3e)">🫧</div>
+        <div class="post-meta">
+          <div class="post-name">Le Chaudron des Zen'rgies</div>
+          <div class="post-time">
+            Il y a 2 heures ·
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          </div>
+        </div>
+        <button class="post-options">
+          <svg viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </button>
+      </div>
+      <p class="post-text">✨ <strong>Nouvelle arrivée !</strong> Des pierres d'améthyste brute viennent d'arriver au chaudron 💜<br><br>
+        L'améthyste est connue pour ses propriétés apaisantes, elle aide à trouver la sérénité et à purifier l'espace. Idéale pour la méditation ou simplement pour décorer votre intérieur avec une touche naturelle et zen 🌿<br><br>
+        Disponible en boutique à Hazebrouck ou en commande ! 📩 Contactez-nous en MP.</p>
+      <div class="post-image" style="background:linear-gradient(135deg,#4a148c,#9c27b0,#ce93d8);height:280px">
+        💎🔮💜
+      </div>
+      <div class="post-reactions">
+        <div class="reaction-icons">
+          <span class="reaction-bubble rb-like">👍</span>
+          <span class="reaction-bubble rb-love">❤️</span>
+          <span class="reaction-bubble rb-wow">😮</span>
+          <span class="reaction-count">142 personnes</span>
+        </div>
+        <div>18 commentaires · 7 partages</div>
+      </div>
+      <div class="post-actions">
+        <button class="post-action liked" onclick="this.classList.toggle('liked')">
+          <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+          J'aime
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+          Commenter
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+          Partager
+        </button>
+      </div>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="card post">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#2d5016,#6b9e3e)">🫧</div>
+        <div class="post-meta">
+          <div class="post-name">Le Chaudron des Zen'rgies</div>
+          <div class="post-time">
+            Hier à 18h30 ·
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          </div>
+        </div>
+        <button class="post-options">
+          <svg viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </button>
+      </div>
+      <p class="post-text large">🌙 Bonne nuit à tous ! Prenez soin de vous cette nuit — rechargez vos énergies sous les étoiles ✨</p>
+      <div class="post-reactions">
+        <div class="reaction-icons">
+          <span class="reaction-bubble rb-love">❤️</span>
+          <span class="reaction-bubble rb-like">👍</span>
+          <span class="reaction-count">87 personnes</span>
+        </div>
+        <div>5 commentaires</div>
+      </div>
+      <div class="post-actions">
+        <button class="post-action" onclick="this.classList.toggle('liked')">
+          <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+          J'aime
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+          Commenter
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+          Partager
+        </button>
+      </div>
+    </div>
+
+    <!-- Post 3 -->
+    <div class="card post">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#2d5016,#6b9e3e)">🫧</div>
+        <div class="post-meta">
+          <div class="post-name">Le Chaudron des Zen'rgies</div>
+          <div class="post-time">
+            Il y a 3 jours ·
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          </div>
+        </div>
+        <button class="post-options">
+          <svg viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </button>
+      </div>
+      <p class="post-text">🕯️ <strong>Atelier bougie soy wax</strong> — Samedi 24 mai à Hazebrouck !<br><br>
+        Venez créer vos propres bougies naturelles parfumées. Matières premières bio, cadre cosy, bonne humeur garantie 🌸<br><br>
+        📍 Le Chaudron des Zen'rgies, Hazebrouck<br>
+        🕐 14h00 – 17h00<br>
+        💶 35€ par personne (matériel inclus)<br><br>
+        Places limitées ! Inscrivez-vous en MP 📩</p>
+      <div class="post-image" style="background:linear-gradient(135deg,#f57f17,#ffca28,#fff9c4);height:260px;font-size:72px">
+        🕯️🌸✨
+      </div>
+      <div class="post-reactions">
+        <div class="reaction-icons">
+          <span class="reaction-bubble rb-love">❤️</span>
+          <span class="reaction-bubble rb-like">👍</span>
+          <span class="reaction-bubble rb-wow">😮</span>
+          <span class="reaction-count">213 personnes</span>
+        </div>
+        <div>34 commentaires · 51 partages</div>
+      </div>
+      <div class="post-actions">
+        <button class="post-action" onclick="this.classList.toggle('liked')">
+          <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+          J'aime
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+          Commenter
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+          Partager
+        </button>
+      </div>
+    </div>
+
+    <!-- Post 4 -->
+    <div class="card post">
+      <div class="post-header">
+        <div class="post-avatar" style="background:linear-gradient(135deg,#2d5016,#6b9e3e)">🫧</div>
+        <div class="post-meta">
+          <div class="post-name">Le Chaudron des Zen'rgies</div>
+          <div class="post-time">
+            5 mai ·
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+          </div>
+        </div>
+        <button class="post-options">
+          <svg viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        </button>
+      </div>
+      <p class="post-text">💚 Un grand merci à tous nos clients et abonnés pour votre soutien ! Grâce à vous, Le Chaudron des Zen'rgies grandit chaque jour un peu plus 🙏<br><br>
+      Nous approchons les <strong>1 400 abonnés</strong> — c'est magique ! Pour fêter ça, on prépare une surprise… restez connectés ✨</p>
+      <div class="post-reactions">
+        <div class="reaction-icons">
+          <span class="reaction-bubble rb-love">❤️</span>
+          <span class="reaction-bubble rb-like">👍</span>
+          <span class="reaction-count">189 personnes</span>
+        </div>
+        <div>22 commentaires · 12 partages</div>
+      </div>
+      <div class="post-actions">
+        <button class="post-action" onclick="this.classList.toggle('liked')">
+          <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+          J'aime
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24"><path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18z"/></svg>
+          Commenter
+        </button>
+        <button class="post-action">
+          <svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
+          Partager
+        </button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
