@@ -378,6 +378,22 @@ body {
   text-transform: uppercase; color: rgba(245,242,236,.25);
 }
 
+/* ══ TOOL LOGOS ══ */
+.tool-category { margin-bottom: 16px; }
+.tool-cat-name {
+  font-size: 9px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--ink3); margin-bottom: 8px;
+}
+.tool-grid { display: flex; flex-wrap: wrap; gap: 8px 10px; }
+.tool-item {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; width: 48px;
+}
+.tool-logo { width: 26px; height: 26px; object-fit: contain; }
+.tool-name {
+  font-size: 9px; color: var(--ink2); text-align: center; line-height: 1.2;
+}
+
 /* ══ PRINT ══ */
 @media print {
   .nav, .ticker, .photo-watermark, .vertical-name-1, .vertical-name-2,
@@ -734,16 +750,47 @@ body {
         </div>
       </div>
 
-      <div class="skill-group">
-        <div class="skill-group-title">
-          IA &amp; Outils digitaux
-          <span class="skill-level">Maîtrise</span>
+    </div>
+
+    <!-- Outils & Logiciels -->
+    <div class="sidebar-section">
+      <div class="sidebar-label">Outils &amp; Logiciels</div>
+
+      <div class="tool-category">
+        <div class="tool-cat-name">Adobe</div>
+        <div class="tool-grid">
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/adobeindesign" alt="InDesign" class="tool-logo" loading="lazy"><span class="tool-name">InDesign</span></div>
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/adobephotoshop" alt="Photoshop" class="tool-logo" loading="lazy"><span class="tool-name">Photoshop</span></div>
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/adobeillustrator" alt="Illustrator" class="tool-logo" loading="lazy"><span class="tool-name">Illustrator</span></div>
         </div>
-        <div class="skill-tags">
-          <span class="skill-tag">Claude</span>
-          <span class="skill-tag">ChatGPT</span>
-          <span class="skill-tag">Midjourney</span>
-          <span class="skill-tag">Copilot</span>
+      </div>
+
+      <div class="tool-category">
+        <div class="tool-cat-name">Microsoft</div>
+        <div class="tool-grid">
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/microsoftword" alt="Word" class="tool-logo" loading="lazy"><span class="tool-name">Word</span></div>
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/microsoftexcel" alt="Excel" class="tool-logo" loading="lazy"><span class="tool-name">Excel</span></div>
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/microsoftpowerpoint" alt="PowerPoint" class="tool-logo" loading="lazy"><span class="tool-name">PPT</span></div>
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/microsoft365" alt="Microsoft 365" class="tool-logo" loading="lazy"><span class="tool-name">M365</span></div>
+        </div>
+      </div>
+
+      <div class="tool-category">
+        <div class="tool-cat-name">Gestion</div>
+        <div class="tool-grid">
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/odoo" alt="Odoo" class="tool-logo" loading="lazy"><span class="tool-name">Odoo</span></div>
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/sage" alt="Sage" class="tool-logo" loading="lazy"><span class="tool-name">Sage</span></div>
+        </div>
+      </div>
+
+      <div class="tool-category" style="margin-bottom:0">
+        <div class="tool-cat-name">IA &amp; Création</div>
+        <div class="tool-grid">
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/anthropic/D97757" alt="Claude" class="tool-logo" loading="lazy"><span class="tool-name">Claude</span></div>
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/openai/10a37f" alt="ChatGPT" class="tool-logo" loading="lazy"><span class="tool-name">ChatGPT</span></div>
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/microsoftcopilot" alt="Copilot" class="tool-logo" loading="lazy"><span class="tool-name">Copilot</span></div>
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/midjourney" alt="Midjourney" class="tool-logo" loading="lazy"><span class="tool-name">Midjourney</span></div>
+          <div class="tool-item"><img src="https://cdn.simpleicons.org/canva" alt="Canva" class="tool-logo" loading="lazy"><span class="tool-name">Canva</span></div>
         </div>
       </div>
     </div>
