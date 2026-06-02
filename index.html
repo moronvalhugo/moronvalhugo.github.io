@@ -326,6 +326,7 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
 /* ══ HERO CTA ══ */
 .hero-cta { display: inline-flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--black); background: var(--accent); text-decoration: none; padding: 14px 28px; margin-top: 28px; transition: background .3s, color .3s; }
 .hero-cta:hover { background: var(--ink); color: var(--bg); }
+.hero-cta-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
 .hero-phone { display: block; font-size: 15px; font-weight: 500; color: var(--ink2); text-decoration: none; margin-top: 10px; letter-spacing: .5px; transition: color .2s; }
 .hero-phone:hover { color: var(--accent); }
 
@@ -726,6 +727,9 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
   .footer-right { text-align: left; }
   body { cursor: auto; }
   .cursor, .cursor-ring { display: none; }
+  .photo-watermark { display: none; }
+  .hero-cta-group { flex-direction: column; align-items: stretch; }
+  .hero-cta-group .hero-cta { width: 100%; justify-content: center; margin-top: 0; }
 }
 </style>
 </head>
@@ -785,7 +789,7 @@ body:has(.card:hover) .cursor-ring { width: 64px; height: 64px; opacity: 1; }
         Un profil Marketing 360°, vision stratégique et impact terrain —<br>
         <strong>disponible maintenant · Région lilloise.</strong>
       </p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
+      <div class="hero-cta-group">
         <a href="cv.html" class="hero-cta" style="margin-top:0;">Voir mon CV →</a>
         <a href="portfolio.html" class="hero-cta" style="margin-top:0;background:var(--ink);color:var(--bg);">Voir mon portfolio →</a>
         <a href="cv-teaser.html" target="_blank" class="hero-cta" style="margin-top:0;background:transparent;color:var(--ink);border:1px solid var(--border);">↓ CV version courte</a>

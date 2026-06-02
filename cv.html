@@ -394,6 +394,10 @@ body {
   font-size: 9px; color: var(--ink2); text-align: center; line-height: 1.2;
 }
 
+/* ══ ACCROCHE + CTA ══ */
+.accroche-block { padding: 56px 48px; }
+.cv-cta { padding: 72px 48px; }
+
 /* ══ PRINT ══ */
 @media print {
   .nav, .ticker, .photo-watermark, .vertical-name-1, .vertical-name-2,
@@ -439,6 +443,8 @@ body {
   body { cursor: auto; }
   .footer { flex-direction: column; gap: 24px; padding: 40px 24px; }
   .footer-nav { display: none; }
+  .accroche-block { padding: 32px 24px; }
+  .cv-cta { padding: 48px 24px; }
 }
 </style>
 </head>
@@ -528,7 +534,7 @@ body {
 </div>
 
 <!-- ══ ACCROCHE ══ -->
-<div style="padding: 56px 48px; border-bottom: 1px solid var(--border); position: relative; z-index: 1; max-width: 860px;">
+<div class="accroche-block" style="border-bottom: 1px solid var(--border); position: relative; z-index: 1; max-width: 860px;">
   <p style="font-size: 17px; font-weight: 300; line-height: 1.75; color: var(--ink2); margin-bottom: 16px;">
     10 ans à construire des marques et générer des résultats concrets pour PME et ETI.
   </p>
@@ -865,7 +871,7 @@ body {
 </div><!-- /body-wrap -->
 
 <!-- ══ CONTACT CTA ══ -->
-<section style="background:var(--ink);padding:72px 48px;position:relative;z-index:1;">
+<section class="cv-cta" style="background:var(--ink);position:relative;z-index:1;">
   <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(200,169,107,.6);margin-bottom:16px;">Prochain pas</div>
   <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,6vw,80px);line-height:.9;letter-spacing:-2px;text-transform:uppercase;color:var(--bg);margin-bottom:24px;">Travaillons<br><span style="color:var(--accent);">ensemble</span></h2>
   <p style="font-size:14px;color:rgba(245,242,236,.4);margin-bottom:36px;">Disponible immédiatement · CDI · Région Lilloise</p>
