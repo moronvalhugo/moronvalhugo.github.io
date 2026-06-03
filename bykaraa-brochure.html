@@ -6,38 +6,36 @@
   <title>KÄRAA — Plaquette Commerciale 2025</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap" rel="stylesheet">
   <style>
-    /* ─── TOKENS ───────────────────────────────────────────────── */
+    /* ─── TOKENS — vraie charte KÄRAA ───────────────────────────── */
     :root {
-      --ink:    #0A0A0A;
-      --ink-2:  #141414;
-      --ink-3:  #1E1E1E;
-      --gold:   #C9A96E;
-      --gold-2: #A3824A;
-      --gold-3: #E8D5B0;
-      --ash:    #8A8A8A;
-      --snow:   #F5F3EE;
-      --white:  #FFFFFF;
+      --ink:     #2B2D3A;   /* charcoal logo */
+      --ink-2:   #3C3F52;
+      --rose:    #D4A5B5;   /* accent rose poudré */
+      --rose-2:  #EDCFDA;
+      --rose-3:  #F7EDF1;
+      --white:   #FFFFFF;
+      --offwhite:#F8F7F5;
+      --light:   #EFEFED;
+      --muted:   #7A7B8A;
 
-      --serif: 'Cormorant Garamond', Georgia, serif;
-      --sans:  'Inter', system-ui, sans-serif;
+      --sans: 'Plus Jakarta Sans', system-ui, sans-serif;
 
       --page-w: 210mm;
       --page-h: 297mm;
     }
 
-    /* ─── RESET ─────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 14px; background: #1a1a1a; }
-    body { font-family: var(--sans); color: var(--white); }
+    html { font-size: 14px; background: #E8E8E6; }
+    body { font-family: var(--sans); color: var(--ink); }
 
-    /* ─── PAGE SHELL ────────────────────────────────────────────── */
+    /* ─── PAGE ───────────────────────────────────────────────────── */
     .page {
       width: var(--page-w);
       min-height: var(--page-h);
       margin: 0 auto 16px;
-      background: var(--ink);
+      background: var(--white);
       position: relative;
       overflow: hidden;
     }
@@ -46,324 +44,350 @@
        PAGE 1 — COUVERTURE
     ═══════════════════════════════════════════════════════════════ */
     .cover {
-      background: var(--ink);
       display: grid;
-      grid-template-rows: 1fr auto;
-      padding: 0;
+      grid-template-columns: 1fr 1fr;
+      min-height: var(--page-h);
     }
 
-    .cover__bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 55% at 75% 35%, rgba(201,169,110,.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(201,169,110,.06) 0%, transparent 70%);
-    }
-
-    .cover__arc {
-      position: absolute;
-      width: 480px; height: 480px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,169,110,.2);
-      top: -120px; right: -120px;
-    }
-    .cover__arc-2 {
-      position: absolute;
-      width: 320px; height: 320px;
-      border-radius: 50%;
-      border: 1px solid rgba(201,169,110,.12);
-      top: -40px; right: -40px;
-    }
-    .cover__arc-3 {
-      position: absolute;
-      width: 620px; height: 620px;
-      border-radius: 50%;
-      border: 0.5px solid rgba(201,169,110,.06);
-      top: -200px; right: -200px;
-    }
-
-    .cover__inner {
-      position: relative;
-      z-index: 2;
+    /* Colonne gauche : contenu */
+    .cover__left {
+      background: var(--ink);
+      padding: 14mm 10mm 10mm 12mm;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      padding: 18mm 16mm 0 16mm;
-      flex: 1;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
     }
 
-    .cover__eyebrow {
-      font-family: var(--sans);
+    /* cercles décoratifs inspirés des Courbes du logo */
+    .cover__left::before {
+      content: '';
+      position: absolute;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,165,181,.2);
+      bottom: -60px; left: -60px;
+    }
+    .cover__left::after {
+      content: '';
+      position: absolute;
+      width: 340px; height: 340px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(212,165,181,.1);
+      bottom: -130px; left: -130px;
+    }
+
+    .cover__logo-img {
+      width: 120px;
+      filter: invert(1) brightness(2);
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover__left-body {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover__year {
       font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 10mm;
-    }
-
-    .cover__logo {
-      font-family: var(--serif);
-      font-size: 80px;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      line-height: 1;
-      color: var(--white);
-      margin-bottom: 6mm;
-    }
-    .cover__logo span { color: var(--gold); }
-
-    .cover__sub {
-      font-family: var(--sans);
-      font-size: 10px;
-      font-weight: 300;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--ash);
-      margin-bottom: 14mm;
+      color: var(--rose);
+      margin-bottom: 6mm;
     }
 
-    .cover__rule {
-      width: 48px; height: 1px;
-      background: var(--gold);
+    .cover__headline {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 5mm;
+    }
+    .cover__headline em {
+      font-style: normal;
+      color: var(--rose);
+    }
+
+    .cover__sub {
+      font-size: 10px;
+      font-weight: 300;
+      line-height: 1.65;
+      color: rgba(255,255,255,.55);
       margin-bottom: 8mm;
     }
 
-    .cover__tagline {
-      font-family: var(--serif);
-      font-size: 26px;
-      font-weight: 300;
-      font-style: italic;
-      line-height: 1.35;
-      color: var(--snow);
-      max-width: 140mm;
-    }
-    .cover__tagline strong {
-      font-style: normal;
-      font-weight: 600;
-      color: var(--gold);
+    .cover__cta {
+      display: inline-block;
+      background: var(--rose);
+      color: var(--ink);
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 3.5mm 6mm;
+      text-decoration: none;
+      align-self: flex-start;
     }
 
-    .cover__footer {
-      position: relative;
-      z-index: 2;
-      padding: 8mm 16mm;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-top: 1px solid rgba(201,169,110,.15);
-    }
-    .cover__footer-label {
-      font-size: 8px;
+    .cover__doc-type {
+      font-size: 7.5px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--ash);
-    }
-    .cover__footer-year {
-      font-family: var(--serif);
-      font-size: 22px;
-      color: var(--gold);
-      font-weight: 300;
+      color: rgba(255,255,255,.25);
+      position: relative;
+      z-index: 1;
     }
 
+    /* Colonne droite : photo plein écran */
+    .cover__right {
+      position: relative;
+      overflow: hidden;
+    }
+    .cover__photo {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .cover__photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(43,45,58,.15) 0%, rgba(43,45,58,.4) 100%);
+    }
+    .cover__photo-caption {
+      position: absolute;
+      bottom: 8mm; right: 6mm;
+      font-size: 7px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      writing-mode: vertical-rl;
+    }
+
+    /* bande rose en bas */
     .cover__band {
       position: absolute;
       bottom: 0; left: 0; right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--gold-2), var(--gold), var(--gold-3), var(--gold));
+      background: var(--rose);
+      z-index: 10;
     }
 
     /* ═══════════════════════════════════════════════════════════════
        PAGE 2 — MANIFESTE
     ═══════════════════════════════════════════════════════════════ */
     .manifeste {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       min-height: var(--page-h);
+      display: grid;
+      grid-template-rows: auto 1fr;
     }
 
-    .manifeste__left {
-      background: var(--gold);
-      padding: 18mm 10mm 18mm 14mm;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      overflow: hidden;
+    /* Header pleine largeur */
+    .manifeste__header {
+      background: var(--offwhite);
+      padding: 12mm 12mm 10mm;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8mm;
+      align-items: end;
+      border-bottom: 1px solid var(--light);
     }
-    .manifeste__left::after {
-      content: '';
-      position: absolute;
-      width: 260px; height: 260px;
-      border-radius: 50%;
-      border: 1px solid rgba(0,0,0,.1);
-      bottom: -80px; right: -80px;
-    }
-    .manifeste__left-number {
-      font-family: var(--serif);
-      font-size: 120px;
-      font-weight: 600;
+
+    .manifeste__num {
+      font-size: 80px;
+      font-weight: 800;
+      color: var(--rose-2);
       line-height: 1;
-      color: rgba(0,0,0,.08);
-      position: absolute;
-      bottom: 14mm; left: 10mm;
     }
-    .manifeste__left-label {
-      font-size: 8px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,.5);
-      margin-bottom: 6mm;
-    }
-    .manifeste__left-title {
-      font-family: var(--serif);
-      font-size: 38px;
-      font-weight: 300;
+
+    .manifeste__title {
+      font-size: 26px;
+      font-weight: 700;
       line-height: 1.15;
       color: var(--ink);
     }
+    .manifeste__title em {
+      font-style: normal;
+      color: var(--rose);
+    }
 
-    .manifeste__right {
-      background: var(--ink-2);
-      padding: 18mm 14mm 18mm 10mm;
+    /* Corps */
+    .manifeste__body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .manifeste__photo-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .manifeste__photo {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .manifeste__photo-badge {
+      position: absolute;
+      bottom: 6mm; left: 6mm;
+      background: var(--rose);
+      color: var(--ink);
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 2.5mm 5mm;
+    }
+
+    .manifeste__text {
+      padding: 10mm 10mm 10mm 8mm;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: 8mm;
+      justify-content: space-between;
     }
 
     .manifeste__quote {
-      font-family: var(--serif);
-      font-size: 18px;
-      font-style: italic;
-      font-weight: 300;
+      font-size: 14px;
+      font-weight: 600;
       line-height: 1.5;
-      color: var(--snow);
-      border-left: 2px solid var(--gold);
+      color: var(--ink);
+      border-left: 3px solid var(--rose);
       padding-left: 5mm;
+      margin-bottom: 6mm;
     }
 
-    .manifeste__body {
-      font-size: 10.5px;
-      line-height: 1.75;
-      color: var(--ash);
+    .manifeste__para {
+      font-size: 9.5px;
       font-weight: 300;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 4mm;
     }
 
-    .manifeste__pill-row {
+    .manifeste__pills {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 4mm;
+      gap: 5px;
+      margin-top: 2mm;
     }
     .manifeste__pill {
-      font-size: 8px;
-      letter-spacing: 0.15em;
+      font-size: 7.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      border: 1px solid rgba(201,169,110,.4);
-      color: var(--gold-3);
-      padding: 4px 10px;
-      border-radius: 20px;
+      background: var(--rose-3);
+      color: var(--ink);
+      padding: 3px 8px;
+      border-radius: 2px;
     }
 
     /* ═══════════════════════════════════════════════════════════════
        PAGE 3 — EXPERTISES
     ═══════════════════════════════════════════════════════════════ */
     .expertises {
-      padding: 16mm 14mm;
-      background: var(--ink);
-      position: relative;
+      min-height: var(--page-h);
+      display: flex;
+      flex-direction: column;
     }
 
-    .section-header {
+    .page-header {
+      padding: 10mm 12mm 8mm;
       display: flex;
+      justify-content: space-between;
       align-items: flex-end;
-      gap: 8mm;
-      margin-bottom: 10mm;
+      border-bottom: 1px solid var(--light);
     }
-    .section-header__eyebrow {
+    .page-header__left {}
+    .page-header__eyebrow {
       font-size: 8px;
+      font-weight: 600;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--gold);
-      white-space: nowrap;
+      color: var(--rose);
+      margin-bottom: 2mm;
     }
-    .section-header__title {
-      font-family: var(--serif);
-      font-size: 36px;
-      font-weight: 300;
-      color: var(--white);
+    .page-header__title {
+      font-size: 28px;
+      font-weight: 800;
       line-height: 1;
-      flex: 1;
+      color: var(--ink);
     }
-    .section-header__rule {
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(201,169,110,.4), transparent);
-      margin-bottom: 6px;
+    .page-header__logo {
+      width: 80px;
+      opacity: .25;
     }
 
+    /* grille 2×2 avec photo dans chaque carte */
     .exp-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4mm;
+      flex: 1;
     }
 
     .exp-card {
-      background: var(--ink-2);
-      border: 1px solid rgba(201,169,110,.12);
-      padding: 8mm 7mm;
-      position: relative;
+      border-right: 1px solid var(--light);
+      border-bottom: 1px solid var(--light);
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
     }
-    .exp-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px; height: 100%;
-      background: var(--gold);
+    .exp-card:nth-child(even) { border-right: none; }
+    .exp-card:nth-child(n+3) { border-bottom: none; }
+
+    .exp-card__photo-wrap {
+      height: 55mm;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
     }
-    .exp-card__num {
-      font-family: var(--serif);
-      font-size: 44px;
-      font-weight: 600;
-      color: rgba(201,169,110,.08);
-      position: absolute;
-      top: 4mm; right: 6mm;
-      line-height: 1;
+    .exp-card__photo {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .3s;
     }
-    .exp-card__icon {
-      font-size: 18px;
-      margin-bottom: 4mm;
-      display: block;
+    .exp-card__photo-num {
+      position: absolute;
+      top: 4mm; left: 4mm;
+      background: var(--rose);
+      color: var(--ink);
+      font-size: 8px;
+      font-weight: 800;
+      width: 18px; height: 18px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+    }
+
+    .exp-card__body {
+      padding: 6mm 6mm 6mm;
+      flex: 1;
     }
     .exp-card__title {
-      font-family: var(--serif);
-      font-size: 19px;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 2mm;
-      line-height: 1.2;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 3mm;
     }
     .exp-card__list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 3px;
-      margin-top: 3mm;
+      gap: 2px;
     }
     .exp-card__list li {
-      font-size: 9.5px;
-      color: var(--ash);
-      font-weight: 300;
+      font-size: 9px;
+      font-weight: 400;
+      color: var(--muted);
       padding-left: 10px;
       position: relative;
+      line-height: 1.5;
     }
     .exp-card__list li::before {
       content: '→';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
+      position: absolute; left: 0;
+      color: var(--rose);
       font-size: 8px;
     }
 
@@ -371,198 +395,221 @@
        PAGE 4 — OFFRE COMMERCIALE
     ═══════════════════════════════════════════════════════════════ */
     .offre {
-      padding: 16mm 14mm;
-      background: var(--ink);
-      position: relative;
-    }
-
-    .offre__bg-arc {
-      position: absolute;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      border: 0.5px solid rgba(201,169,110,.06);
-      bottom: -200px; left: -200px;
+      min-height: var(--page-h);
+      display: flex;
+      flex-direction: column;
+      background: var(--offwhite);
     }
 
     .offre-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 4mm;
-      margin-top: 8mm;
+      gap: 0;
+      flex: 1;
+      border-top: 1px solid var(--light);
     }
 
     .offre-card {
-      background: var(--ink-2);
-      border: 1px solid rgba(201,169,110,.15);
-      padding: 8mm 6mm;
+      background: var(--white);
+      border-right: 1px solid var(--light);
+      padding: 8mm 7mm;
       display: flex;
       flex-direction: column;
-      position: relative;
-      overflow: hidden;
     }
+    .offre-card:last-child { border-right: none; }
 
     .offre-card--featured {
-      background: var(--gold);
-      border-color: var(--gold);
+      background: var(--ink);
     }
     .offre-card--featured .offre-card__name,
+    .offre-card--featured .offre-card__price { color: var(--white); }
     .offre-card--featured .offre-card__desc,
-    .offre-card--featured .offre-card__price,
     .offre-card--featured .offre-card__price-note,
-    .offre-card--featured .offre-card__feature { color: var(--ink); }
-    .offre-card--featured .offre-card__feature::before { color: var(--ink); }
-    .offre-card--featured .offre-card__rule { background: rgba(0,0,0,.2); }
+    .offre-card--featured .offre-card__feature { color: rgba(255,255,255,.55); }
+    .offre-card--featured .offre-card__feature::before { color: var(--rose); }
+    .offre-card--featured .offre-card__rule { background: rgba(255,255,255,.1); }
+    .offre-card--featured .offre-card__badge {
+      background: var(--rose);
+      color: var(--ink);
+    }
 
     .offre-card__badge {
       display: inline-block;
       font-size: 7px;
-      letter-spacing: 0.2em;
+      font-weight: 700;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      background: rgba(201,169,110,.15);
-      color: var(--gold);
-      border-radius: 20px;
-      padding: 3px 8px;
+      background: var(--rose-3);
+      color: var(--ink);
+      padding: 2.5px 7px;
+      border-radius: 2px;
       margin-bottom: 4mm;
       align-self: flex-start;
     }
-    .offre-card--featured .offre-card__badge {
-      background: var(--ink);
-      color: var(--gold);
-    }
-
     .offre-card__name {
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.1;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ink);
       margin-bottom: 2mm;
     }
     .offre-card__desc {
-      font-size: 9px;
-      color: var(--ash);
+      font-size: 8.5px;
       font-weight: 300;
-      line-height: 1.5;
+      color: var(--muted);
+      line-height: 1.55;
       margin-bottom: 4mm;
     }
     .offre-card__rule {
       height: 1px;
-      background: rgba(201,169,110,.2);
+      background: var(--light);
       margin-bottom: 4mm;
     }
     .offre-card__features {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 3.5px;
       flex: 1;
-      margin-bottom: 5mm;
+      margin-bottom: 6mm;
     }
     .offre-card__feature {
-      font-size: 9px;
-      color: var(--ash);
-      font-weight: 300;
+      font-size: 8.5px;
+      font-weight: 400;
+      color: var(--muted);
       padding-left: 12px;
       position: relative;
       line-height: 1.4;
     }
     .offre-card__feature::before {
       content: '✓';
-      position: absolute;
-      left: 0;
-      color: var(--gold);
+      position: absolute; left: 0;
+      color: var(--rose);
       font-size: 8px;
+      font-weight: 700;
     }
     .offre-card__price {
-      font-family: var(--serif);
-      font-size: 28px;
-      font-weight: 300;
-      color: var(--white);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--ink);
       line-height: 1;
       margin-top: auto;
     }
-    .offre-card__price sup { font-size: 14px; vertical-align: super; }
+    .offre-card__price sup { font-size: 13px; }
     .offre-card__price-note {
-      font-size: 8px;
-      color: var(--ash);
+      font-size: 7.5px;
       font-weight: 300;
-      margin-top: 1mm;
+      color: var(--muted);
+      margin-top: 1.5mm;
     }
 
-    .offre__note {
-      margin-top: 6mm;
-      font-size: 8.5px;
-      color: var(--ash);
-      font-weight: 300;
-      line-height: 1.6;
-      border-left: 1px solid rgba(201,169,110,.3);
-      padding-left: 4mm;
-      font-style: italic;
+    .offre__footer {
+      padding: 6mm 12mm;
+      background: var(--rose-3);
+      border-top: 1px solid var(--rose-2);
     }
+    .offre__footer p {
+      font-size: 8.5px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.65;
+    }
+    .offre__footer strong { font-weight: 700; }
 
     /* ═══════════════════════════════════════════════════════════════
        PAGE 5 — ÉQUIPE + CONTACT
     ═══════════════════════════════════════════════════════════════ */
-    .team-contact {
-      display: grid;
-      grid-template-rows: auto 1fr;
-      background: var(--ink);
+    .final {
       min-height: var(--page-h);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
     }
 
-    .team { padding: 16mm 14mm 8mm; }
-
+    /* ─ équipe */
+    .team { padding: 10mm 12mm 8mm; }
     .team-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 4mm;
-      margin-top: 8mm;
+      margin-top: 6mm;
     }
-
     .team-card {
-      background: var(--ink-2);
-      border-top: 2px solid var(--gold);
+      background: var(--offwhite);
+      border-top: 3px solid var(--rose);
       padding: 5mm 4mm;
       text-align: center;
     }
-    .team-card__avatar {
-      width: 36px; height: 36px;
+    .team-card__init {
+      width: 34px; height: 34px;
       border-radius: 50%;
-      background: rgba(201,169,110,.15);
+      background: var(--rose-2);
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
       margin: 0 auto 3mm;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--serif);
-      font-size: 18px;
-      color: var(--gold);
-      font-style: italic;
     }
     .team-card__name {
-      font-family: var(--serif);
-      font-size: 14px;
-      color: var(--white);
-      font-weight: 400;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
       margin-bottom: 1mm;
     }
     .team-card__role {
-      font-size: 7.5px;
+      font-size: 7px;
+      font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--rose);
       margin-bottom: 2mm;
     }
     .team-card__desc {
-      font-size: 8.5px;
-      color: var(--ash);
+      font-size: 8px;
       font-weight: 300;
+      color: var(--muted);
       line-height: 1.5;
       font-style: italic;
     }
 
+    /* ─ photo bande */
+    .team__photo-strip {
+      overflow: hidden;
+      position: relative;
+      height: 50mm;
+    }
+    .team__photo-strip img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+    }
+    .team__photo-strip-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(43,45,58,.6) 0%, transparent 50%);
+    }
+    .team__photo-strip-text {
+      position: absolute;
+      left: 12mm; top: 50%;
+      transform: translateY(-50%);
+      color: white;
+    }
+    .team__photo-strip-text p {
+      font-size: 9px;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose-2);
+      margin-bottom: 2mm;
+    }
+    .team__photo-strip-text h3 {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    /* ─ contact */
     .contact {
-      background: var(--gold);
-      padding: 10mm 14mm;
+      background: var(--ink);
+      padding: 8mm 12mm;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10mm;
@@ -570,77 +617,70 @@
       position: relative;
       overflow: hidden;
     }
-    .contact::before {
-      content: '';
-      position: absolute;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      border: 1px solid rgba(0,0,0,.08);
-      top: -100px; right: -100px;
-    }
     .contact::after {
       content: '';
       position: absolute;
-      width: 180px; height: 180px;
+      width: 280px; height: 280px;
       border-radius: 50%;
-      border: 1px solid rgba(0,0,0,.06);
-      top: -30px; right: -30px;
+      border: 1px solid rgba(212,165,181,.12);
+      top: -100px; right: -100px;
     }
 
-    .contact__left, .contact__right { position: relative; z-index: 1; }
-
     .contact__eyebrow {
-      font-size: 8px;
+      font-size: 7.5px;
+      font-weight: 600;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: rgba(0,0,0,.5);
+      color: var(--rose);
       margin-bottom: 3mm;
     }
     .contact__title {
-      font-family: var(--serif);
-      font-size: 30px;
-      font-weight: 300;
-      color: var(--ink);
-      line-height: 1.15;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
       margin-bottom: 5mm;
     }
-    .contact__cta {
+    .contact__btn {
       display: inline-block;
-      background: var(--ink);
-      color: var(--gold);
-      font-size: 9px;
-      letter-spacing: 0.2em;
+      background: var(--rose);
+      color: var(--ink);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      padding: 4mm 8mm;
+      padding: 3.5mm 6mm;
       text-decoration: none;
-      font-weight: 500;
     }
 
-    .contact__item {
+    .contact__list {
       display: flex;
-      align-items: flex-start;
-      gap: 3mm;
-      margin-bottom: 4mm;
+      flex-direction: column;
+      gap: 4mm;
+      position: relative;
+      z-index: 1;
     }
-    .contact__item-icon {
-      font-size: 12px;
-      color: rgba(0,0,0,.4);
-      margin-top: 1px;
-      flex-shrink: 0;
-    }
+    .contact__item {}
     .contact__item-label {
       font-size: 7px;
+      font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(0,0,0,.45);
-      display: block;
+      color: var(--rose);
       margin-bottom: 1px;
     }
-    .contact__item-text {
-      font-family: var(--serif);
-      font-size: 14px;
-      color: var(--ink);
-      font-weight: 300;
+    .contact__item-val {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .contact__logo {
+      filter: invert(1) brightness(2);
+      width: 70px;
+      opacity: .15;
+      position: absolute;
+      bottom: 6mm; right: 10mm;
     }
 
     /* ─── PRINT ──────────────────────────────────────────────────── */
@@ -659,20 +699,20 @@
       @page { size: A4; margin: 0; }
     }
 
-    /* ─── SCREEN WRAPPER ─────────────────────────────────────────── */
+    /* ─── SCREEN ─────────────────────────────────────────────────── */
     .wrapper { padding: 24px; }
     .print-btn {
       display: block;
       width: 210mm;
       margin: 0 auto 16px;
-      background: var(--gold);
-      color: var(--ink);
+      background: var(--ink);
+      color: var(--white);
       border: none;
       padding: 12px 24px;
       font-family: var(--sans);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       cursor: pointer;
     }
@@ -686,150 +726,192 @@
 
   <!-- ═══ PAGE 1 : COUVERTURE ════════════════════════════════════ -->
   <div class="page cover">
-    <div class="cover__bg"></div>
-    <div class="cover__arc"></div>
-    <div class="cover__arc-2"></div>
-    <div class="cover__arc-3"></div>
+    <div class="cover__left">
+      <img class="cover__logo-img"
+           src="https://bykaraa.com/wp-content/uploads/2026/02/Courbes.png"
+           alt="KÄRAA">
 
-    <div class="cover__inner">
-      <p class="cover__eyebrow">Agence de communication visuelle — Blaringhem</p>
-      <h1 class="cover__logo">KÄR<span>AA</span></h1>
-      <p class="cover__sub">L'image. La marque. L'impact.</p>
-      <div class="cover__rule"></div>
-      <p class="cover__tagline">
-        <strong>L'image</strong> qui attire,<br>
-        qui convainc,<br>
-        et qui fidélise.
-      </p>
+      <div class="cover__left-body">
+        <p class="cover__year">Plaquette commerciale — 2025</p>
+        <h1 class="cover__headline">
+          Votre image<br>mérite<br><em>mieux.</em>
+        </h1>
+        <p class="cover__sub">
+          Identité, signalétique, covering, vidéo.<br>
+          Un seul interlocuteur. Zéro dispersion.
+        </p>
+        <a href="mailto:contact@bykaraa.com" class="cover__cta">Demander un audit gratuit</a>
+      </div>
+
+      <p class="cover__doc-type">bykaraa.com — Confidentiel</p>
+      <div class="cover__band"></div>
     </div>
 
-    <footer class="cover__footer">
-      <div>
-        <p class="cover__footer-label">Plaquette commerciale</p>
-        <p class="cover__footer-label" style="margin-top:2px;color:#555">Confidentiel — Usage interne</p>
-      </div>
-      <p class="cover__footer-year">2025</p>
-    </footer>
-    <div class="cover__band"></div>
+    <div class="cover__right">
+      <img class="cover__photo"
+           src="https://bykaraa.com/wp-content/uploads/2026/04/Marquage_4-scaled.jpg"
+           alt="Pose signalétique KÄRAA">
+      <div class="cover__photo-overlay"></div>
+      <p class="cover__photo-caption">Photo © Melvyne Caboche — KÄRAA</p>
+    </div>
   </div>
 
   <!-- ═══ PAGE 2 : MANIFESTE ════════════════════════════════════ -->
   <div class="page manifeste">
-    <div class="manifeste__left">
+    <div class="manifeste__header">
       <div>
-        <p class="manifeste__left-label">Notre vision</p>
-        <h2 class="manifeste__left-title">Un seul<br>interlocuteur.<br>Tous vos<br>supports.</h2>
+        <p class="manifeste__num">01</p>
       </div>
-      <p class="manifeste__left-number">01</p>
+      <div>
+        <p style="font-size:8px;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--rose);margin-bottom:3mm;">Notre positionnement</p>
+        <h2 class="manifeste__title">
+          Votre image mérite mieux que<br>
+          <em>5 prestataires</em><br>
+          qui ne se parlent pas.
+        </h2>
+      </div>
     </div>
 
-    <div class="manifeste__right">
-      <blockquote class="manifeste__quote">
-        "Votre image de marque mérite une agence<br>
-        aussi exigeante que vous."
-      </blockquote>
+    <div class="manifeste__body">
+      <div class="manifeste__photo-wrap">
+        <img class="manifeste__photo"
+             src="https://bykaraa.com/wp-content/uploads/2026/04/Crea-logo-scaled.jpg"
+             alt="Studio créatif KÄRAA">
+        <span class="manifeste__photo-badge">Studio créatif</span>
+      </div>
 
-      <p class="manifeste__body">
-        Dans un monde où chaque point de contact compte, KÄRAA prend en charge l'intégralité de votre expression visuelle. De la conception de votre identité à son déploiement sur tous les supports — physiques et digitaux — nous garantissons une cohérence absolue, sans perte d'information entre plusieurs prestataires.
-      </p>
+      <div class="manifeste__text">
+        <div>
+          <p class="manifeste__quote">
+            "L'image qui attire, convainc et fidélise."
+          </p>
+          <p class="manifeste__para">
+            Dans un monde saturé de messages, votre image de marque est votre premier commercial. Chez KÄRAA, nous prenons en charge l'intégralité de votre expression visuelle — de la conception de votre identité jusqu'à son déploiement sur chaque support.
+          </p>
+          <p class="manifeste__para">
+            Fini les allers-retours entre le graphiste, l'imprimeur, le poseur et le vidéaste. Avec nous : <strong style="color:var(--ink);font-weight:600">un seul interlocuteur, une cohérence absolue, des délais maîtrisés.</strong>
+          </p>
+        </div>
 
-      <p class="manifeste__body">
-        Notre approche repose sur une logique simple&nbsp;: <em style="color:var(--snow)">une image forte n'est pas une dépense, c'est un investissement qui travaille pour vous 24h/24.</em> Signalétique, véhicules, réseaux sociaux, vidéo&nbsp;— chaque support devient un commercial silencieux au service de votre croissance.
-      </p>
-
-      <div class="manifeste__pill-row">
-        <span class="manifeste__pill">Prospection</span>
-        <span class="manifeste__pill">Performance</span>
-        <span class="manifeste__pill">Fidélisation</span>
-        <span class="manifeste__pill">Attractivité</span>
-        <span class="manifeste__pill">Crédibilité</span>
+        <div>
+          <p style="font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:3mm;">Votre image, c'est votre outil de</p>
+          <div class="manifeste__pills">
+            <span class="manifeste__pill">Prospection</span>
+            <span class="manifeste__pill">Performance</span>
+            <span class="manifeste__pill">Fidélisation</span>
+            <span class="manifeste__pill">Attractivité</span>
+            <span class="manifeste__pill">Crédibilité</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- ═══ PAGE 3 : EXPERTISES ═══════════════════════════════════ -->
   <div class="page expertises">
-    <div style="position:absolute;width:280px;height:280px;border-radius:50%;border:0.5px solid rgba(201,169,110,.07);top:-80px;right:-80px;"></div>
-
-    <div class="section-header">
-      <p class="section-header__eyebrow">02 — Nos expertises</p>
-      <h2 class="section-header__title">Quatre pôles.<br>Une cohérence.</h2>
-      <div class="section-header__rule"></div>
+    <div class="page-header">
+      <div class="page-header__left">
+        <p class="page-header__eyebrow">02 — Nos expertises</p>
+        <h2 class="page-header__title">Quatre pôles. Une cohérence.</h2>
+      </div>
+      <img class="page-header__logo"
+           src="https://bykaraa.com/wp-content/uploads/2026/02/Courbes.png"
+           alt="">
     </div>
 
     <div class="exp-grid">
+      <!-- Identité -->
       <div class="exp-card">
-        <span class="exp-card__num">01</span>
-        <span class="exp-card__icon">◈</span>
-        <h3 class="exp-card__title">Identité<br>& Stratégie</h3>
-        <ul class="exp-card__list">
-          <li>Création de logo & naming</li>
-          <li>Charte graphique complète</li>
-          <li>Refonte d'identité</li>
-          <li>Stratégie de marque</li>
-          <li>Supports print (carte, flyer, plaquette)</li>
-        </ul>
+        <div class="exp-card__photo-wrap">
+          <img class="exp-card__photo"
+               src="https://bykaraa.com/wp-content/uploads/2026/04/Crea-logo-scaled.jpg"
+               alt="Identité & Stratégie">
+          <span class="exp-card__photo-num">01</span>
+        </div>
+        <div class="exp-card__body">
+          <h3 class="exp-card__title">Identité & Stratégie</h3>
+          <ul class="exp-card__list">
+            <li>Création de logo & naming</li>
+            <li>Charte graphique complète</li>
+            <li>Refonte d'identité de marque</li>
+            <li>Supports print (carte, flyer, plaquette)</li>
+          </ul>
+        </div>
       </div>
 
+      <!-- Signalétique -->
       <div class="exp-card">
-        <span class="exp-card__num">02</span>
-        <span class="exp-card__icon">◇</span>
-        <h3 class="exp-card__title">Signalétique<br>& Enseigne</h3>
-        <ul class="exp-card__list">
-          <li>Enseignes lumineuses sur-mesure</li>
-          <li>Signalétique intérieure & extérieure</li>
-          <li>Vitrophanie & vitrines</li>
-          <li>PLV & présentoirs</li>
-          <li>Pose & installation</li>
-        </ul>
+        <div class="exp-card__photo-wrap">
+          <img class="exp-card__photo"
+               src="https://bykaraa.com/wp-content/uploads/2026/04/Marquage_4-scaled.jpg"
+               alt="Signalétique & Enseigne">
+          <span class="exp-card__photo-num">02</span>
+        </div>
+        <div class="exp-card__body">
+          <h3 class="exp-card__title">Signalétique & Enseigne</h3>
+          <ul class="exp-card__list">
+            <li>Enseignes lumineuses sur-mesure</li>
+            <li>Signalétique intérieure & extérieure</li>
+            <li>Vitrophanie & vitrines</li>
+            <li>PLV, présentoirs, pose & installation</li>
+          </ul>
+        </div>
       </div>
 
+      <!-- Covering -->
       <div class="exp-card">
-        <span class="exp-card__num">03</span>
-        <span class="exp-card__icon">◉</span>
-        <h3 class="exp-card__title">Covering<br>& Marquage</h3>
-        <ul class="exp-card__list">
-          <li>Covering partiel & intégral de véhicules</li>
-          <li>Marquage de flotte</li>
-          <li>Textile technique & vêtements de travail</li>
-          <li>Adhésifs haute durabilité</li>
-          <li>Matériaux résistants aux UV</li>
-        </ul>
+        <div class="exp-card__photo-wrap">
+          <img class="exp-card__photo"
+               src="https://bykaraa.com/wp-content/uploads/2026/04/Pose_3-scaled.jpg"
+               alt="Covering & Marquage">
+          <span class="exp-card__photo-num">03</span>
+        </div>
+        <div class="exp-card__body">
+          <h3 class="exp-card__title">Covering & Marquage</h3>
+          <ul class="exp-card__list">
+            <li>Covering partiel & intégral de véhicules</li>
+            <li>Marquage de flotte</li>
+            <li>Textile technique & vêtements</li>
+            <li>Adhésifs haute durabilité UV</li>
+          </ul>
+        </div>
       </div>
 
+      <!-- Digital -->
       <div class="exp-card">
-        <span class="exp-card__num">04</span>
-        <span class="exp-card__icon">▷</span>
-        <h3 class="exp-card__title">Production<br>Digitale</h3>
-        <ul class="exp-card__list">
-          <li>Reportage photo professionnel</li>
-          <li>Vidéo corporate & clip institutionnel</li>
-          <li>Motion Design & animation</li>
-          <li>Contenus pour réseaux sociaux</li>
-          <li>Identité sonore</li>
-        </ul>
+        <div class="exp-card__photo-wrap">
+          <img class="exp-card__photo"
+               src="https://bykaraa.com/wp-content/uploads/2026/04/Prod_Video-scaled.jpg"
+               alt="Production Digitale">
+          <span class="exp-card__photo-num">04</span>
+        </div>
+        <div class="exp-card__body">
+          <h3 class="exp-card__title">Production Digitale</h3>
+          <ul class="exp-card__list">
+            <li>Reportage photo professionnel</li>
+            <li>Vidéo corporate & clip institutionnel</li>
+            <li>Motion Design & logo animé</li>
+            <li>Contenus réseaux sociaux</li>
+          </ul>
+        </div>
       </div>
-    </div>
-
-    <div style="margin-top:8mm;display:flex;align-items:center;gap:6mm;">
-      <span style="width:32px;height:1px;background:var(--gold);display:inline-block;flex-shrink:0;"></span>
-      <p style="font-family:var(--serif);font-size:13px;font-style:italic;color:var(--ash);">
-        Chaque expertise est pensée pour se compléter — une image cohérente sur tous vos supports.
-      </p>
     </div>
   </div>
 
   <!-- ═══ PAGE 4 : OFFRE COMMERCIALE ════════════════════════════ -->
   <div class="page offre">
-    <div class="offre__bg-arc"></div>
-
-    <div class="section-header">
-      <p class="section-header__eyebrow">03 — Offre commerciale</p>
-      <h2 class="section-header__title">Nos formules<br>sur-mesure.</h2>
-      <div class="section-header__rule"></div>
+    <div class="page-header" style="background:var(--offwhite);">
+      <div class="page-header__left">
+        <p class="page-header__eyebrow">03 — Offre commerciale</p>
+        <h2 class="page-header__title">Nos formules sur-mesure.</h2>
+      </div>
+      <img class="page-header__logo"
+           src="https://bykaraa.com/wp-content/uploads/2026/02/Courbes.png"
+           alt="">
     </div>
 
     <div class="offre-grid">
+      <!-- ESSENTIEL -->
       <div class="offre-card">
         <span class="offre-card__badge">Formule</span>
         <h3 class="offre-card__name">Essentiel</h3>
@@ -837,34 +919,36 @@
         <div class="offre-card__rule"></div>
         <ul class="offre-card__features">
           <li class="offre-card__feature">Création de logo (3 propositions)</li>
-          <li class="offre-card__feature">Charte graphique (couleurs, typo, règles)</li>
-          <li class="offre-card__feature">Carte de visite (recto-verso)</li>
+          <li class="offre-card__feature">Charte graphique complète</li>
+          <li class="offre-card__feature">Carte de visite recto-verso</li>
           <li class="offre-card__feature">Entête & signature e-mail</li>
           <li class="offre-card__feature">2 révisions incluses</li>
           <li class="offre-card__feature">Livrables HD tous formats</li>
         </ul>
-        <p class="offre-card__price"><sup>à partir de </sup>890<sup>€</sup></p>
+        <p class="offre-card__price"><sup>à partir de </sup>890<sup> €</sup></p>
         <p class="offre-card__price-note">HT — Devis personnalisé sur demande</p>
       </div>
 
+      <!-- BUSINESS — FEATURED -->
       <div class="offre-card offre-card--featured">
-        <span class="offre-card__badge">Recommandé</span>
+        <span class="offre-card__badge">Le plus demandé</span>
         <h3 class="offre-card__name">Business</h3>
-        <p class="offre-card__desc">L'identité visuelle déployée dans le monde physique.</p>
+        <p class="offre-card__desc">L'identité déployée dans le monde physique.</p>
         <div class="offre-card__rule"></div>
         <ul class="offre-card__features">
           <li class="offre-card__feature">Tout le pack Essentiel</li>
           <li class="offre-card__feature">Enseigne lumineuse sur-mesure</li>
-          <li class="offre-card__feature">Signalétique intérieure (jusqu'à 5 éléments)</li>
+          <li class="offre-card__feature">Signalétique intérieure (5 éléments)</li>
           <li class="offre-card__feature">Covering d'un véhicule</li>
           <li class="offre-card__feature">Plaquette commerciale (4 pages)</li>
           <li class="offre-card__feature">Accompagnement stratégique (2h)</li>
           <li class="offre-card__feature">Pose & installation incluses</li>
         </ul>
-        <p class="offre-card__price"><sup>à partir de </sup>2 900<sup>€</sup></p>
+        <p class="offre-card__price"><sup>à partir de </sup>2 900<sup> €</sup></p>
         <p class="offre-card__price-note">HT — Paiement en 3× sans frais</p>
       </div>
 
+      <!-- FULL BRAND -->
       <div class="offre-card">
         <span class="offre-card__badge">Formule</span>
         <h3 class="offre-card__name">Full Brand</h3>
@@ -872,98 +956,107 @@
         <div class="offre-card__rule"></div>
         <ul class="offre-card__features">
           <li class="offre-card__feature">Tout le pack Business</li>
-          <li class="offre-card__feature">Reportage photo professionnel (1 jour)</li>
+          <li class="offre-card__feature">Reportage photo (1 journée)</li>
           <li class="offre-card__feature">Vidéo corporate (1–2 min)</li>
           <li class="offre-card__feature">Motion design (logo animé)</li>
-          <li class="offre-card__feature">Kit réseaux sociaux (formats + templates)</li>
-          <li class="offre-card__feature">Covering flotte (jusqu'à 3 véhicules)</li>
-          <li class="offre-card__feature">Suivi marque sur 12 mois</li>
+          <li class="offre-card__feature">Kit réseaux sociaux</li>
+          <li class="offre-card__feature">Covering flotte (3 véhicules)</li>
+          <li class="offre-card__feature">Suivi marque 12 mois</li>
         </ul>
-        <p class="offre-card__price"><sup>à partir de </sup>5 900<sup>€</sup></p>
+        <p class="offre-card__price"><sup>à partir de </sup>5 900<sup> €</sup></p>
         <p class="offre-card__price-note">HT — Devis ajusté à votre projet</p>
       </div>
     </div>
 
-    <p class="offre__note">
-      Tous nos projets débutent par un audit gratuit de votre image actuelle. Chaque devis est élaboré sur-mesure selon vos enjeux, votre secteur et votre budget. Pas de forfait rigide — une réponse adaptée à votre réalité.
-    </p>
+    <div class="offre__footer">
+      <p>
+        <strong>Audit de votre image actuelle offert</strong> — Tous nos projets démarrent par un diagnostic gratuit de votre image.
+        Aucun forfait n'est figé&nbsp;: chaque devis est élaboré sur-mesure selon vos enjeux, votre secteur et votre budget.
+      </p>
+    </div>
   </div>
 
   <!-- ═══ PAGE 5 : ÉQUIPE + CONTACT ═════════════════════════════ -->
-  <div class="page team-contact">
+  <div class="page final">
+
     <div class="team">
-      <div class="section-header">
-        <p class="section-header__eyebrow">04 — L'équipe</p>
-        <h2 class="section-header__title">Des talents<br>au service de votre image.</h2>
-        <div class="section-header__rule"></div>
+      <div class="page-header" style="padding:0 0 6mm;border-bottom:1px solid var(--light);margin-bottom:6mm;">
+        <div class="page-header__left">
+          <p class="page-header__eyebrow">04 — L'équipe</p>
+          <h2 class="page-header__title">Des talents pour votre image.</h2>
+        </div>
       </div>
 
       <div class="team-grid">
         <div class="team-card">
-          <div class="team-card__avatar">A</div>
+          <div class="team-card__init">A</div>
           <p class="team-card__name">Aurélie</p>
           <p class="team-card__role">CEO & Fondatrice</p>
           <p class="team-card__desc">Visionnaire et stratège. Pilote l'agence avec une exigence créative absolue.</p>
         </div>
         <div class="team-card">
-          <div class="team-card__avatar">M</div>
+          <div class="team-card__init">M</div>
           <p class="team-card__name">Melvyne</p>
           <p class="team-card__role">Graphiste</p>
           <p class="team-card__desc">Maître des formes et des couleurs. Donne vie à chaque identité.</p>
         </div>
         <div class="team-card">
-          <div class="team-card__avatar">É</div>
+          <div class="team-card__init">É</div>
           <p class="team-card__name">Élodie</p>
           <p class="team-card__role">Assistante de direction</p>
-          <p class="team-card__desc">Relation client & coordination. Votre interlocutrice au quotidien.</p>
+          <p class="team-card__desc">Relation client et coordination. Votre interlocutrice au quotidien.</p>
         </div>
         <div class="team-card">
-          <div class="team-card__avatar">F</div>
+          <div class="team-card__init">F</div>
           <p class="team-card__name">Franck</p>
           <p class="team-card__role">Poseur & Installateur</p>
-          <p class="team-card__desc">Expert de l'installation. Parfait chaque détail sur le terrain.</p>
+          <p class="team-card__desc">Expert de l'installation terrain. Parfait chaque détail.</p>
         </div>
       </div>
     </div>
 
+    <!-- Bande photo -->
+    <div class="team__photo-strip">
+      <img src="https://bykaraa.com/wp-content/uploads/2026/04/Prod_Video-scaled.jpg" alt="Production KÄRAA">
+      <div class="team__photo-strip-overlay"></div>
+      <div class="team__photo-strip-text">
+        <p>Une agence complète</p>
+        <h3>Du concept<br>au terrain.</h3>
+      </div>
+    </div>
+
+    <!-- Contact -->
     <div class="contact">
-      <div class="contact__left">
-        <p class="contact__eyebrow">05 — Passez à l'action</p>
+      <div style="position:relative;z-index:1;">
+        <p class="contact__eyebrow">05 — Passons à l'action</p>
         <h2 class="contact__title">Parlons de<br>votre projet.</h2>
-        <a href="mailto:contact@bykaraa.com" class="contact__cta">Demander un audit gratuit</a>
+        <a href="mailto:contact@bykaraa.com" class="contact__btn">Demander un audit gratuit</a>
       </div>
 
-      <div class="contact__right">
+      <div class="contact__list">
         <div class="contact__item">
-          <span class="contact__item-icon">✆</span>
-          <div>
-            <span class="contact__item-label">Téléphone</span>
-            <p class="contact__item-text">06 88 35 29 79</p>
-          </div>
+          <p class="contact__item-label">Téléphone</p>
+          <p class="contact__item-val">06 88 35 29 79</p>
         </div>
         <div class="contact__item">
-          <span class="contact__item-icon">✉</span>
-          <div>
-            <span class="contact__item-label">E-mail</span>
-            <p class="contact__item-text">contact@bykaraa.com</p>
-          </div>
+          <p class="contact__item-label">E-mail</p>
+          <p class="contact__item-val">contact@bykaraa.com</p>
         </div>
         <div class="contact__item">
-          <span class="contact__item-icon">◎</span>
-          <div>
-            <span class="contact__item-label">Site web</span>
-            <p class="contact__item-text">bykaraa.com</p>
-          </div>
+          <p class="contact__item-label">Site web</p>
+          <p class="contact__item-val">bykaraa.com</p>
         </div>
         <div class="contact__item">
-          <span class="contact__item-icon">⊙</span>
-          <div>
-            <span class="contact__item-label">Adresse</span>
-            <p class="contact__item-text">Blaringhem — 59173, France</p>
-          </div>
+          <p class="contact__item-label">Adresse</p>
+          <p class="contact__item-val">Blaringhem — 59173</p>
         </div>
       </div>
+
+      <img class="contact__logo"
+           src="https://bykaraa.com/wp-content/uploads/2026/02/Courbes.png"
+           alt="">
     </div>
+
   </div>
 
 </div>
